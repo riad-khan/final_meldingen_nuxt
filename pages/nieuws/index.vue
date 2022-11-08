@@ -9,7 +9,7 @@
       <Location urlPath="nieuws"/>
 
       <!-- News Section-->
-      <section class="news-archive sec-padding pt-0">
+      <section class="news-archive sec-padding pt-0 news_page">
         <div class="container">
           <div class="news_lsit mt-20">
             <RegioList path="nieuws" region="Nederland"/>
@@ -323,7 +323,5 @@ created() {
 .btn-group .button {
   margin-bottom: 0;
 }
-.news_drop div#news-list {
-  padding: 10px;
-}
+
 </style>

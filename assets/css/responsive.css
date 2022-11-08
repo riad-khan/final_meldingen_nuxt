@@ -726,7 +726,14 @@
     section.footer-sec.sec-padding {
         padding-bottom: 0px;
     }
-
+    .news-thumb img.img-thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .header_bellow_bg {
+        height: 0px;
+    }
     /*End Mobile*/
 }
 

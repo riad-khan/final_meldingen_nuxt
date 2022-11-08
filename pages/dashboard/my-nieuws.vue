@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-
+    <div class="header_bellow_bg"></div>
     <main class="main-content bg-white">
       <section class="page-content contact-page my-account-page sec-padding ">
 
@@ -110,5 +110,7 @@ export default {
 </script>
 
 <style scoped>
-
+.mac-content .card .card-content h6 {
+    text-align: left;
+}
 </style>

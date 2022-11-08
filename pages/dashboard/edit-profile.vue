@@ -1,6 +1,7 @@
 <template>
   <div>
     <Header />
+    <div class="header_bellow_bg"></div>
     <main class="main-content bg-white">
       <section data-aos="fade-up" data-aos-delay="200" data-aos-once="true" class="page-content contact-page my-account-page sec-padding ">
 
