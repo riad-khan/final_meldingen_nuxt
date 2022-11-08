@@ -99,8 +99,14 @@ const config = useRuntimeConfig();
 apiUrl = config.public.api;
 backend = config.public.backend;
 
-const {data: melding, pending} = await useAsyncData('get_meldingen', () => $fetch(`${apiUrl}/meldingen/scroll-more/0`));
+//const {data: melding, pending} = await useAsyncData('get_meldingen', () => $fetch(`${apiUrl}/meldingen/scroll-more/0`));
+
+const { data: melding,pending } = await useFetch(`${apiUrl}/meldingen/scroll-more/0`)
+
 const {data: seo} = await useAsyncData('home_seo', () => $fetch(`${apiUrl}/seo-data/home`));
+
+nextReq = melding.value.nextReq;
+
 
 useHead({
   titleTemplate: ` ${seo.value.title}`,
@@ -110,7 +116,8 @@ useHead({
     {name: 'keywords', content: `${seo.value.seo_keywords}`}
   ],
 })
-meldingenArray = melding.value;
+meldingenArray = melding.value.data;
+
 isLoading = pending;
 onMounted(() => {
   refreshNuxtData('get_meldingen');
@@ -123,6 +130,8 @@ onMounted(() => {
 import moment from "moment/moment";
 import axios from "axios";
 import addImage from 'assets/img/add-img.jpg'
+
+let nextReq;
 
 let apiUrl;
 let backend;
@@ -149,9 +158,13 @@ export default {
   },
   created() {
 
+    console.log(meldingenArray)
+
     this.meldingens = meldingenArray;
+    this.nexReq = nextReq
   },
   mounted() {
+
     window.addEventListener('scroll', this.handleScroll)
   },
   methods: {
@@ -160,13 +173,17 @@ export default {
     },
     getMoreMeldingen(page) {
       this.loading = true;
+      this.nexReq = false;
+
       axios.get(`${apiUrl}/meldingen/scroll-more/` + page)
           .then((response) => {
-            response.data.map((item, i) => {
-              this.meldingens.push(item)
-              this.loading = false;
+            response.data.data.map((item, i) => {
+             this.meldingens.push(item)
+
 
             })
+            this.nexReq = response.data.nextReq;
+            this.loading = false
 
           })
           .catch(error => {
@@ -176,12 +193,17 @@ export default {
 
     },
     handleScroll() {
-      if ((Math.round(window.scrollY) + window.innerHeight+300) >= document.body.scrollHeight) {
+      const route = useRoute();
+    if(route.name == 'index'){
+      if ((Math.round(window.scrollY) + window.innerHeight + 300) >= document.body.scrollHeight) {
+        if(this.nexReq === true){
 
           this.getMoreMeldingen(this.increment++);
+        }
 
 
       }
+    }else return
 
     }
   }

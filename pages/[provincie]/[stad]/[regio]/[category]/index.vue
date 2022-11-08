@@ -9,9 +9,9 @@
           <div class="breadcrumbs desktop-only">
             <ul class="inline-list">
               <li><nuxt-link to="/">Home</nuxt-link><span class="right-angel">></span></li>
-              <li><nuxt-link :to="'/'+route.params.provincie.toLowerCase() ">{{meldingenDetails.provincie}}</nuxt-link><span class="right-angel">></span></li>
-              <li><nuxt-link :to="'/'+route.params.stad.toLowerCase()">{{meldingenDetails.stad}}</nuxt-link><span class="right-angel">></span></li>
-              <li class="text-trans-cap">{{meldingenDetails.categorie}}</li>
+              <li><nuxt-link :to="'/'+route.params.provincie.toLowerCase() ">{{meldingenDetails.details.provincie}}</nuxt-link><span class="right-angel">></span></li>
+              <li><nuxt-link :to="'/'+route.params.stad.toLowerCase()">{{meldingenDetails.details.stad}}</nuxt-link><span class="right-angel">></span></li>
+              <li class="text-trans-cap">{{meldingenDetails.details.categorie}}</li>
             </ul>
           </div>
 
@@ -21,16 +21,16 @@
               <div v-if="isLoading === true" style="height: 300px;" :class="isLoading ? 'spin':''"></div>
               <div v-else class="content">
                 <h2 class="content-heading">
-                  {{meldingenDetails.straat}} in {{meldingenDetails.stad}} - <span class="text-trans-cap">{{meldingenDetails.categorie}}</span>
+                  {{meldingenDetails.details.straat}} in {{meldingenDetails.details.stad}} - <span class="text-trans-cap">{{meldingenDetails.details.categorie}}</span>
 
                 </h2>
                 <div class="meta">
                   <ul class="inline-list">
-                    <li><span class="icon-clock"></span> {{ DateTime(meldingenDetails.timestamp) }}</li>
+                    <li><span class="icon-clock"></span> {{ DateTime(meldingenDetails.details.timestamp) }}</li>
 
                   </ul>
                 </div>
-                <p>Regio {{meldingenDetails.regio}} kreeg op  {{DateTime(meldingenDetails.timestamp, 'dddd DD MMMM')}} een melding via het p2000 netwerk. De {{meldingenDetails.dienst}} is met spoed uitgerukt naar de {{meldingenDetails.straat}} in {{meldingenDetails.stad}}</p>
+                <p>Regio {{meldingenDetails.details.regio}} kreeg op  {{DateTime(meldingenDetails.details.timestamp, 'dddd DD MMMM')}} een melding via het p2000 netwerk. De {{meldingenDetails.details.dienst}} is met spoed uitgerukt naar de {{meldingenDetails.details.straat}} in {{meldingenDetails.details.stad}}</p>
 
 
                 <h3 class="weight-500 mt-30">Verzonden aan eenheden</h3>
@@ -49,15 +49,15 @@
                   <li>{{item.omschrijving}} </li>
                 </ul>
                 <div class="google-map-sec">
-                  <iframe :src="'https://maps.google.com/maps?q='+meldingenDetails.straat+','+meldingenDetails.stad+'&t=&z=15&ie=UTF8&iwloc=&output=embed'" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                  <iframe :src="'https://maps.google.com/maps?q='+meldingenDetails.details.straat+','+meldingenDetails.details.stad+'&t=&z=15&ie=UTF8&iwloc=&output=embed'" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
                 <ul class="social desktop-only">
                   <li class="label">Delen:</li>
 
 
-                  <li><ShareNetwork network="facebook" :title="meldingenDetails.straat + 'in' + meldingenDetails.stad + '-' + meldingenDetails.categorie " :url="currentUrl" ><span class="icon-facebook"><span class="path1"></span><span class="path2"></span></span></ShareNetwork></li>
-                  <li><ShareNetwork network="twitter" :title="meldingenDetails.straat + 'in' + meldingenDetails.stad + '-' + meldingenDetails.categorie "  :url="currentUrl" ><span class="icon-twitter"><span class="path1"></span><span class="path2"></span></span></ShareNetwork></li>
+                  <li><ShareNetwork network="facebook" :title="meldingenDetails.details.straat + 'in' + meldingenDetails.details.stad + '-' + meldingenDetails.details.categorie " :url="currentUrl" ><span class="icon-facebook"><span class="path1"></span><span class="path2"></span></span></ShareNetwork></li>
+                  <li><ShareNetwork network="twitter" :title="meldingenDetails.details.straat + 'in' + meldingenDetails.details.stad + '-' + meldingenDetails.details.categorie "  :url="currentUrl" ><span class="icon-twitter"><span class="path1"></span><span class="path2"></span></span></ShareNetwork></li>
                   <li><a href=""><span class="icon-Instagram"></span></a></li>
                 </ul>
 
@@ -67,56 +67,61 @@
 
             <div class="col-md-4 col-lg-3 col-xs-12">
               <div class="sidebar">
-                <h3 class="weight-500"> Ander Nieuws</h3>
-                <div id="news_list">
-                  <div v-for="(item, i) in recentNews" :key="i">
 
-                    <div class="card mobile-col-2 other-news box-shadow border-radius-8">
-                      <div class="card-thumb">
-                        <img :src="backend + item.image" alt="nieuws image" class="desktop-only">
-                        <img :src="backend + item.image" alt="nieuws image" class="mobile-only">
+                <h2 id="widget_title" class="sec-heading weight-500">Eerdere P2000-meldingen</h2>
+
+                <div v-for="(item,i) in meldingenDetails.recentMeldingen">
+                  <div class="card other-news box-shadow border-radius-8">
+                    <div class="card-content">
+                      <h3 class="d-flex align-items-center">
+
+                        <img v-if="item.dienst == 'ambulance'" src="@/assets/img/ambulance.png" class="news-icon"/>
+                        <img v-if="item.dienst == 'brandweer'" src="@/assets/img/brandweer.png" class="news-icon"/>
+                        <img v-if="item.dienst == 'kustwacht'" src="@/assets/img/kustwacht.png" class="news-icon"/>
+                        <img v-if="item.dienst == 'politie'" src="@/assets/img/politie.png" class="news-icon"/>
+                        <img v-if="item.dienst == 'traumaheli'" src="@/assets/img/traumaheli.png" class="news-icon"/>
+
+                        <router-link
+                            :to="'/'+item.provincie.toLowerCase()+'/'+item.stad_url.toLowerCase()+'/'+item.regio_url.toLowerCase()+'/'+item.categorie_url.toLowerCase()+'-'+item.id">
+                          {{ item.categorie }}
+                        </router-link>
+                      </h3>
+                      <div class="meta">
+                        <ul class="inline-list">
+                          <span class="place-name" style="bottom: 33px;">{{ DateTime(item.timestamp) }}</span>
+
+                        </ul>
                       </div>
-                      <div class="card-content">
+                      <span class="place-name"> {{ item.straat }}</span> in <span class="place-title"
+                                                                                  style="color: #669e97 !important;"><nuxt-link :to="'/'+item.stad.toLowerCase()">{{ item.stad }}</nuxt-link> </span>,
+                      <span class="place-name">
+                {{ item.provincie }}</span>
+                      <div class="btn-group  mt-10">
+                        <a :class="'button btn-more bg-red border-radius-8 '+item.dienst">{{ item.dienst }}</a>
 
-                        <h6>
-                          <nuxt-link
-                              :to="'/nieuws/'+item.state.toLowerCase()+'/'+item.city.replace(/\s+/g, '-').toLowerCase()+'/'+item.slug.toLowerCase() +'-'+item.id"
-                              class="">
-                            {{ item.title }}
-                          </nuxt-link>
-                        </h6>
-                        <div class="meta">
-                          <ul class="inline-list">
-                            <li><span class="icon-clock"></span> {{ dateTime(item.created_at) }} in &nbsp;</li>
-                            <li style="color: darkcyan">
-                              <nuxt-link :to="'/nieuws/'+item.state.replace(/\s+/g, '-',).toLowerCase()">{{ item.state }}</nuxt-link>
-                            </li>
-                            <li>Nederland</li>
-                          </ul>
-                        </div>
-                        <div class="btn-group">
-                          <a v-for="(tag,i) in item.tags.split(',')" v-show="tag.length !==0 "
-                             :class="'button btn-more bg-blue border-radius-8 '+ tag"
-                          >{{ tag }}</a>
-                        </div>
-                      </div>
-
-
-                    </div>
-                    <div v-if="i % 6 === 3" class="card card-img">
-                      <div :style="image" class="news-item box-shadow border-radius news-ad-sec min-height-100">
-                        <div class="news-content">
-                          <h2 class="new-ad-heading">Dit is een placeholder voor reclame</h2>
-                        </div>
                       </div>
                     </div>
+                  </div>
 
-
+                  <div v-if="i % 2 === 1" class="card card-img">
+                    <div :style="image" class="news-item box-shadow border-radius news-ad-sec min-height-100">
+                      <div class="news-content">
+                        <h2 class="new-ad-heading">Dit is een placeholder voor reclame</h2>
+                      </div>
+                    </div>
                   </div>
 
 
                 </div>
 
+
+                <div class="card card-img square">
+                  <div :style="image" class="news-item box-shadow border-radius news-ad-sec min-height-100">
+                    <div class="news-content">
+                      <h2 class="new-ad-heading">Dit is een placeholder voor reclame</h2>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 

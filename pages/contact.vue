@@ -92,6 +92,7 @@ export default {
       }
     }
   },
+
   methods:{
     sendMessage(){
       axios.post(`${apiUrl}/contact`,this.formData)

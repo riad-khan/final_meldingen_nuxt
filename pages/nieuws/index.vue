@@ -257,9 +257,13 @@ export default {
 created() {
 
 },
+
+
   mounted() {
-    this.getOtherNews();
-    window.addEventListener('scroll', this.handleScroll);
+  if(this.$route.name == 'nieuws')
+
+    this.getMoreOtherNews(1);
+   window.addEventListener('scroll', this.handleScroll);
   
     // this.fetchNews();
   },

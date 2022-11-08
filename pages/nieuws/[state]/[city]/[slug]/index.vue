@@ -9,6 +9,8 @@
             <ul class="inline-list">
               <li><a href="/">Home</a><span class="right-angel">&gt;</span></li>
 
+
+
               <li>
                 <nuxt-link to="/nieuws/">Nieuws</nuxt-link>
                 <span class="right-angel">&gt;</span>
@@ -106,6 +108,14 @@
                 <p><strong>{{ newsDetails.details.description }}</strong></p>
                 <div v-html="newsDetails.details.content"></div>
 
+                <div class="btn-group mt-10">
+                 <div class="row">
+                   <a :class="'button btn-more bg-blue border-radius-8 '+ tag" v-for="(tag,i) in newsDetails.details.tags.split(',')">{{ tag }}</a>
+
+                 </div>
+
+                </div>
+
               </div>
 
               <!--   comment Section-->
@@ -164,58 +174,65 @@
 
             </div>
 
+
+
             <div class="col-md-4 col-lg-3 col-xs-12">
               <div class="sidebar">
-                <h3 class="weight-500"> Ander Nieuws</h3>
-                <div id="news_list">
-                  <div v-for="(item, i) in newsDetails.recent_news" :key="i">
 
-                    <div class="card mobile-col-2 other-news box-shadow border-radius-8">
-                      <div class="card-thumb">
-                        <img :src="backend + item.image" alt="nieuws image" class="desktop-only">
-                        <img :src="backend + item.image" alt="nieuws image" class="mobile-only">
+                <h2 id="widget_title" class="sec-heading weight-500">Eerdere P2000-meldingen</h2>
+
+                <div v-for="(item,i) in newsDetails.recentMeldingen">
+                  <div class="card other-news box-shadow border-radius-8">
+                    <div class="card-content">
+                      <h3 class="d-flex align-items-center">
+
+                        <img v-if="item.dienst == 'ambulance'" src="@/assets/img/ambulance.png" class="news-icon"/>
+                        <img v-if="item.dienst == 'brandweer'" src="@/assets/img/brandweer.png" class="news-icon"/>
+                        <img v-if="item.dienst == 'kustwacht'" src="@/assets/img/kustwacht.png" class="news-icon"/>
+                        <img v-if="item.dienst == 'politie'" src="@/assets/img/politie.png" class="news-icon"/>
+                        <img v-if="item.dienst == 'traumaheli'" src="@/assets/img/traumaheli.png" class="news-icon"/>
+
+                        <router-link
+                            :to="'/'+item.provincie.toLowerCase()+'/'+item.stad_url.toLowerCase()+'/'+item.regio_url.toLowerCase()+'/'+item.categorie_url.toLowerCase()+'-'+item.id">
+                          {{ item.categorie }}
+                        </router-link>
+                      </h3>
+                      <div class="meta">
+                        <ul class="inline-list">
+                          <span class="place-name" style="bottom: 33px;">{{ DateTimeUnix(item.timestamp) }}</span>
+
+                        </ul>
                       </div>
-                      <div class="card-content">
+                      <span class="place-name"> {{ item.straat }}</span> in <span class="place-title"
+                                                                                  style="color: #669e97 !important;"><nuxt-link :to="'/'+item.stad.toLowerCase()">{{ item.stad }}</nuxt-link> </span>,
+                      <span class="place-name">
+                {{ item.provincie }}</span>
+                      <div class="btn-group  mt-10">
+                        <a :class="'button btn-more bg-red border-radius-8 '+item.dienst">{{ item.dienst }}</a>
 
-                        <h6>
-                          <nuxt-link
-                              :to="'/nieuws/'+item.state.toLowerCase()+'/'+item.city.replace(/\s+/g, '-').toLowerCase()+'/'+item.slug.toLowerCase() +'-'+item.id"
-                              class="">
-                            {{ item.title }}
-                          </nuxt-link>
-                        </h6>
-                        <div class="meta">
-                          <ul class="inline-list">
-                            <li><span class="icon-clock"></span> {{ dateTime(item.created_at) }} in &nbsp;</li>
-                            <li style="color: darkcyan">
-                              <nuxt-link :to="'/nieuws/'+item.state">{{ item.state }}</nuxt-link>
-                            </li>
-                            <li>Nederland</li>
-                          </ul>
-                        </div>
-                        <div class="btn-group">
-                          <a v-for="(tag,i) in item.tags.split(',')" v-show="tag.length !==0 "
-                             :class="'button btn-more bg-blue border-radius-8 '+ tag"
-                          >{{ tag }}</a>
-                        </div>
-                      </div>
-
-
-                    </div>
-                    <div v-if="i % 6 === 3" class="card card-img">
-                      <div :style="image" class="news-item box-shadow border-radius news-ad-sec min-height-100">
-                        <div class="news-content">
-                          <h2 class="new-ad-heading">Dit is een placeholder voor reclame</h2>
-                        </div>
                       </div>
                     </div>
+                  </div>
 
-
+                  <div v-if="i % 2 === 1" class="card card-img">
+                    <div :style="image" class="news-item box-shadow border-radius news-ad-sec min-height-100">
+                      <div class="news-content">
+                        <h2 class="new-ad-heading">Dit is een placeholder voor reclame</h2>
+                      </div>
+                    </div>
                   </div>
 
 
                 </div>
 
+
+                <div class="card card-img square">
+                  <div :style="image" class="news-item box-shadow border-radius news-ad-sec min-height-100">
+                    <div class="news-content">
+                      <h2 class="new-ad-heading">Dit is een placeholder voor reclame</h2>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -358,27 +375,34 @@ export default {
 
 
     likeNews() {
-      const route = useRoute();
-      let news_id = route.params.slug.replace(/[^0-9]/g, '');
-      const data = {
-        newsId: news_id
-      }
-      axios.post(`${apiUrl}/fav/like/`, data, {
-        headers: {
-          "Content-type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem('token')}`
-        }
-      })
-          .then(response => {
-            this.status = response.data.status
-          })
-          .catch(error => {
-            console.log(error)
-          })
+     if(this.auth){
+       const route = useRoute();
+       let news_id = route.params.slug.replace(/[^0-9]/g, '');
+       const data = {
+         newsId: news_id
+       }
+       axios.post(`${apiUrl}/fav/like/`, data, {
+         headers: {
+           "Content-type": "application/json",
+           "Authorization": `Bearer ${localStorage.getItem('token')}`
+         }
+       })
+           .then(response => {
+             this.status = response.data.status
+           })
+           .catch(error => {
+             console.log(error)
+           })
+     }else{
+       alert('please login to make Favourite')
+     }
     },
 
     dateTime(value) {
       return moment(value).format('hh:mm');
+    },
+    DateTimeUnix(value) {
+      return moment.unix(value, "MM-DD-YYYY").locale('nl').fromNow()
     },
     RelativeDate(value) {
       return moment(value).format('MMMM Do YYYY, h:mm:ss a');
