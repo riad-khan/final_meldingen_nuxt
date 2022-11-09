@@ -6,7 +6,7 @@
       <div class="row d-flex align-items-center call-to-row box-shadow bg-white-gray">
         <div class="col-md-8 col-xs-7">
           <div class="location-search-form">
-            <input v-model="search" name="placename" placeholder="Zoek op plaatsnaam" type="text"
+            <input v-model="search" name="placename" autocomplete="off" placeholder="Zoek op plaatsnaam" type="text"
                    @input="(e)=>searchRegion(e)"/>
           </div>
         </div>
@@ -24,10 +24,10 @@
 
       <div class="row">
         <div class="col-md-12">
-          <div v-for="(item, i) in locations" v-show="isOpen" id="search_by_place_result"
+          <div v-for="(item, i) in meldingens" v-show="isOpen" id="search_by_place_result"
                class="searchbar-area box-shadow">
             <router-link :to="urlPath == 'meldingen' ? `/${item.provincie_url}/${item.stad_url}`:`/${urlPath}/${item.provincie_url}`" class="d-block">{{ item.stad }}
-              <span>{{ item.provincie }}
+              <span>{{ findProvName(item.provincie) }}
               </span></router-link>
           </div>
         </div>
@@ -41,10 +41,14 @@
 
 <script>
 import axios from "axios";
+import stad from "../stad.json";
+import provincies from '../provincie.json'
+
 
 let apiUrl
 export default {
   setup() {
+
     const config = useRuntimeConfig();
     apiUrl = config.public.api;
   },
@@ -53,13 +57,23 @@ export default {
   data() {
     return {
       isOpen: false,
-      meldinges: [],
+      locations : stad,
       search: '',
       isLoading: false,
+      provincie: provincies,
+      meldingens:[],
+      count: 0
     }
   },
 
+
+
   methods: {
+    findProvName(stad_id){
+        const {provincie} = this.provincie.find( ({provincie,id}) => id === stad_id )
+
+      return provincie
+    },
     findMyLocation() {
       const success = (position) => {
         const latitude = position.coords.latitude;
@@ -84,33 +98,57 @@ export default {
       navigator.geolocation.getCurrentPosition(success, error)
 
     },
-    searchRegion(e) {
-      this.isLoading = true;
+    searchRegion() {
+      this.count = 0
+      // this.isLoading = true;
+      //
+      // axios.get(`${apiUrl}/meldingen/auto/search?search=${e.target.value}`)
+      //     .then((res) => {
+      //       this.meldinges = [];
+      //       this.meldinges.push(res.data)
+      //       this.isLoading = false;
+      //     })
+      //     .catch((error) => {
+      //       console.log(error)
+      //     })
+      //
+      // this.isOpen = true
+      //
+      // if (this.search === '') {
+      //   this.meldinges = []
+      //   this.isOpen = false
+      // }
 
-      axios.get(`${apiUrl}/meldingen/auto/search?search=${e.target.value}`)
-          .then((res) => {
-            this.meldinges = [];
-            this.meldinges.push(res.data)
-            this.isLoading = false;
-          })
-          .catch((error) => {
-            console.log(error)
-          })
+    let limit = 0;
 
-      this.isOpen = true
+      console.log(this.locations[0].stad_url)
 
-      if (this.search === '') {
-        this.meldinges = []
-        this.isOpen = false
+    this.locations.map((item,i)=>{
+      if((item.stad_url.substring(0,this.search.length) === this.search)){
+        if(limit > 5){
+          return;
+        }
+        if(this.meldingens.length === 6){
+          this.meldingens.splice(0,6)
+        }
+        this.meldingens.push(item)
+        this.isOpen = true;
+        limit ++;
+        if(this.search == ''){
+          this.isOpen = false
+          this.meldingens = [];
+        }
+
       }
+    })
 
 
     }
   },
   computed: {
-    locations() {
-      return this.meldinges[0]
-    }
+    // locations() {
+    //   return this.meldinges[0]
+    // }
   }
 }
 </script>

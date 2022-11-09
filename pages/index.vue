@@ -128,6 +128,7 @@ onMounted(() => {
 
 <script>
 import moment from "moment/moment";
+import 'moment/locale/nl'
 import axios from "axios";
 import addImage from 'assets/img/add-img.jpg'
 
@@ -157,9 +158,6 @@ export default {
     }
   },
   created() {
-
-    console.log(meldingenArray)
-
     this.meldingens = meldingenArray;
     this.nexReq = nextReq
   },
@@ -169,7 +167,7 @@ export default {
   },
   methods: {
     DateTime(value) {
-      return moment.unix(value, "MM-DD-YYYY").fromNow()
+      return moment.unix(value).locale('nl').fromNow()
     },
     getMoreMeldingen(page) {
       this.loading = true;

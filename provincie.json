@@ -1,0 +1,14 @@
+[
+  {"id":"1","provincie":"Noord-Brabant","provincie_url":"noord-brabant","slug":"","seo_keywords":null,"seo_meta":null},
+  {"id":"2","provincie":"Friesland","provincie_url":"friesland","slug":"","seo_keywords":null,"seo_meta":null},
+  {"id":"3","provincie":"Noord-Holland","provincie_url":"noord-holland","slug":"","seo_keywords":null,"seo_meta":null},
+  {"id":"4","provincie":"Zuid-Holland","provincie_url":"zuid-holland","slug":"","seo_keywords":null,"seo_meta":null},
+  {"id":"5","provincie":"Zeeland","provincie_url":"zeeland","slug":"","seo_keywords":null,"seo_meta":null},
+  {"id":"6","provincie":"Gelderland","provincie_url":"gelderland","slug":"","seo_keywords":null,"seo_meta":null},
+  {"id":"7","provincie":"Utrecht","provincie_url":"utrecht","slug":"","seo_keywords":null,"seo_meta":null},
+  {"id":"8","provincie":"Drenthe","provincie_url":"drenthe","slug":"","seo_keywords":null,"seo_meta":null},
+  {"id":"9","provincie":"Groningen","provincie_url":"groningen","slug":"","seo_keywords":null,"seo_meta":null},
+  {"id":"10","provincie":"Overijssel","provincie_url":"overijssel","slug":"","seo_keywords":null,"seo_meta":null},
+  {"id":"11","provincie":"Flevoland","provincie_url":"flevoland","slug":"","seo_keywords":null,"seo_meta":null},
+  {"id":"12","provincie":"Limburg","provincie_url":"limburg","slug":"","seo_keywords":null,"seo_meta":null}
+]

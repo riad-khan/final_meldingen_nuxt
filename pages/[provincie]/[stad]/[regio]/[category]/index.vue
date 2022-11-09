@@ -88,7 +88,7 @@
                       </h3>
                       <div class="meta">
                         <ul class="inline-list">
-                          <span class="place-name" style="bottom: 33px;">{{ DateTime(item.timestamp) }}</span>
+                         <li> <span class="icon-clock"></span> {{ dateTime(item.timestamp) }}</li>
 
                         </ul>
                       </div>
@@ -202,10 +202,12 @@ onMounted(() => {
 let apiUrl;
 let backend;
 import moment from "moment";
+import addImage from 'assets/img/add-img.jpg'
 export default {
   name: "index",
   data(){
     return{
+      image: {backgroundImage: `url(${addImage})`},
       currentUrl: "",
     }
   },
@@ -219,11 +221,16 @@ export default {
       return moment.unix(value).format('MMMM Do YYYY');
     },
     dateTime(value) {
-      return moment(value).format('hh:mm');
+
+      let date = moment.unix(value).format('DD-MM-YYYY');
+      let time = moment.unix(value).format('hh:mm');
+
+      return date + ' om ' + time
+
     },
-    RelativeDate(value) {
-      return moment(value).format('MMMM Do YYYY,');
-    },
+    // RelativeDate(value) {
+    //   return moment(value).format('MMMM Do YYYY,');
+    // },
   },
 }
 </script>
