@@ -26,7 +26,7 @@
         <div class="col-md-12">
           <div v-for="(item, i) in meldingens" v-show="isOpen" id="search_by_place_result"
                class="searchbar-area box-shadow">
-            <router-link :to="urlPath == 'meldingen' ? `/${item.provincie_url}/${item.stad_url}`:`/${urlPath}/${item.provincie_url}`" class="d-block">{{ item.stad }}
+            <router-link :to="urlPath == 'meldingen' ? `/${findProvUrl(item.provincie)}/${item.stad_url}`:`/${urlPath}/${findProvUrl(item.provincie)}`" class="d-block">{{ item.stad }}
               <span>{{ findProvName(item.provincie) }}
               </span></router-link>
           </div>
@@ -71,8 +71,11 @@ export default {
   methods: {
     findProvName(stad_id){
         const {provincie} = this.provincie.find( ({provincie,id}) => id === stad_id )
-
       return provincie
+    },
+    findProvUrl(stad_id){
+      const {provincie_url} = this.provincie.find( ({provincie,id}) => id === stad_id )
+      return provincie_url
     },
     findMyLocation() {
       const success = (position) => {
@@ -99,29 +102,10 @@ export default {
 
     },
     searchRegion() {
-      this.count = 0
-      // this.isLoading = true;
-      //
-      // axios.get(`${apiUrl}/meldingen/auto/search?search=${e.target.value}`)
-      //     .then((res) => {
-      //       this.meldinges = [];
-      //       this.meldinges.push(res.data)
-      //       this.isLoading = false;
-      //     })
-      //     .catch((error) => {
-      //       console.log(error)
-      //     })
-      //
-      // this.isOpen = true
-      //
-      // if (this.search === '') {
-      //   this.meldinges = []
-      //   this.isOpen = false
-      // }
+
 
     let limit = 0;
 
-      console.log(this.locations[0].stad_url)
 
     this.locations.map((item,i)=>{
       if((item.stad_url.substring(0,this.search.length) === this.search)){

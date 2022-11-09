@@ -70,11 +70,14 @@
 
                 <h2 class="sec-heading mt-30 color-black">Ander Nieuws</h2>
 
-                <div class="meldingen">
-                  <div v-for="(item, i) in moreNews" :key="i" class="card other-news acard box-shadow border-radius-8"
-                       data-aos="fade-up" data-aos-delay="10" data-aos-once="true">
 
+                <div class="meldingen">
+                  <div v-for="(item,i) in moreNews" class="card other-news acard box-shadow border-radius-8 d-flex">
+                    <div class="news-thumb"><img :src="backend + item.image" alt="" class="img-thumb border-radius"></div>
                     <div class="card-content">
+
+
+
                       <h3 class="card-heading">
                         <nuxt-link
                             :to="'/nieuws/'+item.state.toLowerCase()+'/'+item.city.replace(/\s+/g, '-').toLowerCase()+'/'+item.slug.toLowerCase() +'-'+item.id"
@@ -85,19 +88,17 @@
                       <div class="meta">
                         <ul class="inline-list">
                           <li><span class="icon-clock"></span> {{ dateTime(item.created_at) }} in &nbsp;</li>
-                          <li><nuxt-link :to="'/nieuws/'+item.state.toLowerCase()">{{ item.state }}</nuxt-link>,&nbsp;</li>
+                          <li><a href=""><nuxt-link :to="'/nieuws/'+item.state.toLowerCase()">{{ item.state }}</nuxt-link></a>,&nbsp;</li>
                           <li>Nederland</li>
                         </ul>
                       </div>
                       <div class="btn-group mt-10">
                         <a v-for="(tag,i) in item.tags.split(',')" v-show="tag.length !==0 "
                            :class="'button btn-more bg-blue border-radius-8 '+ tag"
-                           href="">{{ tag }}</a>
+                        >{{ tag }}</a>
                       </div>
                     </div>
-
                   </div>
-
                 </div>
                 <div v-if="loadingMore === true" :class="loadingMore ? 'spin':''" style="height: 300px;"></div>
 
@@ -130,7 +131,7 @@
                       </h3>
                       <div class="meta">
                         <ul class="inline-list">
-                          <span class="place-name" style="bottom: 33px;">{{ DateTimeUnix(item.timestamp) }}</span>
+                          <li> <span class="icon-clock"></span>   {{ dateTimeUnix(item.timestamp) }}</li>
 
                         </ul>
                       </div>
@@ -271,8 +272,13 @@ created() {
     dateTime(value) {
       return moment(value).format('hh:mm');
     },
-    DateTimeUnix(value) {
-      return moment.unix(value, "MM-DD-YYYY").locale('nl').fromNow()
+    dateTimeUnix(value) {
+
+      let date = moment.unix(value).format('DD-MM-YYYY');
+      let time = moment.unix(value).format('hh:mm');
+
+      return date + ' om ' + time
+
     },
 
 

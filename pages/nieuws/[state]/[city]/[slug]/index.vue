@@ -29,7 +29,10 @@
           </div>
 
           <div class="row with-sidebar">
-            <div class="col-md-12 pt-30 m-pt-0">
+
+
+            <div class="col-md-8 col-lg-9 col-xs-12">
+
               <div class="card card-overlay other-news box-shadow border-radius">
                 <div class="card-thumb">
                   <img :src="backend + newsDetails.details.image" alt="nieuws image" class="desktop-only">
@@ -42,9 +45,6 @@
                   <h4 class="text-limit-2 mt-10 m-mt-0 t-mt-0" style="color:white">{{ newsDetails.details.title }}</h4>
                 </div>
               </div>
-            </div>
-
-            <div class="col-md-8 col-lg-9 col-xs-12">
 
               <div class="content">
                 <div class="meta">
@@ -110,7 +110,7 @@
 
                 <div class="btn-group mt-10">
                  <div class="row">
-                   <a :class="'button btn-more bg-blue border-radius-8 '+ tag" v-for="(tag,i) in newsDetails.details.tags.split(',')">{{ tag }}</a>
+                   <a  :class="'button btn-more bg-blue border-radius-8 '+ tag" v-for="(tag,i) in newsDetails.details.tags.split(',')" v-show="tag.length !==0 ">{{ tag }}</a>
 
                  </div>
 
@@ -199,7 +199,7 @@
                       </h3>
                       <div class="meta">
                         <ul class="inline-list">
-                          <span class="place-name" style="bottom: 33px;">{{ DateTimeUnix(item.timestamp) }}</span>
+                          <li><span class="icon-clock"></span>  {{ dateTimeUnix(item.timestamp) }}</li>
 
                         </ul>
                       </div>
@@ -352,6 +352,14 @@ export default {
 
   methods: {
 
+    dateTimeUnix(value) {
+
+      let date = moment.unix(value).format('DD-MM-YYYY');
+      let time = moment.unix(value).format('hh:mm');
+
+      return date + ' om ' + time
+
+    },
     unlikeNews() {
       const route = useRoute();
       let news_id = route.params.slug.replace(/[^0-9]/g, '');
