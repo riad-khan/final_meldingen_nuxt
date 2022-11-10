@@ -214,7 +214,6 @@ export default {
 
           this.getMoreMeldingen(this.increment++);
 
-
         }
 
       }

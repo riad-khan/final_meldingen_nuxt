@@ -92,10 +92,10 @@
 
                         </ul>
                       </div>
-                      <span class="place-name"> {{ item.straat }}</span> in <span class="place-title"
-                                                                                  style="color: #669e97 !important;"><nuxt-link :to="'/'+item.stad.toLowerCase()">{{ item.stad }}</nuxt-link> </span>,
-                      <span class="place-name">
-                {{ item.provincie }}</span>
+<!--                      <span class="place-name"> {{ item.straat }}</span> in <span class="place-title"-->
+<!--                                                                                  style="color: #669e97 !important;"><nuxt-link :to="'/'+item.stad.toLowerCase()">{{ item.stad }}</nuxt-link> </span>,-->
+<!--                      <span class="place-name">-->
+<!--                {{ item.provincie }}</span>-->
                       <div class="btn-group  mt-10">
                         <a :class="'button btn-more bg-red border-radius-8 '+item.dienst">{{ item.dienst }}</a>
 

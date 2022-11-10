@@ -104,6 +104,8 @@ backend = config.public.backend;
 
 const { data: melding, pending } = await useAsyncData('filter_meldingen', () => $fetch(`${apiUrl}/meldingen/filter-meldingen/${route.params.provincie}/0`));
 meldingenArray = melding;
+nextReq = true;
+
 const regio = route.params.provincie
 
 onMounted(() => {
@@ -153,6 +155,7 @@ useHead({
 </script>
 
 <script>
+let nextReq;
 import moment from "moment/moment";
 import axios from "axios";
 import addImage from 'assets/img/add-img.jpg'
@@ -175,6 +178,7 @@ export default {
       increment: 1,
       region: '',
       isLoading: false,
+      nexReq: null,
 
 
     }
@@ -184,6 +188,7 @@ export default {
     const route = useRoute();
     this.region = route.params.regio
     this.meldingens = meldingenArray;
+    this.nexReq = nextReq;
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll);
@@ -193,8 +198,8 @@ export default {
     DateTime(value) {
       return moment.unix(value, "MM-DD-YYYY").locale('nl').fromNow()
     },
-    getMoreMeldingen(page) {
-      const provincie = this.$route.params.provincie;
+    getMoreMeldingen(provincie,page) {
+      this.nexReq = false;
       this.isLoading = true;
       axios.get(`${apiUrl}/meldingen/filter-meldingen/` + provincie + '/' + page)
           .then((response) => {
@@ -202,6 +207,7 @@ export default {
               this.meldingens.push(item)
               this.isLoading = false;
             })
+            this.nexReq = true;
           })
           .catch(error => {
             console.log(error)
@@ -210,9 +216,15 @@ export default {
 
     },
     handleScroll() {
-      if ((Math.round(window.scrollY) + window.innerHeight) >= document.body.scrollHeight) {
+      const route = useRoute();
+      if ((Math.round(window.scrollY) + window.innerHeight + 300) >= document.body.scrollHeight) {
+        if(route.name =='provincie'){
+         if(this.nexReq === true){
+           this.getMoreMeldingen(this.$route.params.provincie,this.increment++)
+         }
 
-        this.getMoreMeldingen(this.increment++);
+        }
+
 
 
       }

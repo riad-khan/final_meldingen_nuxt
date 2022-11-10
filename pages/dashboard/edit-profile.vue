@@ -53,6 +53,22 @@
 const config = useRuntimeConfig();
 apiUrl = config.public.api;
 backend = config.public.backend;
+useHead({
+  titleTemplate: `Meldingen.nl - Edit profile`,
+  // script: [{children: `${seo.value.structured_data}`}],
+  meta:[
+    {name:'description',content:'112 meldingen edit profile'},
+    {
+      property: "og:title",
+      content: 'Meldingen.nl - Edit profile'
+    },
+    {
+      property: "twitter:title",
+      content: 'Meldingen.nl - Edit profile'
+    },
+  ]
+
+})
 </script>
 
 <script>

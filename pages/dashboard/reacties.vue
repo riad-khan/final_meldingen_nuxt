@@ -56,9 +56,27 @@
 </template>
 
 <script setup>
+
 const config = useRuntimeConfig();
 apiUrl = config.public.api;
 backend = config.public.backend;
+
+useHead({
+  titleTemplate: `Meldingen.nl - My reacties`,
+  // script: [{children: `${seo.value.structured_data}`}],
+  meta:[
+    {name:'description',content:'112 meldingen My reacties'},
+    {
+      property: "og:title",
+      content: 'Meldingen.nl - My reacties'
+    },
+    {
+      property: "twitter:title",
+      content: 'Meldingen.nl - My reacties'
+    },
+  ]
+
+})
 </script>
 
 <script>
@@ -117,8 +135,8 @@ export default {
       const {$swal} = useNuxtApp()
 
       $swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'you want to delete this ?',
+        text: "You won't be able to restore this again!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

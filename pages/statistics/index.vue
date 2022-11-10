@@ -156,10 +156,13 @@
 
                  <div style=" margin-bottom: 2px;" id="slider" class="loaded">
                    <div class="wrapper">
-                     <div id="provincie_buttons_area" class="slides chart-btn" style="left: -660px;">
 
 
-                       <button v-for="(item, i) in provincieCount" :key="i" :id="item.provincie"
+                     <div id="provincie_buttons_area" class="slides chart-btn" >
+
+
+
+                       <button v-for="(item, i) in provincieBtn" :key="i" :id="item.provincie"
                                @click="provincieSelect(item.provincie,i)"
                                :class="index === i ?'provienci button active':'provienci button'" :value="item.provincie"
                                style="margin-left: 2px;margin-top: 3px;">
@@ -175,16 +178,12 @@
 
                      </div>
                    </div>
-                   <a id="prev" class="control prev"></a>
-                   <a id="next" class="control next"></a>
-                   <div class="dots"><i data-id="0" class=""></i><i data-id="1" class=""></i><i data-id="2"
-                                                                                                class=""></i><i data-id="3" class=""></i><i data-id="4" class="active"></i><i data-id="5"
-                                                                                                                                                                              class=""></i><i data-id="6" class=""></i><i data-id="7" class=""></i><i data-id="8"
-                                                                                                                                                                                                                                                      class=""></i><i data-id="9" class=""></i><i data-id="10" class=""></i><i data-id="11"
-                                                                                                                                                                                                                                                                                                                               class=""></i></div>
+                   <a id="prev" class="control prev" :style="image"></a>
+                   <a id="next" class="control next" :style="image"></a>
+                   <div class="dots"></div>
                  </div><br>
 
-                 <div style="height: 300px" ref="provincie_canvas" class="">
+                 <div style="height: 300px" ref="provincie_canvas" id="provincie_canvas" class="">
                    <canvas id="myChart5" style="display: block; box-sizing: border-box; height: 300px; width: 683px;"
                            width="683" height="300"></canvas>
                  </div>
@@ -217,9 +216,9 @@
                  </select>
                </p>
 
-               <div style=" margin-bottom: 2px;" id="slider" class="loaded">
-                 <div class="wrapper">
-                   <div id="provincie_buttons_area" class="slides chart-btn" style="left: -660px;">
+               <div style=" margin-bottom: 2px;">
+
+                   <div id="emergency_options_button" class="chart-btn">
 
 
                      <button v-for="(item, i) in emergencyBtn" :key="i" :id="item.dienst"
@@ -237,7 +236,7 @@
 
 
                    </div>
-                 </div>
+
                  <a id="prev" class="control prev"></a>
                  <a id="next" class="control next"></a>
                  <div class="dots"><i data-id="0" class=""></i><i data-id="1" class=""></i><i data-id="2"
@@ -275,11 +274,15 @@ onMounted(() => {
 </script>
 
 <script>
+import {provincieValue} from "../../provincieChart";
+
+
 let apiUrl;
 let backend;
 import Chart from 'chart.js/auto/auto.mjs';
 import axios from 'axios';
-
+import addImage from "../../assets/img/add-img.jpg";
+import rightIcon from 'assets/img/angel-icon-right.png'
 
 
 
@@ -288,6 +291,9 @@ export default {
   components: {},
   data() {
     return {
+      image: {backgroundImage: `url(${rightIcon})`},
+      provincieBtn: provincieValue,
+      slide: null,
       myChart1: null,
       myChart2: null,
       myChart3: null,
@@ -681,11 +687,171 @@ export default {
 
   mounted() {
 
-
     this.RegioChange('all');
+    if(document.getElementById('provincie_buttons_area')){
+      var slider = document.getElementById('slider'),
+          sliderItems = document.getElementById('provincie_buttons_area'),
+          prev = document.getElementById('prev'),
+          next = document.getElementById('next'),
+          dot = document.querySelector('.dots');
+
+      function provienci(wrapper, items, prev, next) {
+
+        var posX1 = 0,
+            posX2 = 0,
+            posInitial,
+            posFinal,
+            threshold = 100,
+            slides = items.getElementsByClassName('provienci'),
+            slidesLength = slides.length,
+            slideSize = items.getElementsByClassName('provienci')[0].offsetWidth,
+            index = 0,
+            allowShift = true;
+
+
+
+        wrapper.classList.add('loaded');
+
+        for (var j = 0; j < slidesLength; j++) {
+          var dotItem = document.createElement('i');
+          dotItem.dataset.id = j ;
+
+
+          dot.appendChild(dotItem);
+
+
+        }
+
+        document.querySelector('.dots i:first-child').classList.add('active');
+
+
+        function appendAfter(n, original, appendTo) {
+          for(var i = 0; i < n; i++) {
+            var clone = original[i].cloneNode(true);
+            appendTo.appendChild(clone);
+          }
+
+        }
+        appendAfter(5, slides, items);
+
+
+
+        // Click events
+        prev.addEventListener('click', function () { shiftSlide(-1) });
+        next.addEventListener('click', function () { shiftSlide(1) });
+
+        // Transition events
+        items.addEventListener('transitionend', checkIndex);
+
+        function dragStart (e) {
+          e = e || window.event;
+          e.preventDefault();
+          posInitial = items.offsetLeft;
+
+          if (e.type == 'touchstart') {
+            posX1 = e.touches[0].clientX;
+          } else {
+            posX1 = e.clientX;
+            document.onmouseup = dragEnd;
+            document.onmousemove = dragAction;
+          }
+        }
+
+        function dragAction (e) {
+          e = e || window.event;
+
+          console.log('frim dragAction')
+
+          if (e.type == 'touchmove') {
+            posX2 = posX1 - e.touches[0].clientX;
+            posX1 = e.touches[0].clientX;
+          } else {
+            posX2 = posX1 - e.clientX;
+            posX1 = e.clientX;
+          }
+          items.style.left = (items.offsetLeft - posX2) + "px";
+        }
+
+        function dragEnd (e) {
+          posFinal = items.offsetLeft;
+          if (posFinal - posInitial < -threshold) {
+            shiftSlide(1, 'drag');
+          } else if (posFinal - posInitial > threshold) {
+            shiftSlide(-1, 'drag');
+          } else {
+            items.style.left = (posInitial) + "px";
+          }
+
+          document.onmouseup = null;
+          document.onmousemove = null;
+        }
+
+        function shiftSlide(dir, action) {
+          items.classList.add('shifting');
+
+          if (allowShift) {
+            if (!action) { posInitial = items.offsetLeft; }
+
+            if (dir ==1) {
+              items.style.left = (posInitial - slideSize) + "px";
+              index++;
+            } else if (dir == -1) {
+              items.style.left = (posInitial + slideSize) + "px";
+              index--;
+            }
+
+          };
+
+          allowShift = false;
+        }
+
+        function checkIndex (){
+          items.classList.remove('shifting');
+
+          if (index == -1) {
+            items.style.left = -(slidesLength * slideSize ) + "px";
+            index = slidesLength - 1;
+          }
+
+          if (index == slidesLength) {
+            items.style.left = -(1 * slideSize) + "px";
+            index = 0;
+          }
+          deleteDots();
+          dot.children[index].classList.add('active');
+          allowShift = true;
+        }
+
+        dot.addEventListener('click', function(e){
+          if(e.target.tagName.toLowerCase() !== 'i') return;
+          checkDots(e);
+        });
+        function checkDots(e) {
+          items.classList.add('shifting');
+          deleteDots();
+          e.target.classList.add('active');
+          items.style.left = -(1 * (slideSize * e.target.dataset.id)) + "px";
+          index = e.target.dataset.id;
+        }
+
+        function deleteDots(e) {
+          var dotElements = document.querySelectorAll('.dots i');
+          for (var i = 0; i < dotElements.length; i++) {
+            dotElements[i].classList.remove('active');
+          }
+        }
+
+      }
+
+
+
+      provienci(slider, sliderItems, prev, next);
+    }
+
 
   },
   methods: {
+
     RegioChange(e) {
       let regio;
       if(e == 'all'){
@@ -931,10 +1097,11 @@ export default {
       );
     },
     fetchProvincieMeldingen(hour, provincie) {
+
       this.$refs.provincie_canvas.classList.value = "spin";
       axios.get(`${apiUrl}/charts/prov/${hour}/${provincie}`)
           .then((response) => {
-
+            this.slide = true;
             this.config5.data.labels = [];
             this.config5.data.datasets[0].data = [];
             for (let i = 0; i < response.data.chart.length; i++) {
@@ -942,11 +1109,24 @@ export default {
               this.config5.data.datasets[0].data.push(response.data.chart[i].calculated);
             }
 
+            response.data.hoursData.map((item,i)=>{
+              const data = this.provincieBtn.filter(el => el.provincie === item.provincie);
+
+              for(let i = 0; i < data.length; i++){
+                if(data[i].provincie === item.provincie){
+                  data[i].total = item.total;
+                  this.provincieBtn.push(data);
+                  this.provincieBtn.pop(data);
+                }
+              }
+            })
+
 
             this.provincieChartRender();
             this.$refs.provincie_canvas.classList.value = "";
 
             this.provincieCount = response.data.hoursData;
+
 
           })
 
@@ -1013,5 +1193,111 @@ export default {
 </script>
 
 <style scoped>
+div#slider{
+  position: relative;
+}
+.wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+.slides {
+  display: flex;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 10000px;
+}
+.chart-btn button.button {
+  background: transparent;
+  color: var(--text-color);
+  text-align: left;
+  border: 2px solid;
+  border-color: #CCCCCC;
+  margin-right: 5px;
+  min-width: 132px;
+  font-size: 12px;
+
+}
+.chart-btn button.button.active, .chart-btn button.button:hover {
+  background: #E9ECEF;
+  color: #1F4160;
+  border: 1.5px solid #1F4160;
+}
+
+select {
+  border: none;
+  color: #669E97;
+  outline: none;
+  background: transparent;
+}
+
+div#slider {
+  position: relative;
+}
+#slider .slider {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  box-shadow: 3px 3px 10px rgba(0,0,0,.2);
+}
+
+.wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.slides {
+  display: flex;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 10000px;
+}
+.chart-btn button.button {
+  background: transparent;
+  color: var(--text-color);
+  text-align: left;
+  border: 2px solid;
+  border-color: #CCCCCC;
+  margin-right: 5px;
+  min-width: 132px;
+  font-size: 12px;
+}
+.slides.shifting {
+  transition: left .2s ease-out;
+}
+.control {
+  position: absolute;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  margin-top: -10px;
+  z-index: 2;
+}
+
+.prev,
+.next {
+  background-size: 12px;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.prev {
+
+  left: -20px;
+  transform: rotate(180deg);
+}
+
+.next {
+
+  right: -20px;
+}
 
 </style>

@@ -41,6 +41,13 @@
                 </div>
                 <div class="card-content card-img-overlay">
                   <div class="btn-group">
+
+
+                        <a  :class="'button btn-more bg-blue border-radius-8  '+ tag" v-for="(tag,i) in newsDetails.details.tags.split(',')" v-show="tag.length !==0 ">{{ tag }}</a>
+
+
+
+
                   </div>
                   <h4 class="text-limit-2 mt-10 m-mt-0 t-mt-0" style="color:white">{{ newsDetails.details.title }}</h4>
                 </div>
@@ -94,9 +101,7 @@
 
                         </div>
 
-                        <button class="button btn-tranparent text-dark-white"><span class="icon-user-hear"></span>
-                          {{ totalComments.total }} reacties
-                        </button>
+
 
                       </div>
                     </div>
@@ -110,7 +115,7 @@
 
                 <div class="btn-group mt-10">
                  <div class="row">
-                   <a  :class="'button btn-more bg-blue border-radius-8 '+ tag" v-for="(tag,i) in newsDetails.details.tags.split(',')" v-show="tag.length !==0 ">{{ tag }}</a>
+                   <a id="tag" :class="'button btn-more bg-tag border-radius-8  '+ tag" v-for="(tag,i) in newsDetails.details.tags.split(',')" v-show="tag.length !==0 ">{{ tag }}</a>
 
                  </div>
 
@@ -121,8 +126,8 @@
               <!--   comment Section-->
 
               <div v-if="!auth" class="comment-sec t-mt-20">
-                <h2 class="weight-500">Comment On Article</h2>
-                <nuxt-link class="button btn-tranparent" to="/login">Sign up to comment</nuxt-link>
+                <h2 class="comment-head">Reageer op dit artikel</h2>
+                <nuxt-link id="comment-btn" class="button btn-tranparent" to="/login">Aanmelden om te reageren</nuxt-link>
               </div>
 
               <div v-else class="comment-sec t-mt-20">
@@ -148,6 +153,14 @@
                 </div>
               </div>
 
+              <div>
+                <h2 class="reacties">Reacties ({{totalComments.total}})</h2>
+
+                <nuxt-link v-if="!auth" to="/login" id="login-btn" class="button btn-tranparent text-dark-white"><span class="icon-user-hear"></span>
+                   Bekijk de reacties
+                </nuxt-link>
+
+              </div>
               <div v-if="auth" class="comment-view">
                 <div id="comment-area">
                   <h1>comments</h1>
@@ -203,10 +216,10 @@
 
                         </ul>
                       </div>
-                      <span class="place-name"> {{ item.straat }}</span> in <span class="place-title"
-                                                                                  style="color: #669e97 !important;"><nuxt-link :to="'/'+item.stad.toLowerCase()">{{ item.stad }}</nuxt-link> </span>,
-                      <span class="place-name">
-                {{ item.provincie }}</span>
+<!--                      <span class="place-name"> {{ item.straat }}</span> in <span class="place-title"-->
+<!--                                                                                  style="color: #669e97 !important;"><nuxt-link :to="'/'+item.stad.toLowerCase()">{{ item.stad }}</nuxt-link> </span>,-->
+<!--                      <span class="place-name">-->
+<!--                {{ item.provincie }}</span>-->
                       <div class="btn-group  mt-10">
                         <a :class="'button btn-more bg-red border-radius-8 '+item.dienst">{{ item.dienst }}</a>
 
@@ -493,7 +506,55 @@ export default {
 </script>
 
 <style scoped>
-.btn-tranparent {
-  color: white;
+
+#comment-btn{
+  background-color: white !important;
+  color: #404040 !important;
+  font-family: 'Roboto Condensed';
 }
+
+#login-btn{
+  background-color: white !important;
+  color: #404040 !important;
+  font-family: 'Roboto Condensed';
+}
+
+.reacties{
+  color:#404040 !important;
+  padding-top: 20px;
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 40px;
+
+}
+.comment-head{
+  width: 222px;
+  height: 40px;
+  left: 202px;
+  top: 1351px;
+
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 40px;
+  color:#404040 !important;
+}
+#tag{
+  background: rgba(31, 65, 96, 0.25) !important;
+  color: #1F4160;
+}
+.breadcrumbs ul.inline-list li{
+  color: #669E97;
+}
+.breadcrumbs ul.inline-list li a{
+  color: #1F405E;
+}
+.right-angel{
+  color: #669E97 !important;
+}
+
+
 </style>

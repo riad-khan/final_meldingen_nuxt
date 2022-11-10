@@ -19,14 +19,14 @@
                     <div class="col-md-6">
                       <div class="post-meta news">
                         <h3>
-                          1                                        </h3>
+                         {{fav_news}}                                  </h3>
                         <strong>Favorite nieuws</strong>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="post-meta comments">
                         <h3>
-                          2                                        </h3>
+                         {{totalComments}}                                    </h3>
                         <strong>Comments</strong>
                       </div>
                     </div>
@@ -43,11 +43,42 @@
   </div>
 </template>
 
-<script>
+<script setup>
+const config = useRuntimeConfig();
+apiUrl = config.public.api;
+backend = config.public.backend;
 
+useHead({
+  titleTemplate: `Meldingen.nl - Dashboard`,
+  // script: [{children: `${seo.value.structured_data}`}],
+  meta:[
+    {name:'description',content:'112 meldingen dashboard'},
+    {
+      property: "og:title",
+      content: 'Meldingen.nl - Dashboard'
+    },
+    {
+      property: "twitter:title",
+      content: 'Meldingen.nl - Dashboard'
+    },
+  ]
+
+})
+</script>
+
+<script>
+let apiUrl;
+let backend;
 import {isAuth} from '../../middlewares/auth'
+import axios from "axios";
 export default {
   name: "Dashboard.vue",
+  data(){
+    return{
+      totalComments:0,
+      fav_news : 0
+    }
+  },
 
   created() {
     if(typeof window !== "undefined"){
@@ -55,7 +86,15 @@ export default {
         this.$router.push('/login')
       }
     }
-  }
+  },
+  mounted() {
+    const id = localStorage.getItem('id')
+    axios.get(`${apiUrl}/user/dashboard/count/`+34)
+        .then((response)=>{
+         this.totalComments = response.data.comments.total;
+         this.fav_news = response.data.fav_news.total;
+        })
+  },
 }
 </script>
 

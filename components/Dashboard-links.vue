@@ -3,7 +3,8 @@
     <div class="my-account">
       <div class="user-avatar bg-lightgrey-black">
         <div class="profile-pic-text-area">
-          <img style="border-radius: 50%;" :src="userinfo.profile_pic">
+          <img style="border-radius: 50%;" v-if="userinfo.profile_pic" :src="userinfo.profile_pic">
+          <p style="border-radius: 50%;" v-else >{{nameWord}}</p>
         </div>                        <p>{{userinfo.name}}</p>
       </div>
       <div class="dashboard-menu">
@@ -33,7 +34,8 @@ export default {
   name: "Dashboard-links",
   data(){
     return{
-      userinfo:{}
+      userinfo:{},
+      nameWord:'',
     }
   },
 
@@ -48,6 +50,7 @@ export default {
      })
          .then((response)=>{
            this.userinfo = response.data[0];
+           this.nameWord  = this.userinfo.name.split(' ').map(name => name[0]).join('').toUpperCase()
          })
          .catch((error)=>{
            console.log(error)
@@ -62,8 +65,12 @@ export default {
       localStorage.removeItem('email');
       localStorage.removeItem('name');
       this.$router.push('/')
+    },
+    NameWord(name){
+      return name.split(' ').map(name => name[0]).join('').toUpperCase()
     }
-  }
+  },
+
 }
 </script>
 

@@ -57,6 +57,23 @@
 const config = useRuntimeConfig();
 apiUrl = config.public.api;
 backend = config.public.backend;
+useHead({
+  titleTemplate: `Meldingen.nl - My Nieuws`,
+  // script: [{children: `${seo.value.structured_data}`}],
+  meta:[
+    {name:'description',content:'112 meldingen My Nieuws'},
+    {
+      property: "og:title",
+      content: 'Meldingen.nl - My Nieuws'
+    },
+    {
+      property: "twitter:title",
+      content: 'Meldingen.nl - My Nieuws'
+    },
+  ]
+
+})
+
 </script>
 
 
