@@ -253,7 +253,7 @@ img.news-icon {
 }
 
 .profile-pic-text-area ._text-area {
-    background: gainsboro;
+    background: #fff;
     height: 50px;
     width: 50px;
     margin: 0 auto;
@@ -840,8 +840,8 @@ span.input-icon.map-icon img {
     left: 0;
     right: 0;
     min-width: 100%;
-    margin: 5px 0;
-    border: 1px solid #FB4A3F;
+    margin: 15px 0;
+    border: 1px solid #669E97;
     border-radius: 4px;
     box-sizing: border-box;
     box-shadow: var(--box-shadow);
@@ -859,6 +859,7 @@ span.input-icon.map-icon img {
     visibility: visible;
     pointer-events: all;
     transform: translateY(0);
+    transition: .3s;
 }
 
 .option-hover:before {

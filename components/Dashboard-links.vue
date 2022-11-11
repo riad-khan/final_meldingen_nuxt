@@ -4,7 +4,7 @@
       <div class="user-avatar bg-lightgrey-black">
         <div class="profile-pic-text-area">
           <img style="border-radius: 50%;" v-if="userinfo.profile_pic" :src="userinfo.profile_pic">
-          <p style="border-radius: 50%;" v-else >{{nameWord}}</p>
+          <div class="_text-area" v-else >{{nameWord}}</div>
         </div>                        <p>{{userinfo.name}}</p>
       </div>
       <div class="dashboard-menu">

@@ -281,7 +281,7 @@
 
     header.header-area {
         padding: 30px 0px;
-        padding-bottom: 70px;
+        padding-bottom: 30px;
     }
 
     .logo img {
@@ -326,7 +326,7 @@
         height: 100%;
         width: 88%;
         position: fixed;
-        z-index: 99;
+        z-index: 9999;
         top: 0;
         right: -88%;
         background-color: var(--theme-color);
@@ -448,6 +448,7 @@
     .news-item img.news-icon {
         right: 0;
         opacity: .5;
+        top:21px
     }
 
     .news-item .news-content {
@@ -456,6 +457,7 @@
 
     .news-content h4 {
         margin-bottom: 5px;
+        padding-left:30px
     }
 
     .news-content p.place {
@@ -731,8 +733,11 @@
         height: 100%;
         object-fit: cover;
     }
+    .mac-content .post-meta {
+        margin-bottom: 10px;
+    }
     .header_bellow_bg {
-        height: 0px;
+        margin-top: -1px;
     }
     /*End Mobile*/
 }

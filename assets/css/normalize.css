@@ -300,7 +300,7 @@ body {
     --primary-color: #E64C3C;
     --white-color: #fff;
     --cyan-color: #669E97;
-    --bg-gradient: linear-gradient(88.91deg, #FC2B4D 0%, #FA673C 100%);
+    --bg-gradient: linear-gradient(88.91deg, #1F4160 0%, #2B5882 100%);
     --color-gradient: linear-gradient(to right, #FC2B4D 0%, #FA673C 100%);
     --bg-gradient-hover: linear-gradient(88.91deg, #FA673C 0%, #FC2B4D 100%);
     --border-gradient: linear-gradient(45deg, #FC2B4D, #FA673C) 1;
