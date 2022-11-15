@@ -87,11 +87,13 @@
 import { isAuth } from "../middlewares/auth";
 
 
+
 export default {
   name: "Header",
   data() {
     return {
       isAuth: null,
+      isOpen : false,
     }
   },
 
@@ -99,6 +101,20 @@ export default {
     if (typeof window !== "undefined") {
       this.isAuth = isAuth();
     }
+  },
+
+  mounted(){
+    const menuBtn = document.querySelector('.menu-btn');
+      menuBtn.addEventListener('click', () => {
+        if (!this.isOpen) {
+          menuBtn.classList.add('open');
+          this.isOpen = true;
+        }
+        else {
+          menuBtn.classList.remove('open');
+          this.isOpen = false;
+        }
+      });
   },
 
   computed: {
@@ -128,23 +144,6 @@ export default {
       } else {
         x.style.display = "none";
       }
-
-    console.log(x.style.display);
-
-      /*burger icon */
-      // const menuBtn = document.querySelector('.menu-btn');
-      // menuBtn.addEventListener('click', () => {
-      //   let menuOpen = false;
-      //   if (!menuOpen) {
-      //     menuBtn.classList.add('open');
-      //     menuOpen = true;
-      //   }
-      //   else {
-      //     menuBtn.classList.remove('open');
-      //     menuOpen = false;
-      //   }
-      // });
-      
     }
   }
 

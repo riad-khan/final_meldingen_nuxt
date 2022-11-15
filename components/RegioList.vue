@@ -13,10 +13,10 @@
       </div>
 
 
-      <div v-for="(item, i) in values" :key="i" class="col-md-3">
+      <div  class="col-md-3" v-for="(item, i) in values" :key="i">
         <div class="news-list">
-          <ul>
-            <li :class="region === item.regio ? 'active' : ''">
+          <ul >
+            <li  :class="region === item.regio ? 'active' : ''">
               <nuxt-link :to="path == 'meldingen' ? `/${item.regio_url}`:`/${path}/${item.provincie_url}`">{{ item.regio }}</nuxt-link>
             </li>
 
