@@ -317,24 +317,25 @@
         border: none;
         padding: 10px 15px;
     }
-
+/*
     #mobileSidenav {
         display: block;
     }
-
-    .sidenav {
-        height: 100%;
-        width: 88%;
-        position: fixed;
-        z-index: 9999;
-        top: 0;
-        right: -88%;
-        background-color: var(--theme-color);
-        overflow-x: hidden;
-        transition: var(--transition-delay);
-        padding-top: 60px;
-        border-radius: 8px 0px 0px 8px;
-    }
+*/
+.sidenav {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 9999;
+    top: 95px;
+    right: 0;
+    background-color: var(--theme-color);
+    overflow-x: hidden;
+    transition: var(--transition-delay);
+    padding-top: 0;
+    border-radius: 8px 0px 0px 8px;
+    border-top: 1px solid #2b5882;
+}
 
     .sidenav .logo {
         position: absolute;

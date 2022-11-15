@@ -1,18 +1,8 @@
 <template>
   <div>
     <!--Header-->
-    <div id="mobileSidenav" class="sidenav">
-      <div class="sidenav-header">
-        <div class="logo">
-          <h1>
-            <router-link to="/"><img alt="" src="@/assets/img/logo.svg" /></router-link>
-          </h1>
-        </div>
-        <div class="close-sec">
-          <a class="closebtn" href="javascript:void(0)" @click="closeNav"><img src="@/assets/img/icon-close.svg"></a>
-        </div>
-      </div>
-      <div  class="menu-mobile">
+    <div id="mobileSidenav" class="sidenav" style="display: none;">
+      <div class="menu-mobile">
         <ul>
           <li :class="currentRouteName === '/' ? 'active' : ''">
             <nuxt-link to="/">Meldingen</nuxt-link>
@@ -57,18 +47,15 @@
               </h1>
             </div>
           </div>
-          <div class="col-md-8 col-xs-4 textright">
-
-
-
+          <div class="col-md-8 col-xs-4">
             <div class="menu">
-
-         
-
-
-
-
-            <button class="openNav box-shadow" id="toggle" @click="openNav"><img src="@/assets/img/icon-hamburger.svg"></button>
+              <!--
+              <button class="openNav box-shadow" id="toggle" @click="openNav"><img
+                  src="@/assets/img/icon-hamburger.svg"></button>
+              -->
+              <div class="menu-btn" @click="openNav">
+                <div class="menu-btn__burger"></div>
+              </div>
               <ul>
                 <li :class="currentRouteName === '/' ? 'active' : ''">
                   <nuxt-link to="/">Meldingen</nuxt-link>
@@ -85,7 +72,7 @@
                 <li v-else :class="currentRouteName === '/login' ? 'active' : ''">
                   <nuxt-link to="/login"><span>Account</span></nuxt-link>
                 </li>
-                
+
               </ul>
             </div>
           </div>
@@ -120,27 +107,107 @@ export default {
     }
   },
   methods: {
-  
+    /*
+      openNav() {
+        document.getElementById("mobileSidenav").style.display = "block";
+        var element = document.getElementById("body-class");
+        element.classList.add("sidenav-open");
+      },
+      closeNav() {
+        document.getElementById("mobileSidenav").style.display = "none";
+        var element = document.getElementById("body-class");
+        setTimeout(function () {
+          element.classList.remove("sidenav-open");
+        }, 500);
+      }
+      */
     openNav() {
-      document.getElementById("mobileSidenav").style.right = "0";
-      var element = document.getElementById("body-class");
-      element.classList.add("sidenav-open");
-    },
-    closeNav() {
-      document.getElementById("mobileSidenav").style.right = "-88%";
-      var element = document.getElementById("body-class");
-      setTimeout(function () {
-        element.classList.remove("sidenav-open");
-      }, 500);
+      var x = document.getElementById("mobileSidenav");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+
+    console.log(x.style.display);
+
+      /*burger icon */
+      // const menuBtn = document.querySelector('.menu-btn');
+      // menuBtn.addEventListener('click', () => {
+      //   let menuOpen = false;
+      //   if (!menuOpen) {
+      //     menuBtn.classList.add('open');
+      //     menuOpen = true;
+      //   }
+      //   else {
+      //     menuBtn.classList.remove('open');
+      //     menuOpen = false;
+      //   }
+      // });
+      
     }
   }
 
 }
 </script>
 <style scoped>
+.menu-btn {
+  width: 40px;
+  height: 35px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+  border: 1px solid #fff;
+  float: right;
+}
+
+.menu-btn__burger {
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  border-radius: 1px;
+  transition: all .2s ease-in-out;
+}
+
+.menu-btn__burger::before,
+.menu-btn__burger::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  border-radius: 5px;
+  transition: all .2s ease-in-out;
+}
+
+.menu-btn__burger::before {
+  transform: translateY(-6px);
+}
+
+.menu-btn__burger::after {
+  transform: translateY(6px);
+}
 
 
+.menu-btn.open .menu-btn__burger {
+  transform: translateX(-50px);
+  background: transparent;
+}
 
+.menu-btn.open .menu-btn__burger::before {
+  transform: rotate(45deg) translate(35px, -35px);
+  background: #fff;
+}
 
+.menu-btn.open .menu-btn__burger::after {
+  transform: rotate(-45deg) translate(35px, 35px);
+  background: #fff;
+}
 
+.menu-btn.open {
+  border: 1px solid #fff;
+}
 </style>
