@@ -1,18 +1,18 @@
 <template>
   <div>
-    <Header/>
+    <Header />
 
     <main class="main-content bg-lightgrey">
 
 
 
-      <Location urlPath="nieuws"/>
+      <Location urlPath="nieuws" />
 
       <!-- News Section-->
       <section class="news-archive sec-padding pt-0 news_page">
         <div class="container">
           <div class="news_lsit mt-20">
-            <RegioList path="nieuws" region="Nederland"/>
+            <RegioList path="nieuws" region="Nederland" />
           </div>
           <div class="row">
             <div class="col-md-8 col-xs-12 ">
@@ -20,38 +20,40 @@
 
                 <!--            News card start    -->
 
-<!--                <div v-if="pending === true" :class="pending ? 'spin':''" style="height: 300px;"></div>-->
+                <!--                <div v-if="pending === true" :class="pending ? 'spin':''" style="height: 300px;"></div>-->
 
 
-            <div class="meldingen">
-              <div v-for="(item,i) in news.news" class="card other-news acard box-shadow border-radius-8 d-flex">
-                <div class="news-thumb"><img :src="backend + item.image" alt="" class="img-thumb border-radius"></div>
-                <div class="card-content">
+                <div class="meldingen">
+                  <div v-for="(item, i) in news.news" class="card other-news acard box-shadow border-radius-8 d-flex">
+                    <div class="news-thumb"><img :src="backend + item.image" alt="" class="img-thumb border-radius">
+                    </div>
+                    <div class="card-content">
 
 
 
-                  <h3 class="card-heading">
-                    <nuxt-link
-                        :to="'/nieuws/'+item.state.toLowerCase()+'/'+item.city.replace(/\s+/g, '-').toLowerCase()+'/'+item.slug.toLowerCase() +'-'+item.id"
-                        class="">
-                      {{ item.title }}
-                    </nuxt-link>
-                  </h3>
-                  <div class="meta">
-                    <ul class="inline-list">
-                      <li><span class="icon-clock"></span> {{ dateTime(item.created_at) }} in &nbsp;</li>
-                      <li><a href=""><nuxt-link :to="'/nieuws/'+item.state.toLowerCase()">{{ item.state }}</nuxt-link></a>,&nbsp;</li>
-                      <li>Nederland</li>
-                    </ul>
-                  </div>
-                  <div class="btn-group mt-10">
-                    <a v-for="(tag,i) in item.tags.split(',')" v-show="tag.length !==0 "
-                       :class="'button btn-more bg-blue border-radius-8 '+ tag"
-                    >{{ tag }}</a>
+                      <h3 class="card-heading">
+                        <nuxt-link
+                          :to="'/nieuws/' + item.state.toLowerCase() + '/' + item.city.replace(/\s+/g, '-').toLowerCase() + '/' + item.slug.toLowerCase() + '-' + item.id"
+                          class="">
+                          {{ item.title }}
+                        </nuxt-link>
+                      </h3>
+                      <div class="meta">
+                        <ul class="inline-list">
+                          <li><span class="icon-clock"></span> {{ dateTime(item.created_at) }} in &nbsp;</li>
+                          <li><a href="">
+                              <nuxt-link :to="'/nieuws/' + item.state.toLowerCase()">{{ item.state }}</nuxt-link>
+                            </a>,&nbsp;</li>
+                          <li>Nederland</li>
+                        </ul>
+                      </div>
+                      <div class="btn-group mt-10">
+                        <a v-for="(tag, i) in item.tags.split(',')" v-show="tag.length !== 0"
+                          :class="'button btn-more bg-blue border-radius-8 ' + tag">{{ tag }}</a>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
                 <!--                News card end-->
 
@@ -72,35 +74,37 @@
 
 
                 <div class="meldingen">
-                  <div v-for="(item,i) in moreNews" class="card other-news acard box-shadow border-radius-8 d-flex">
-                    <div class="news-thumb"><img :src="backend + item.image" alt="" class="img-thumb border-radius"></div>
+                  <div v-for="(item, i) in moreNews" class="card other-news acard box-shadow border-radius-8 d-flex">
+                    <div class="news-thumb"><img :src="backend + item.image" alt="" class="img-thumb border-radius">
+                    </div>
                     <div class="card-content">
 
 
 
                       <h3 class="card-heading">
                         <nuxt-link
-                            :to="'/nieuws/'+item.state.toLowerCase()+'/'+item.city.replace(/\s+/g, '-').toLowerCase()+'/'+item.slug.toLowerCase() +'-'+item.id"
-                            class="">
+                          :to="'/nieuws/' + item.state.toLowerCase() + '/' + item.city.replace(/\s+/g, '-').toLowerCase() + '/' + item.slug.toLowerCase() + '-' + item.id"
+                          class="">
                           {{ item.title }}
                         </nuxt-link>
                       </h3>
                       <div class="meta">
                         <ul class="inline-list">
                           <li><span class="icon-clock"></span> {{ dateTime(item.created_at) }} in &nbsp;</li>
-                          <li><a href=""><nuxt-link :to="'/nieuws/'+item.state.toLowerCase()">{{ item.state }}</nuxt-link></a>,&nbsp;</li>
+                          <li><a href="">
+                              <nuxt-link :to="'/nieuws/' + item.state.toLowerCase()">{{ item.state }}</nuxt-link>
+                            </a>,&nbsp;</li>
                           <li>Nederland</li>
                         </ul>
                       </div>
                       <div class="btn-group mt-10">
-                        <a v-for="(tag,i) in item.tags.split(',')" v-show="tag.length !==0 "
-                           :class="'button btn-more bg-blue border-radius-8 '+ tag"
-                        >{{ tag }}</a>
+                        <a v-for="(tag, i) in item.tags.split(',')" v-show="tag.length !== 0"
+                          :class="'button btn-more bg-blue border-radius-8 ' + tag">{{ tag }}</a>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div v-if="loadingMore === true" :class="loadingMore ? 'spin':''" style="height: 300px;"></div>
+                <div v-if="loadingMore === true" :class="loadingMore ? 'spin' : ''" style="height: 300px;"></div>
 
 
               </div>
@@ -113,34 +117,36 @@
 
                 <h2 id="widget_title" class="sec-heading weight-500">Eerdere P2000-meldingen</h2>
 
-                <div v-for="(item,i) in news.recentMeldingen">
+                <div v-for="(item, i) in news.recentMeldingen">
                   <div class="card other-news box-shadow border-radius-8">
                     <div class="card-content">
                       <h3 class="d-flex align-items-center">
 
-                        <img v-if="item.dienst == 'ambulance'" src="@/assets/img/ambulance.png" class="news-icon"/>
-                        <img v-if="item.dienst == 'brandweer'" src="@/assets/img/brandweer.png" class="news-icon"/>
-                        <img v-if="item.dienst == 'kustwacht'" src="@/assets/img/kustwacht.png" class="news-icon"/>
-                        <img v-if="item.dienst == 'politie'" src="@/assets/img/politie.png" class="news-icon"/>
-                   <img v-if="item.dienst == 'traumaheli'" src="@/assets/img/traumaheli.png" class="news-icon"/>
+                        <img v-if="item.dienst == 'ambulance'" src="@/assets/img/ambulance.png" class="news-icon" />
+                        <img v-if="item.dienst == 'brandweer'" src="@/assets/img/brandweer.png" class="news-icon" />
+                        <img v-if="item.dienst == 'kustwacht'" src="@/assets/img/kustwacht.png" class="news-icon" />
+                        <img v-if="item.dienst == 'politie'" src="@/assets/img/politie.png" class="news-icon" />
+                        <img v-if="item.dienst == 'traumaheli'" src="@/assets/img/traumaheli.png" class="news-icon" />
 
                         <router-link
-                            :to="'/'+item.provincie.toLowerCase()+'/'+item.stad_url.toLowerCase()+'/'+item.regio_url.toLowerCase()+'/'+item.categorie_url.toLowerCase()+'-'+item.id">
+                          :to="'/' + item.provincie.toLowerCase() + '/' + item.stad_url.toLowerCase() + '/' + item.regio_url.toLowerCase() + '/' + item.categorie_url.toLowerCase() + '-' + item.id">
                           {{ item.categorie }}
                         </router-link>
                       </h3>
                       <div class="meta">
                         <ul class="inline-list">
-                          <li> <span class="icon-clock"></span>   {{ dateTimeUnix(item.timestamp) }}</li>
+                          <li> <span class="icon-clock"></span> {{ dateTimeUnix(item.timestamp) }}</li>
 
                         </ul>
                       </div>
                       <span class="place-name"> {{ item.straat }}</span> in <span class="place-title"
-                                                                                  style="color: #669e97 !important;"><nuxt-link :to="'/'+item.stad.toLowerCase()">{{ item.stad }}</nuxt-link> </span>,
+                        style="color: #669e97 !important;">
+                        <nuxt-link :to="'/' + item.stad.toLowerCase()">{{ item.stad }}</nuxt-link>
+                      </span>,
                       <span class="place-name">
-                {{ item.provincie }}</span>
+                        {{ item.provincie }}</span>
                       <div class="btn-group  mt-10">
-                        <a :class="'button btn-more bg-red border-radius-8 '+item.dienst">{{ item.dienst }}</a>
+                        <a :class="'button btn-more bg-red border-radius-8 ' + item.dienst">{{ item.dienst }}</a>
 
                       </div>
                     </div>
@@ -175,7 +181,7 @@
       <!-- / Step Section-->
     </main>
 
-    <Footer/>
+    <Footer />
   </div>
 </template>
 
@@ -185,15 +191,15 @@ const config = useRuntimeConfig();
 apiUrl = config.public.api;
 backend = config.public.backend;
 
-const {data: news, pending,refresh} = await useAsyncData('get_news', () => $fetch(`${apiUrl}/news/`));
+const { data: news, pending, refresh } = await useAsyncData('get_news', () => $fetch(`${apiUrl}/news/`));
 
 
 useHead({
   titleTemplate: ` ${news.value.seo.title}`,
-  script: [{children: `${news.value.seo.structured_data}`}],
+  script: [{ children: `${news.value.seo.structured_data}` }],
   meta: [
-    {name: 'description', content: `${news.value.seo.seo_meta}`},
-    {name: 'keywords', content: `${news.value.seo.seo_keywords}`},
+    { name: 'description', content: `${news.value.seo.seo_meta}` },
+    { name: 'keywords', content: `${news.value.seo.seo_keywords}` },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     {
       property: "og:title",
@@ -236,12 +242,12 @@ let backend;
 export default {
 
 
-  components: {Location},
+  components: { Location },
 
   name: "index",
   data() {
     return {
-      image: {backgroundImage: `url(${addImage})`},
+      image: { backgroundImage: `url(${addImage})` },
 
       increment: 1,
       nextReq: null,
@@ -252,20 +258,22 @@ export default {
       news: [],
       newsLoading: false,
       loadingMore: false,
+      loadData: true,
+      nextReq: true,
 
     }
   },
-created() {
+  created() {
 
-},
+  },
 
 
   mounted() {
-  if(this.$route.name == 'nieuws')
+    if (this.$route.name == 'nieuws')
 
-    this.getMoreOtherNews(1);
-   window.addEventListener('scroll', this.handleScroll);
-  
+      this.getMoreOtherNews(1);
+    window.addEventListener('scroll', this.handleScroll);
+
     // this.fetchNews();
   },
   methods: {
@@ -285,38 +293,57 @@ created() {
 
     getOtherNews() {
       axios.get(`${apiUrl}/news/other/news/`)
-          .then((response) => {
-            response.data.map((item, i) => {
-              this.increment = 2;
-              this.moreNews.push(item)
-            })
+        .then((response) => {
+          response.data.map((item, i) => {
+            this.increment = 2;
+            this.moreNews.push(item)
           })
-          .catch(error => {
-            console.log(error)
-          })
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     getMoreOtherNews(page) {
-      this.loadingMore = true;
-      axios.get(`${apiUrl}/news/getMoreOtherNews/` + page)
+      this.nextReq = false;
+      if (this.loadData === true) {
+        this.loadingMore = true;
+        axios.get(`${apiUrl}/news/getMoreOtherNews/` + page)
           .then((response) => {
-            this.nexReq = false;
-            this.loadingMore = false;
-            response.data.map((item, i) => {
-              this.moreNews.push(item)
-            })
+            if (response.data.length !== 0) {
+
+              this.loadingMore = false;
+              this.loadData = true;
+              this.nextReq = true;
+              response.data.map((item, i) => {
+                this.moreNews.push(item)
+              })
+
+            } else {
+
+              this.loadingMore = false;
+              this.nextReq = false;
+              this.loadData = false;
+            }
           })
           .catch(error => {
             console.log(error)
           })
+      }
     },
     handleScroll() {
+      const route = useRoute();
+      if (route.name == 'nieuws') {
+        if ((Math.round(window.scrollY) + window.innerHeight + 300) >= document.body.scrollHeight) {
 
-      if ((Math.round(window.scrollY) + window.innerHeight +300) >= document.body.scrollHeight) {
+          if (this.nextReq === true && this.loadData === true) {
+            this.getMoreOtherNews(this.increment++);
+          }
+
+        }
+      } else return
 
 
-        this.getMoreOtherNews(this.increment++);
 
-      }
 
     },
 
@@ -330,8 +357,8 @@ created() {
 .card-content .meta {
   margin-bottom: 5px;
 }
+
 .btn-group .button {
   margin-bottom: 0;
 }
-
 </style>

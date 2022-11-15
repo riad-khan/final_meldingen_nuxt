@@ -10,11 +10,11 @@
                 <h2 class="heading text-left">Bekijk de P2000-meldingen per plaats</h2>
                 <div class="list-area bg-white border-radius">
                   <ul>
-                    <li><a id="NL-DR1" @click="(e) => selectedRegio(e)">Drenthe</a></li>
+                    <li id="NL-DR1" @click="(e) => selectedRegio(e)">Drenthe</li>
                     <li id="NL-FL2" @click="(e) => selectedRegio(e)">Flevoland</li>
                     <li id="NL-FR3" @click="(e) => selectedRegio(e)">Friesland</li>
                     <li id="NL-GE4" @click="(e) => selectedRegio(e)">Gelderland</li>
-                    <li id="NL-GR5" @click="(e) => selectedRegio(e)">Groningen</li>
+                    <li id="NL-GR5" class="active" @click="(e) => selectedRegio(e)">Groningen</li>
                     <li id="NL-LI6" @click="(e) => selectedRegio(e)">Limburg</li>
                     <li id="NL-NB7" @click="(e) => selectedRegio(e)">Noord-Brabant</li>
                     <li id="NL-NH8" @click="(e) => selectedRegio(e)">Noord-Holland</li>
@@ -97,6 +97,7 @@ export default {
   },
   methods: {
     selectedRegio(e) {
+     
       let id = e.target.id;
       let final = id.slice(0, -1);
       const mapSvg = document.getElementById(final);

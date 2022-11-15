@@ -11,7 +11,7 @@
       <section class="news-archive sec-padding pt-0">
         <div class="container">
           <div class="news_lsit mt-20">
-            <RegioList path="nieuws" :region="provincie"/>
+            <RegioList path="nieuws" :region="provincie" />
           </div>
           <div class="row">
             <div class="col-md-8 col-xs-12 ">
@@ -19,38 +19,39 @@
 
                 <!--            News card start    -->
 
-<!--                <div v-if="pending === true" :class="pending ? 'spin' : ''" style="height: 300px;"></div>-->
+                <!--                <div v-if="pending === true" :class="pending ? 'spin' : ''" style="height: 300px;"></div>-->
 
 
-              <div class="meldingen">
-                <div v-for="(item, i) in allNews" class="card other-news acard box-shadow border-radius-8 d-flex"
-                     data-aos="fade-up" data-aos-delay="10" data-aos-once="true">
-                  <div class="news-thumb"><img :src="backend + item.image" alt="" class="img-thumb border-radius"></div>
-                  <div class="card-content">
-                    <h3 class="card-heading">
-                      <nuxt-link
-                          :to="'/nieuws/'+item.state.toLowerCase()+'/'+item.city.replace(/\s+/g, '-').toLowerCase()+'/'+item.slug.toLowerCase() +'-'+item.id"
-                          class="">
-                        {{ item.title }}
-                      </nuxt-link>
-                    </h3>
-                    <div class="meta">
-                      <ul class="inline-list">
-                        <li><span class="icon-clock"></span> {{ dateTime(item.created_at) }} in &nbsp;</li>
-                        <li>
-                          <nuxt-link :to="'/nieuws/'+item.state.toLowerCase()">{{ item.state }}</nuxt-link>
-                          ,&nbsp;
-                        </li>
-                        <li>Nederland</li>
-                      </ul>
+                <div class="meldingen">
+                  <div v-for="(item, i) in allNews" class="card other-news acard box-shadow border-radius-8 d-flex"
+                    data-aos="fade-up" data-aos-delay="10" data-aos-once="true">
+                    <div class="news-thumb"><img :src="backend + item.image" alt="" class="img-thumb border-radius">
                     </div>
-                    <div class="btn-group">
-                      <a v-for="(tag, i) in item.tags.split(',')" v-show="tag.length !== 0"
-                         :class="'button btn-more bg-blue border-radius-8 ' + tag">{{ tag }}</a>
+                    <div class="card-content">
+                      <h3 class="card-heading">
+                        <nuxt-link
+                          :to="'/nieuws/' + item.state.toLowerCase() + '/' + item.city.replace(/\s+/g, '-').toLowerCase() + '/' + item.slug.toLowerCase() + '-' + item.id"
+                          class="">
+                          {{ item.title }}
+                        </nuxt-link>
+                      </h3>
+                      <div class="meta">
+                        <ul class="inline-list">
+                          <li><span class="icon-clock"></span> {{ dateTime(item.created_at) }} in &nbsp;</li>
+                          <li>
+                            <nuxt-link :to="'/nieuws/' + item.state.toLowerCase()">{{ item.state }}</nuxt-link>
+                            ,&nbsp;
+                          </li>
+                          <li>Nederland</li>
+                        </ul>
+                      </div>
+                      <div class="btn-group">
+                        <a v-for="(tag, i) in item.tags.split(',')" v-show="tag.length !== 0"
+                          :class="'button btn-more bg-blue border-radius-8 ' + tag">{{ tag }}</a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
                 <!--                News card end-->
 
@@ -71,13 +72,14 @@
 
                 <div class="meldingen">
                   <div v-for="(item, i) in moreNews" class="card other-news acard box-shadow border-radius-8 d-flex"
-                       data-aos="fade-up" data-aos-delay="10" data-aos-once="true">
-                    <div class="news-thumb"><img :src="backend + item.image" alt="" class="img-thumb border-radius"></div>
+                    data-aos="fade-up" data-aos-delay="10" data-aos-once="true">
+                    <div class="news-thumb"><img :src="backend + item.image" alt="" class="img-thumb border-radius">
+                    </div>
                     <div class="card-content">
                       <h3 class="card-heading">
                         <nuxt-link
-                            :to="'/nieuws/'+item.state.toLowerCase()+'/'+item.city.replace(/\s+/g, '-').toLowerCase()+'/'+item.slug.toLowerCase() +'-'+item.id"
-                            class="">
+                          :to="'/nieuws/' + item.state.toLowerCase() + '/' + item.city.replace(/\s+/g, '-').toLowerCase() + '/' + item.slug.toLowerCase() + '-' + item.id"
+                          class="">
                           {{ item.title }}
                         </nuxt-link>
                       </h3>
@@ -85,7 +87,7 @@
                         <ul class="inline-list">
                           <li><span class="icon-clock"></span> {{ dateTime(item.created_at) }} in &nbsp;</li>
                           <li>
-                            <nuxt-link :to="'/nieuws/'+item.state.toLowerCase()">{{ item.state }}</nuxt-link>
+                            <nuxt-link :to="'/nieuws/' + item.state.toLowerCase()">{{ item.state }}</nuxt-link>
                             ,&nbsp;
                           </li>
                           <li>Nederland</li>
@@ -93,7 +95,7 @@
                       </div>
                       <div class="btn-group">
                         <a v-for="(tag, i) in item.tags.split(',')" v-show="tag.length !== 0"
-                           :class="'button btn-more bg-blue border-radius-8 ' + tag">{{ tag }}</a>
+                          :class="'button btn-more bg-blue border-radius-8 ' + tag">{{ tag }}</a>
                       </div>
                     </div>
                   </div>
@@ -116,24 +118,26 @@
                     <div class="card-content">
                       <h3 class="d-flex align-items-center">
 
-                        <img v-if="item.dienst == 'ambulance'" src="@/assets/img/ambulance.png" class="news-icon"/>
-                  <img v-if="item.dienst == 'brandweer'" src="@/assets/img/brandweer.png" class="news-icon"/>
-                  <img v-if="item.dienst == 'kustwacht'" src="@/assets/img/kustwacht.png" class="news-icon"/>
-                  <img v-if="item.dienst == 'politie'" src="@/assets/img/politie.png" class="news-icon"/>
-                 <img v-if="item.dienst == 'traumaheli'" src="@/assets/img/traumaheli.png" class="news-icon"/>
+                        <img v-if="item.dienst == 'ambulance'" src="@/assets/img/ambulance.png" class="news-icon" />
+                        <img v-if="item.dienst == 'brandweer'" src="@/assets/img/brandweer.png" class="news-icon" />
+                        <img v-if="item.dienst == 'kustwacht'" src="@/assets/img/kustwacht.png" class="news-icon" />
+                        <img v-if="item.dienst == 'politie'" src="@/assets/img/politie.png" class="news-icon" />
+                        <img v-if="item.dienst == 'traumaheli'" src="@/assets/img/traumaheli.png" class="news-icon" />
                         <router-link
-                            :to="'/'+item.provincie.toLowerCase()+'/'+item.stad_url.toLowerCase()+'/'+item.regio_url.toLowerCase()+'/'+item.categorie_url.toLowerCase()+'-'+item.id">
+                          :to="'/' + item.provincie.toLowerCase() + '/' + item.stad_url.toLowerCase() + '/' + item.regio_url.toLowerCase() + '/' + item.categorie_url.toLowerCase() + '-' + item.id">
                           {{ item.categorie }}
                         </router-link>
                       </h3>
                       <div class="meta">
                         <ul class="inline-list">
-                        <li><span class="icon-clock"></span>  {{ dateTimeUnix(item.timestamp) }}</li>
+                          <li><span class="icon-clock"></span> {{ dateTimeUnix(item.timestamp) }}</li>
 
                         </ul>
                       </div>
                       <span class="place-name"> {{ item.straat }}</span> in <span class="place-title"
-                        style="color: #669e97 !important;"><nuxt-link :to="'/'+item.stad.toLowerCase()">{{ item.stad }}</nuxt-link> </span>,
+                        style="color: #669e97 !important;">
+                        <nuxt-link :to="'/' + item.stad.toLowerCase()">{{ item.stad }}</nuxt-link>
+                      </span>,
                       <span class="place-name">
                         {{ item.provincie }}</span>
                       <div class="btn-group mt-10">
@@ -231,6 +235,8 @@ export default {
       moreNews: [],
       img: addImage,
       loadingMore: false,
+      loadData: true,
+      nextReq: true,
     }
   },
 
@@ -271,26 +277,49 @@ export default {
         })
     },
     getMoreOtherNews(page) {
+      this.nextReq = false;
       const route = useRoute();
-      this.loadingMore = true;
-      axios.get(`${apiUrl}/news/filter-news/${route.params.provincie}/${page}`)
-        .then((response) => {
-          this.nexReq = false;
-          this.loadingMore = false;
-          response.data.map((item, i) => {
-            this.moreNews.push(item)
+
+
+      if (this.loadData === true) {
+        this.loadingMore = true;
+        axios.get(`${apiUrl}/news/filter-news/${route.params.provincie}/${page}`)
+          .then((response) => {
+            if (response.data.length !== 0) {
+
+              this.loadData = true;
+              this.nextReq = true;
+              this.loadingMore = false;
+              response.data.map((item, i) => {
+                this.moreNews.push(item)
+              })
+            } else {
+
+              this.loadingMore = false;
+              this.nextReq = false;
+              this.loadData = false;
+            }
           })
-        })
-        .catch(error => {
-          console.log(error)
-        })
+          .catch(error => {
+            console.log(error)
+          })
+      }
+
+
+
+
     },
     handleScroll() {
 
-      if ((Math.round(window.scrollY) + window.innerHeight + 300) >= document.body.scrollHeight) {
+      const route = useRoute();
 
-        this.getMoreOtherNews(this.increment++);
+      if (route.name == 'nieuws-provincie') {
+        if ((Math.round(window.scrollY) + window.innerHeight + 300) >= document.body.scrollHeight) {
+          if (this.nextReq === true && this.loadData === true) {
+            this.getMoreOtherNews(this.increment++);
+          }
 
+        }
       }
 
     },
@@ -302,9 +331,11 @@ export default {
 .card-content .meta {
   margin-bottom: 5px;
 }
+
 .btn-group .button {
   margin-bottom: 0;
 }
+
 .news_drop div#news-list {
   padding: 10px;
 }
