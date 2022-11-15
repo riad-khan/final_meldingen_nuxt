@@ -5,19 +5,19 @@
       <div class="menu-mobile">
         <ul>
           <li :class="currentRouteName === '/' ? 'active' : ''">
-            <nuxt-link to="/">Meldingen</nuxt-link>
+            <nuxt-link to="/">Meldingen <i class="icon-angle-down"></i></nuxt-link>
           </li>
           <li :class="currentRouteName === '/nieuws' ? 'active' : ''">
-            <nuxt-link to="/nieuws">Nieuws</nuxt-link>
+            <nuxt-link to="/nieuws">Nieuws <i class="icon-angle-down"></i></nuxt-link>
           </li>
           <li :class="currentRouteName === '/contact' ? 'active' : ''">
-            <router-link to="/contact">Contact</router-link>
+            <router-link to="/contact">Contact <i class="icon-angle-down"></i></router-link>
           </li>
           <li v-if="isAuth" :class="currentRouteName === '/dashboard' ? 'active' : ''">
-            <router-link to="/dashboard"><span>Profile</span></router-link>
+            <router-link to="/dashboard"><span>Profile</span> <i class="icon-angle-down"></i></router-link>
           </li>
           <li v-else :class="currentRouteName === '/login' ? 'active' : ''">
-            <nuxt-link to="/login"><span>Account</span></nuxt-link>
+            <nuxt-link to="/login"><span>Account</span> <i class="icon-angle-down"></i></nuxt-link>
           </li>
           <!--
           <li><a href="#">
@@ -151,16 +151,18 @@ export default {
 </script>
 <style scoped>
 .menu-btn {
-  width: 40px;
-  height: 35px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: all .2s ease-in-out;
-  border: 1px solid #fff;
-  float: right;
+  width: 35px;
+    height: 35px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    border: 1px solid #2b5882;
+    float: right;
+    background: #2b5882;
+    border-radius: 4px;
 }
 
 .menu-btn__burger {
@@ -168,7 +170,7 @@ export default {
   height: 2px;
   background: #fff;
   border-radius: 1px;
-  transition: all .2s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 
 .menu-btn__burger::before,
@@ -179,7 +181,7 @@ export default {
   height: 2px;
   background: #fff;
   border-radius: 5px;
-  transition: all .2s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 
 .menu-btn__burger::before {
@@ -198,7 +200,7 @@ export default {
 
 .menu-btn.open .menu-btn__burger::before {
   transform: rotate(45deg) translate(35px, -35px);
-  background: #fff;
+  background: #eee;
 }
 
 .menu-btn.open .menu-btn__burger::after {
@@ -207,6 +209,12 @@ export default {
 }
 
 .menu-btn.open {
-  border: 1px solid #fff;
+  border: 1px solid #2b5882;
 }
+@media (min-width: 769px) {
+  .menu-btn {
+    display: none;
+} 
+}
+
 </style>

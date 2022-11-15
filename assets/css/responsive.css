@@ -351,18 +351,40 @@
 
     .menu-mobile ul {
         margin: 0;
-        padding: 40px 20px;
+        padding: 20px;
         list-style: none;
     }
 
     .menu-mobile ul li a {
         display: block;
-        padding: 10px 0px;
-        font-size: 18px;
+        padding: 10px;
+        font-size: 16px;
         color: var(--white-color);
         font-weight: 500;
         position: relative;
+        background: #2b5882;
+        margin-bottom: 10px;
+        border-radius: 4px;
     }
+    .menu-mobile ul li.active a{
+        background-color: #669E97;
+    }
+    .menu-mobile ul li.active a i{
+        background-color: #2b5882;
+    }
+    .menu-mobile ul li a i {
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+        display: inline-block;
+        font-size: 6px;
+        float: right;
+        background: #1f4160;
+        padding: 7px 5px;
+        border-radius: 50px;
+    }   
 
     .menu-mobile ul li a span {
         padding-bottom: 4px;
