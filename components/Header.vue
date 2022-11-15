@@ -12,7 +12,7 @@
           <a class="closebtn" href="javascript:void(0)" @click="closeNav"><img src="@/assets/img/icon-close.svg"></a>
         </div>
       </div>
-      <div class="menu-mobile">
+      <div  class="menu-mobile">
         <ul>
           <li :class="currentRouteName === '/' ? 'active' : ''">
             <nuxt-link to="/">Meldingen</nuxt-link>
@@ -59,12 +59,27 @@
           </div>
           <div class="col-md-8 col-xs-4 textright">
 
-            <a href="#menu" @click.prevent="openNav" id="toggle"><span></span></a>
+
+
             <div class="menu">
 
+              <!-- New Burger menu from Code pen -->
 
 
-              <!-- <a  @click="openNav" id="toggle"><span></span></a> -->
+             <a href="#menu" @click.prevent="openNav" id="toggle"><span></span></a>
+              <div id="menu">
+                <ul>
+                  <li><a href="#home">Home</a></li>
+                  <li><a href="#about">About</a></li>
+                  <li><a href="#contact">Contact</a></li>
+                </ul>
+              </div>
+
+              <!-- End burger menu -->
+
+
+
+
               <!-- <button class="openNav box-shadow" id="toggle" @click="openNav"><img src="@/assets/img/icon-hamburger.svg"></button>  -->
               <ul>
                 <li :class="currentRouteName === '/' ? 'active' : ''">
@@ -82,21 +97,7 @@
                 <li v-else :class="currentRouteName === '/login' ? 'active' : ''">
                   <nuxt-link to="/login"><span>Account</span></nuxt-link>
                 </li>
-                <!--
-                <li><a href="#">
-                  <span class="icon-user">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C10.21 0 12 1.79 12 4C12 6.21 10.21 8 8 8C5.79 8 4 6.21 4 4C4 1.79 5.79 0 8 0ZM8 10C12.42 10 16 11.79 16 14V16H0V14C0 11.79 3.58 10 8 10Z"/></svg>
-                  </span> Account</a>
-                </li>
-                <li class="list-switcher">
-                  <div class="theme-swapper">
-                    <label class="switch">
-                      <input type="checkbox" class="switcher">
-                      <span class="slider round"></span>
-                    </label>
-                  </div>
-                </li>
-  -->
+                
               </ul>
             </div>
           </div>
@@ -186,6 +187,7 @@ export default {
 </script>
 <style scoped>
 /* Important styles */
+/* Important styles */
 #toggle {
   display: block;
   width: 28px;
@@ -233,6 +235,54 @@ export default {
   opacity: 1;
   visibility: visible;
 }
+
+/* menu appearance*/
+#menu {
+  position: relative;
+  color: #DD5044;
+  width: 200px;
+  padding: 10px;
+  margin: auto;
+  font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif;
+  text-align: center;
+  border-radius: 4px;
+  background: white;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  /* just for this demo */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .4s;
+}
+#menu:after {
+  position: absolute;
+  top: -15px;
+  left: 95px;
+  content: "";
+  display: block;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 20px solid white;
+}
+/* ul, li, li a {
+  list-style: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+li a {
+  padding: 5px;
+  color: #888;
+  text-decoration: none;
+  transition: all .2s;
+}
+li a:hover,
+li a:focus {
+  background: #1ABC9C;
+  color: #fff;
+} */
+
+
+
 
 
 </style>
