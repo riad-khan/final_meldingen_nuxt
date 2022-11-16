@@ -52,7 +52,7 @@
                   <iframe :src="'https://maps.google.com/maps?q='+meldingenDetails.details.straat+','+meldingenDetails.details.stad+'&t=&z=15&ie=UTF8&iwloc=&output=embed'" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
-                <ul class="social desktop-only">
+                <ul class="social dark-white white-dark desktop-only">
                   <li class="label">Delen:</li>
 
 
@@ -236,5 +236,11 @@ export default {
 </script>
 
 <style scoped>
-
+ul.social.white-dark li a span[class*="icon-"], ul.social.white-dark li a span[class*="icon-"] .path1:before, ul.social.white-dark li a span[class*="icon-"] .path2:before {
+    font-size: 18px;
+}
+ul.social.white-dark li a {
+    padding: 0;
+    margin-right: 5px;
+}
 </style>

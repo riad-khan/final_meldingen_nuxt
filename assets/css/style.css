@@ -446,11 +446,11 @@ button.openNav {
     margin-right: 5px;
     padding: 5px 12px;
     font-weight: 500;
+    font-size: 14px;
 }
 
 .btn-group .button {
     margin-right: 5px;
-    margin-bottom: 10px;
 }
 
 .map-overlay {
