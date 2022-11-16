@@ -3,8 +3,10 @@
 
     <Header/>
     <main class="main-content bg-dark-white">
-      <section class="page-content details-page sec-padding">
+      <div class="header_bellow_bg"></div>
+      <section class="page-content news-details-page  sec-padding">
         <div class="container">
+          <div class="contact-form box-shadow border-radius-8">
           <div class="breadcrumbs desktop-only">
             <ul class="inline-list">
               <li><a href="/">Home</a><span class="right-angel">&gt;</span></li>
@@ -33,23 +35,15 @@
 
             <div class="col-md-8 col-lg-9 col-xs-12">
 
-              <div class="card card-overlay other-news box-shadow border-radius">
+              <div class="card card-overlay other-news news-details box-shadow border-radius">
                 <div class="card-thumb">
-                  <img :src="backend + newsDetails.details.image" alt="nieuws image" class="desktop-only">
-                  <img :src="backend + newsDetails.details.image" alt="nieuws image" class="mobile-only">
-
+                  <img :src="backend + newsDetails.details.image" alt="nieuws image" class="blog_thumb">
                 </div>
                 <div class="card-content card-img-overlay">
                   <div class="btn-group">
-
-
                         <a  :class="'button btn-more bg-blue border-radius-8  '+ tag" v-for="(tag,i) in newsDetails.details.tags.split(',')" v-show="tag.length !==0 ">{{ tag }}</a>
-
-
-
-
                   </div>
-                  <h4 class="text-limit-2 mt-10 m-mt-0 t-mt-0" style="color:white">{{ newsDetails.details.title }}</h4>
+                  <h6 class="text-limit-2 mt-10 m-mt-0 t-mt-0">{{ newsDetails.details.title }}</h6>
                 </div>
               </div>
 
@@ -114,10 +108,7 @@
                 <div v-html="newsDetails.details.content"></div>
 
                 <div class="btn-group mt-10">
-                 <div class="row">
                    <a id="tag" :class="'button btn-more bg-tag border-radius-8  '+ tag" v-for="(tag,i) in newsDetails.details.tags.split(',')" v-show="tag.length !==0 ">{{ tag }}</a>
-
-                 </div>
 
                 </div>
 
@@ -260,7 +251,7 @@
               </div>
             </div>
           </div>
-
+          </div>
         </div>
 
       </section>
@@ -555,6 +546,64 @@ export default {
 .right-angel{
   color: #669E97 !important;
 }
-
-
+.news-details.card{
+    margin-bottom: 20px;
+    position: relative;
+    padding: 0;
+    background: transparent;
+    border-radius: 0px;  
+}
+.card.card-overlay:after {
+    background: #000000;
+    height: 100%;
+    width: 100%;
+    content: "";
+    position: absolute;
+    top: 0;
+    opacity: .3;
+    border-radius: 4px;
+}
+.news-details .card-content {
+    padding: 15px;
+}
+.news-details.card .card-content.card-img-overlay h6 {
+    color: var(--white-color);
+    margin-bottom: 0px;
+    font-size: 24px;
+}
+.sidebar h2#widget_title {
+    font-size: 22px;
+    margin-top: 0;
+}
+.news-details-page .breadcrumbs {
+    margin-bottom: 20px;
+}
+.sidebar .card-content h3 {
+    font-size: 16px;
+    line-height: 1.3;
+}
+.contact-form {
+    padding: 20px;
+    text-align: inherit;
+    background-image: none;
+    margin-top: -30px;
+}
+.news-details-page{
+  padding-top: 0;
+}
+.card .btn-group .button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    font-weight: 500;
+    font-size: 12px;
+}
+.meta {
+    margin-bottom: 15px;
+}
+.news-item.news-ad-sec {
+    margin-bottom: 0;
+}
+.btn-group .button {
+    margin-bottom: 0;
+}
 </style>

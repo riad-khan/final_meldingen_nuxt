@@ -1150,7 +1150,9 @@ ul.inline-list li a:hover {
 .sidebar {
     margin: 0px;
 }
-
+.sidebar h2 {
+    font-size: 22px;
+}
 .card {
     margin-bottom: 20px;
     position: relative;
@@ -1290,6 +1292,7 @@ h3.card-heading {
     width: 100%;
     bottom: 0;
     background: transparent;
+    z-index: 99;
 }
 
 .card .card-content.card-img-overlay h6 {
