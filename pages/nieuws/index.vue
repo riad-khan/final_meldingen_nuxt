@@ -184,7 +184,7 @@ apiUrl = config.public.api;
 backend = config.public.backend;
 
 const { data: news, pending, refresh } = await useAsyncData('get_news', () => $fetch(`${apiUrl}/news/`));
-const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/ads/news`));
+const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/media/news`));
 
 useHead({
   titleTemplate: ` ${news.value.seo.title}`,

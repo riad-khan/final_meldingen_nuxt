@@ -7,9 +7,9 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2 desktop-only">
-            <div class="a_banner"  v-if="ads.ad1.length > 0" v-html="ads.ad1[0].content">
+            <!-- <div class="a_banner"  v-if="ads.ad1.length > 0" v-html="ads.ad1[0].content">
 
-            </div>
+            </div> -->
           </div>
           <div class="col-md-8">
             <div class="news_list">
@@ -65,6 +65,8 @@
 
 
                 <div v-if="i % 7 === 5" class="card card-img">
+
+               
                   <div v-if="ads.ad3.length > 0" v-html="ads.ad3[0].content">
 
                   </div>
@@ -77,9 +79,9 @@
             </div>
           </div>
           <div class="col-md-2 desktop-only">
-            <div class="a_banner" v-if="ads.ad2.length > 0" v-html="ads.ad2[0].content"  >
+            <!-- <div class="a_banner" v-if="ads.ad2.length > 0" v-html="ads.ad2[0].content"  >
              
-            </div>
+            </div> -->
           </div>
 
         </div>
@@ -102,7 +104,7 @@ const { data: melding,pending } = await useFetch(`${apiUrl}/meldingen/scroll-mor
 
 const {data: seo} = await useAsyncData('home_seo', () => $fetch(`${apiUrl}/seo-data/home`));
 
-const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/ads/home`));
+const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/media/home`));
 
 nextReq = melding.value.nextReq;
 

@@ -871,7 +871,7 @@ export default {
       let customSelect = document.getElementsByClassName('custom-select sources')[0];
       if(customSelect.classList.contains('opened')){
         customSelect.classList.remove('opened');
-        
+        e.stopPropagation();
       }
     
     })
