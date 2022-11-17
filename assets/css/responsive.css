@@ -282,6 +282,9 @@
     header.header-area {
         padding: 30px 0px;
         padding-bottom: 30px;
+        position: fixed;
+        width: 100%;
+        z-index: 999;
     }
 
     .logo img {
@@ -333,7 +336,7 @@
     overflow-x: hidden;
     transition: var(--transition-delay);
     padding-top: 0;
-    border-radius: 8px 0px 0px 8px;
+    
     border-top: 1px solid #2b5882;
 }
 

@@ -219,23 +219,15 @@
                   </div>
 
                   <div v-if="i % 2 === 1" class="card card-img">
-                    <div :style="image" class="news-item box-shadow border-radius news-ad-sec min-height-100">
-                      <div class="news-content">
-                        <h2 class="new-ad-heading">Dit is een placeholder voor reclame</h2>
-                      </div>
-                    </div>
+                    <div v-if="ads.ad1.length > 0" v-html="ads.ad1[0].content"></div>
                   </div>
 
 
                 </div>
 
 
-                <div class="card card-img square">
-                  <div :style="image" class="news-item box-shadow border-radius news-ad-sec min-height-100">
-                    <div class="news-content">
-                      <h2 class="new-ad-heading">Dit is een placeholder voor reclame</h2>
-                    </div>
-                  </div>
+                <div class="card card-img square" v-if="ads.ad2.length > 0" v-html="ads.ad2[0].content">
+                 
                 </div>
               </div>
             </div>
@@ -243,12 +235,8 @@
           </div>
 
           <div class="row pt-20">
-            <div class="col-md-12">
-              <div :style="image" class="news-item box-shadow border-radius news-ad-sec">
-                <div class="news-content">
-                  <h2 class="new-ad-heading">Dit is een voor reclame</h2>
-                </div>
-              </div>
+            <div class="col-md-12" v-if="ads.ad3.length > 0" v-html="ads.ad3[0].content">
+             
             </div>
           </div>
           </div>
@@ -277,12 +265,13 @@ const {
 } = await useAsyncData('news_details', () => $fetch(`${apiUrl}/news/${id}`))
 const {data: seo} = await useAsyncData('news_seo', () => $fetch(`${apiUrl}/seo-data/Nieuws`));
 const {data: totalComments} = await useAsyncData('comments_count', () => $fetch(`${apiUrl}/comments/total-comments/${id}`))
-
+const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/ads/news`));
 
 onMounted(() => {
   refreshNuxtData('news_details');
   refreshNuxtData('news_seo');
   refreshNuxtData('comments_count');
+  refreshNuxtData('ads');
 
 })
 const title = route.params.slug.replaceAll("-", " ");

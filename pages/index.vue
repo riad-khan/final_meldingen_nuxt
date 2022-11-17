@@ -7,8 +7,8 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2 desktop-only">
-            <div class="a_banner">
-              <img src="@/assets/img/add-banner.png" />
+            <div class="a_banner"  v-if="ads.ad1.length > 0" v-html="ads.ad1[0].content">
+
             </div>
           </div>
           <div class="col-md-8">
@@ -65,11 +65,8 @@
 
 
                 <div v-if="i % 7 === 5" class="card card-img">
-                  <div class="news-item box-shadow border-radius news-ad-sec min-height-100"
-                       :style="image">
-                    <div class="news-content">
-                      <h2 class="new-ad-heading"> Dit is een placeholder voor reclame</h2>
-                    </div>
+                  <div v-if="ads.ad3.length > 0" v-html="ads.ad3[0].content">
+
                   </div>
                 </div>
               </div>
@@ -80,8 +77,8 @@
             </div>
           </div>
           <div class="col-md-2 desktop-only">
-            <div class="a_banner">
-              <img src="@/assets/img/add-banner.png"/>
+            <div class="a_banner" v-if="ads.ad2.length > 0" v-html="ads.ad2[0].content"  >
+             
             </div>
           </div>
 
@@ -105,6 +102,8 @@ const { data: melding,pending } = await useFetch(`${apiUrl}/meldingen/scroll-mor
 
 const {data: seo} = await useAsyncData('home_seo', () => $fetch(`${apiUrl}/seo-data/home`));
 
+const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/ads/home`));
+
 nextReq = melding.value.nextReq;
 
 
@@ -121,6 +120,7 @@ meldingenArray = melding.value.data;
 isLoading = pending;
 onMounted(() => {
   refreshNuxtData('get_meldingen');
+  refreshNuxtData('ads');
   refreshNuxtData('home_seo');
 })
 
@@ -142,7 +142,7 @@ export default {
   name: "index.vue",
   data() {
     return {
-      image: {backgroundImage: `url(${addImage})`},
+      image: {backgroundImage: `url(https://final-meldingen-nuxt.vercel.app/_nuxt/add-img.fe8f1d5b.jpg)`},
       prio: {
         1: 'Spoed',
         2: 'Gepaste spoed',
@@ -153,6 +153,7 @@ export default {
       nexReq: null,
       meldingens: [],
       loading: false,
+      ads:{},
 
       increment: 1,
     }
@@ -160,8 +161,11 @@ export default {
   created() {
     this.meldingens = meldingenArray;
     this.nexReq = nextReq
+    
   },
   mounted() {
+
+    
 
     window.addEventListener('scroll', this.handleScroll)
   },

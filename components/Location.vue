@@ -108,7 +108,7 @@ export default {
 
 
     this.locations.map((item,i)=>{
-      if((item.stad_url.substring(0,this.search.length) === this.search)){
+      if((item.stad_url.substring(0,this.search.length) === this.search.toLowerCase())){
         if(limit > 5){
           return;
         }

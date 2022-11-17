@@ -23,18 +23,18 @@
               <div class="col-md-4" v-for="item in partnerBlogs" :key="item.id">
                 <div class="card other-news box-shadow border-radius-8">
                   <div class="card-thumb">
-                    <img :src="backend + item.images" alt="nieuws foto">
+                    <img :src="backend+'/' + item.images" alt="nieuws foto">
 
                   </div>
                   <div class="card-content">
 
 
-                    <h6 class="text-limit-2"><router-link :to="'/partnerbijdrage/' + item.slug + '/'+ item.id">{{item.blog_title}}</router-link></h6>
+                    <h6 class="text-limit-2"><nuxt-link :to="'/partnerbijdrage/' + item.slug + '/'+ item.id">{{item.blog_title}}</nuxt-link></h6>
                     <p>{{item.description.substr(0,100)+"..."}}</p>
                     <div class="meta">
                       <ul class="inline-list">
-                        <li><a href=""><span class="link___fXYli">Lees meer
-                                            <svg width="6" height="10" viewBox="0 0 6 10"><path d="M.348 1.152a.522.522 0 00-.012.71L3.25 5 .336 8.139a.52.52 0 00.012.709l.804.804a.467.467 0 00.686-.028l3.824-4.248a.572.572 0 000-.752L1.838.376a.472.472 0 00-.686-.028l-.804.804z" fill="#FB4A3F" fill-rule="evenodd"></path></svg></span></a></li>
+                        <li><nuxt-link :to="'/partnerbijdrage/' + item.slug + '/'+ item.id"><span class="link___fXYli">Lees meer
+                                            <svg width="6" height="10" viewBox="0 0 6 10"><path d="M.348 1.152a.522.522 0 00-.012.71L3.25 5 .336 8.139a.52.52 0 00.012.709l.804.804a.467.467 0 00.686-.028l3.824-4.248a.572.572 0 000-.752L1.838.376a.472.472 0 00-.686-.028l-.804.804z" fill="#FB4A3F" fill-rule="evenodd"></path></svg></span></nuxt-link></li>
 
 
 
@@ -84,6 +84,7 @@ useHead({
 onMounted(() => {
   refreshNuxtData('get_partner_blogs');
   refreshNuxtData('partner_seo');
+  
 
 })
 </script>

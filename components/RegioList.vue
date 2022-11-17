@@ -13,16 +13,113 @@
       </div>
 
 
-      <div  class="col-md-3" v-for="(item, i) in values" :key="i">
+      <div  class="col-md-3" >
         <div class="news-list">
           <ul >
-            <li  :class="region === item.regio ? 'active' : ''">
-              <nuxt-link :to="path == 'meldingen' ? `/${item.regio_url}`:`/${path}/${item.provincie_url}`">{{ item.regio }}</nuxt-link>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/brabant-noord`:`/${path}/noord-brabant`">Brabant-Noord</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/friesland`:`/${path}/Friesland`">Friesland</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/gooi-en-vechtstreek`:`/${path}/noord-holland`">Gooi en Vechtstreek</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/zuid-holland-zuid`:`/${path}/zuid-holland`">Zuid-Holland Zuid</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/haaglanden`:`/${path}/zuid-holland`">Haaglanden</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/zeeland`:`/${path}/zeeland`">Zeeland</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/noord-en-oost-gelderland`:`/${path}/gelderland`">Noord en Oost-Gelderland</nuxt-link>
             </li>
 
 
           </ul>
         </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="news-list">
+          <ul>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/utrecht`:`/${path}/utrecht`">Utrecht</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/drenthe`:`/${path}/drenthe`">Drenthe</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/groningen`:`/${path}/groningen`">Groningen</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/noord-holland-noord`:`/${path}/noord-holland`">Noord-Holland Noord</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/twente`:`/${path}/overijssel`">Twente</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/amsterdam-amstelland`:`/${path}/noord-holland`">Amsterdam-Amstelland</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/gelderland-zuid`:`/${path}/gelderland`">Gelderland-Zuid</nuxt-link>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+          <div class="news-list">
+            <ul>
+              <li>
+                <nuxt-link :to="path == 'meldingen' ? `/brabant-zuidoost`:`/${path}/noord-brabant`">Brabant-Zuidoost</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link :to="path == 'meldingen' ? `/rotterdam-rijnmond`:`/${path}/zuid-holland`">Rotterdam-Rijnmond</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link :to="path == 'meldingen' ? `/kennemerland`:`/${path}/noord-holland`">Kennemerland</nuxt-link>
+              </li>
+
+              <li>
+                <nuxt-link :to="path == 'meldingen' ? `/midden-en-west-brabant`:`/${path}/noord-brabant`">Midden- en West-Brabant</nuxt-link>
+              </li>
+
+              <li>
+                <nuxt-link :to="path == 'meldingen' ? `/gelderland-midden`:`/${path}/gelderland`">Gelderland Midden</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link :to="path == 'meldingen' ? `/flevoland`:`/${path}/flevoland`">Flevoland</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link :to="path == 'meldingen' ? `/hollands-midden`:`/${path}/zuid-holland`">Hollands Midden</nuxt-link>
+              </li>
+            </ul>
+          </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="news-list">
+          <ul>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/limburg-noord`:`/${path}/Limburg`">Limburg Noord</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/limburg-zuid`:`/${path}/noord-brabant`">Limburg Zuid</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/ijsselland`:`/${path}/overijssel`">IJsselland</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link :to="path == 'meldingen' ? `/zaanstreek-waterland`:`/${path}/noord-holland`">Zaanstreek-Waterland</nuxt-link>
+            </li>
+            
+          </ul>
+        </div>
+
       </div>
 
 

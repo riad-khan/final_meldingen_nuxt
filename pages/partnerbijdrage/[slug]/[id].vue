@@ -18,8 +18,10 @@
           <div class="col-md-12 pt-30 m-pt-0">
             <div class="card card-overlay other-news box-shadow border-radius">
               <div class="card-thumb">
-                <img class="desktop-only" :src="storageUrl + blogDetails.images" alt="nieuws image">
-                <img class="mobile-only" :src="storageUrl + blogDetails.images" alt="nieuws image">
+
+               
+                <img class="desktop-only" :src="backend+'/' + blogDetails.images" alt="nieuws image">
+                <img class="mobile-only" :src="backend+'/' + blogDetails.images" alt="nieuws image">
 
               </div>
               <div class="card-content card-img-overlay">
@@ -60,8 +62,8 @@
 
                 <div class="card mobile-col-2 other-news box-shadow border-radius-8" v-for="(item, i) in recentBlogs" :key="i">
                   <div class="card-thumb">
-                    <img class="desktop-only" :src="storageUrl + item.images" alt="nieuws image">
-                    <img class="mobile-only" src="https://p2000.net/images/blog/1743641253507788.jpg" alt="nieuws image">
+                    <img class="desktop-only" :src="backend+'/' + item.images" alt="nieuws image">
+                    <img class="mobile-only" :src="backend+'/' + item.images" alt="nieuws image">
                   </div>
                   <div class="card-content">
 
@@ -83,12 +85,8 @@
           </div>
         </div>
         <div class="row pt-20">
-          <div class="col-md-12">
-            <div class="news-item box-shadow border-radius news-ad-sec" :style="image">
-              <div class="news-content">
-                <h2 class="new-ad-heading">Dit is een placeholder voor reclame</h2>
-              </div>
-            </div>
+          <div class="col-md-12" v-if="ads.ad1.length > 0" v-html="ads.ad1[0].content">
+          
           </div>
         </div>
       </div>
@@ -102,17 +100,18 @@
 
 <script setup>
 const config = useRuntimeConfig();
-let apiUrl;
-let backend;
+
 apiUrl = config.public.api;
 backend = config.public.backend;
 const route = useRoute();
 
 const {data: blogDetails, pending} = await useAsyncData('get_partner_blogs_details', () => $fetch(`${apiUrl}/partner-blogs/${route.params.id}`));
 const {data: recentBlogs} = await useAsyncData('get_partner_blogs_recent', () => $fetch(`${apiUrl}/partner-blogs/recent-partner-blogs`));
+const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/ads/news`));
 onMounted(() => {
   refreshNuxtData('get_partner_blogs_details');
   refreshNuxtData('get_partner_blogs_recent');
+  refreshNuxtData('ads');
 
 })
 
@@ -141,5 +140,17 @@ export default {
 </script>
 
 <style scoped>
+.text-limit-2{
+  color:white
+}
+.breadcrumbs ul.inline-list li {
+  color: #669E97;
+}
+.right-angel {
+  color: #669E97 !important;
+}
+.breadcrumbs ul.inline-list li a {
+  color: #1F405E;
+}
 
 </style>

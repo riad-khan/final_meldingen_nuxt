@@ -61,12 +61,10 @@
                   <button class="button btn-tranparent">Bekijk alle artikelen</button>
                 </div>
 
-                <div class="card card-img">
-                  <div :style="image" class="news-item box-shadow border-radius news-ad-sec min-height-100">
-                    <div class="news-content">
-                      <h2 class="new-ad-heading">Dit is een placeholder voor reclame</h2>
-                    </div>
-                  </div>
+                
+
+                <div class="card card-img" v-if="ads.ad1.length > 0" v-html="ads.ad1[0].content">
+                 
                 </div>
 
 
@@ -153,10 +151,8 @@
                   </div>
 
                   <div v-if="i % 2 === 1" class="card card-img">
-                    <div :style="image" class="news-item box-shadow border-radius news-ad-sec min-height-100">
-                      <div class="news-content">
-                        <h2 class="new-ad-heading">Dit is een placeholder voor reclame</h2>
-                      </div>
+                    <div v-if="ads.ad2.length > 0" v-html="ads.ad2[0].content">
+
                     </div>
                   </div>
 
@@ -164,12 +160,8 @@
                 </div>
 
 
-                <div class="card card-img square">
-                  <div :style="image" class="news-item box-shadow border-radius news-ad-sec min-height-100">
-                    <div class="news-content">
-                      <h2 class="new-ad-heading">Dit is een placeholder voor reclame</h2>
-                    </div>
-                  </div>
+                <div class="card card-img square" v-if="ads.ad3.length > 0" v-html="ads.ad3[0].content">
+                  
                 </div>
               </div>
             </div>
@@ -192,7 +184,7 @@ apiUrl = config.public.api;
 backend = config.public.backend;
 
 const { data: news, pending, refresh } = await useAsyncData('get_news', () => $fetch(`${apiUrl}/news/`));
-
+const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/ads/news`));
 
 useHead({
   titleTemplate: ` ${news.value.seo.title}`,
@@ -223,6 +215,7 @@ useHead({
 })
 onMounted(() => {
   refreshNuxtData('get_news');
+  refreshNuxtData('ads');
 })
 
 

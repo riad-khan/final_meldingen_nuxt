@@ -27,14 +27,14 @@
                     <div class="btn-group">
                       <button class="button btn-submit btn-full mt-10" type="submit"><span
                                                     :class="isLoading ? 'rolling-spin' : ' '"></span> Inloggen</button>
-                      <a class="button btn-submit btn-full" href="http://localhost:3000/auth/google" target="_blank">
+                      <a class="button btn-submit btn-full mt-10" href="http://localhost:3000/auth/google" target="_blank">
                         <img src="@/assets/img/google-icon.svg" />
-                        Sign in with Google
+                        log in met google
                       </a>
 
                       <a class="button btn-submit btn-full mt-10" href="http://localhost:3000/auth/facebook"
                         target="_blank"><img src="@/assets/img/facebook-icon.svg" />
-                        Sign in with Facebook
+                        Meld je aan met facebook
                       </a>
                     </div>
                   </form>

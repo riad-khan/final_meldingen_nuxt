@@ -33,7 +33,7 @@
                     <div class="col-md-4" v-for="blog in blogs" :key="blog.id" >
                       <div class="card other-news box-shadow border-radius-8">
                         <div class="card-thumb">
-                          <img :src="backend + blog.images" alt="nieuws foto">
+                          <img :src="backend+'/' + blog.images" alt="nieuws foto">
         
                         </div>
                         <div class="card-content">

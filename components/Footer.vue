@@ -8,7 +8,7 @@
             <div class="logo">
               <h1><a href="index.php"><img alt="" src="@/assets/img/logo.svg"/></a></h1>
             </div>
-            <p>Ontwerp door TRMEDIA.AGENCY<br/> Alle rechten voorbehouden, 2021</p>
+    
             <div class="social-sec">
               <a class="button whats-app" href="">Whatsapp</a>
               <ul class="social dark-white">
@@ -30,7 +30,7 @@
                           <li><nuxt-link to="/nieuws">Nieuws</nuxt-link></li>
                          <li><nuxt-link to="/blogs">Blogs</nuxt-link></li>
                           <li><nuxt-link to="/partnerbijdrage">Partnerbijdragen</nuxt-link></li>
-                           <li><nuxt-link to="/statistics">Statistics</nuxt-link></li>
+                           <li><nuxt-link to="/map">Kaarten</nuxt-link></li>
                         <li><nuxt-link to="/contact">Contact</nuxt-link></li>
             </ul>
           </div>

@@ -19,7 +19,7 @@
                   <div class="col-md-12">
                     <div class="card card-overlay other-news box-shadow border-radius">
                       <div class="card-thumb">
-                        <img class="block-thumb" :src="backend + blogDetails.images" alt="nieuws image">
+                        <img class="block-thumb" :src="backend+'/' + blogDetails.images" alt="nieuws image">
 
 
                       </div>
@@ -58,8 +58,8 @@
         
                         <div class="card mobile-col-2 other-news box-shadow border-radius-8" v-for="(item, i) in recents" :key="i">
                           <div class="card-thumb">
-                            <img class="desktop-only" :src="backend + item.images" alt="blog image">
-                            <img class="mobile-only" :src="backend + item.images" alt="blog image">
+                            <img class="desktop-only" :src="backend+'/' + item.images" alt="blog image">
+                            <img class="mobile-only" :src="backend+'/' + item.images" alt="blog image">
                           </div>
                           <div class="card-content">
         
@@ -106,7 +106,7 @@ const route = useRoute();
 apiUrl = config.public.api;
 backend = config.public.backend;
 const {data: blogDetails, pending} = await useAsyncData('get_blog_details', () => $fetch(`${apiUrl}/blogs/${route.params.id}`));
-const {data: recents} = await useAsyncData('get_recent_blogs', () => $fetch(`${apiUrl}/blogs/recent-blogs`));
+const {data: recents} = await useAsyncData('get_recent_blogs', () => $fetch(`${apiUrl}/blogs/recent-blogs/${route.params.id}`));
 const {data: seo} = await useAsyncData('blogs_seo', () => $fetch(`${apiUrl}/seo-data/Blog`));
 useHead({
   titleTemplate: `Blog - Meldingen.nl - ${blogDetails.value.blog_title}`,
@@ -146,5 +146,16 @@ export default{
 </script>
 
 <style scoped>
-
+.text-limit-2{
+  color:white
+}
+.breadcrumbs ul.inline-list li {
+  color: #669E97;
+}
+.right-angel {
+  color: #669E97 !important;
+}
+.breadcrumbs ul.inline-list li a {
+  color: #1F405E;
+}
 </style>

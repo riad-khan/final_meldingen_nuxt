@@ -6,8 +6,8 @@
         <div class="container">
           <div class="row">
             <div class="col-md-2 desktop-only">
-              <div class="a_banner">
-                <img src="@/assets/img/add-banner.png" />
+              <div class="a_banner"  v-if="ads.ad1.length > 0" v-html="ads.ad1[0].content">
+
               </div>
             </div>
             <div class="col-md-8">
@@ -63,11 +63,8 @@
                     </div>
                   </div>
                   <div v-if="i % 7 === 5" class="card card-img">
-                    <div class="news-item box-shadow border-radius news-ad-sec min-height-100"
-                         :style="image">
-                      <div class="news-content">
-                        <h2 class="new-ad-heading"> Dit is een placeholder voor reclame</h2>
-                      </div>
+                    <div v-if="ads.ad3.length > 0" v-html="ads.ad3[0].content">
+
                     </div>
                   </div>
                 </div>
@@ -79,7 +76,9 @@
             </div>
             <div class="col-md-2 desktop-only">
               <div class="a_banner">
-                <img src="@/assets/img/add-banner.png"/>
+                <div class="a_banner" v-if="ads.ad2.length > 0" v-html="ads.ad2[0].content"  >
+             
+                </div>
               </div>
             </div>
 
@@ -103,12 +102,14 @@ apiUrl = config.public.api;
 backend = config.public.backend;
 
 const { data: melding, pending } = await useAsyncData('filter_meldingen', () => $fetch(`${apiUrl}/meldingen/filter-meldingen/${route.params.regio}/0`));
+const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/ads/home`));
 meldingenArray = melding;
 const regio = route.params.regio
 
 onMounted(() => {
     refreshNuxtData('filter_meldingen');
     refreshNuxtData('home_seo');
+    refreshNuxtData('ads');
 
 })
 
