@@ -85,7 +85,7 @@
           </div>
         </div>
         <div class="row pt-20">
-          <div class="col-md-12" v-if="ads.ad1.length > 0" v-html="ads.ad1[0].content">
+          <div class="col-md-12" v-if="media.ad1.length > 0" v-html="media.ad1[0].content">
           
           </div>
         </div>
@@ -107,11 +107,11 @@ const route = useRoute();
 
 const {data: blogDetails, pending} = await useAsyncData('get_partner_blogs_details', () => $fetch(`${apiUrl}/partner-blogs/${route.params.id}`));
 const {data: recentBlogs} = await useAsyncData('get_partner_blogs_recent', () => $fetch(`${apiUrl}/partner-blogs/recent-partner-blogs/${route.params.id}`));
-const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/media/partnerBlogs`));
+const {data : media} = await useAsyncData('media',()=>$fetch(`${apiUrl}/media/partnerBlogs`));
 onMounted(() => {
   refreshNuxtData('get_partner_blogs_details');
   refreshNuxtData('get_partner_blogs_recent');
-  refreshNuxtData('ads');
+  refreshNuxtData('media');
 
 })
 

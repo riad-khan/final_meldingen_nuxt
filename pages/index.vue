@@ -7,7 +7,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2 desktop-only">
-            <div class="a_banner"  v-if="ads.ad1.length > 0" v-html="ads.ad1[0].content">
+            <div class="a_banner"  v-if="media.ad1.length > 0" v-html="media.ad1[0].content">
 
             </div>
           </div>
@@ -67,7 +67,7 @@
                 <div v-if="i % 7 === 5" class="card card-img">
 
                
-                  <div v-if="ads.ad3.length > 0" v-html="ads.ad3[0].content">
+                  <div v-if="media.ad3.length > 0" v-html="media.ad3[0].content">
 
                   </div>
                 </div>
@@ -79,7 +79,8 @@
             </div>
           </div>
           <div class="col-md-2 desktop-only">
-            <div class="a_banner" v-if="ads.ad2.length > 0" v-html="ads.ad2[0].content"  >
+           
+            <div class="a_banner" v-if="media.ad2.length > 0" v-html="media.ad2[0].content"  >
              
             </div>
           </div>
@@ -104,7 +105,7 @@ const { data: melding,pending } = await useFetch(`${apiUrl}/meldingen/scroll-mor
 
 const {data: seo} = await useAsyncData('home_seo', () => $fetch(`${apiUrl}/seo-data/home`));
 
-const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/media/home`));
+const {data : media} = await useAsyncData('media',()=>$fetch(`${apiUrl}/media/home`));
 
 nextReq = melding.value.nextReq;
 
@@ -122,7 +123,7 @@ meldingenArray = melding.value.data;
 isLoading = pending;
 onMounted(() => {
   refreshNuxtData('get_meldingen');
-  refreshNuxtData('ads');
+  refreshNuxtData('media');
   refreshNuxtData('home_seo');
 })
 

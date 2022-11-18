@@ -59,7 +59,7 @@
                   <button class="button btn-tranparent">Bekijk alle artikelen</button>
                 </div>
 
-                <div class="card card-img" v-if="ads.ad1.length > 0" v-html="ads.ad1[0].content">
+                <div class="card card-img" v-if="media.ad1.length > 0" v-html="media.ad1[0].content">
                  
                 </div>
 
@@ -144,7 +144,7 @@
                   </div>
 
                   <div v-if="i % 2 === 1" class="card card-img">
-                    <div v-if="ads.ad2.length > 0" v-html="ads.ad2[0].content">
+                    <div v-if="media.ad2.length > 0" v-html="media.ad2[0].content">
 
                     </div>
                   </div>
@@ -153,7 +153,7 @@
                 </div>
 
 
-                <div class="card card-img square" v-if="ads.ad3.length > 0" v-html="ads.ad3[0].content">
+                <div class="card card-img square" v-if="media.ad3.length > 0" v-html="media.ad3[0].content">
                   
                 </div>
               </div>
@@ -177,7 +177,7 @@ const router = useRoute();
 apiUrl = config.public.api;
 backend = config.public.backend;
 const { data } = await useAsyncData('seo', () => $fetch(`${apiUrl}/seo-data/Nieuws`))
-const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/media/news`));
+const {data : media} = await useAsyncData('media',()=>$fetch(`${apiUrl}/media/news`));
 const provincie = router.params.provincie;
 
 useHead({
@@ -198,7 +198,7 @@ const { data: recentMeldingen } = await useAsyncData('recent_meldingen', () => $
 
 onMounted(() => {
   refreshNuxtData('filter_news');
-  refreshNuxtData('ads');
+  refreshNuxtData('media');
 })
 </script>
   

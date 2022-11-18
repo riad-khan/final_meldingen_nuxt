@@ -155,7 +155,7 @@ var id = route.params.category.replace(/[^0-9]/g,'');
 const {data: meldingenDetails, pending} = await useAsyncData('meldingen_details', () => $fetch(`${apiUrl}/meldingen/${id}`));
 const {data: enheedens} = await useLazyAsyncData('enheeden', () => $fetch(`${apiUrl}/meldingen/enheeden/${id}`));
 const {data: recentNews} = await useLazyAsyncData('recent_news', () => $fetch(`${apiUrl}/news/recent/news`))
-const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/ads/meldingenDetails`));
+const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/media/meldingenDetails`));
 
 
 useHead({

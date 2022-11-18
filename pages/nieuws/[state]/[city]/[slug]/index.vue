@@ -219,14 +219,14 @@
                   </div>
 
                   <div v-if="i % 2 === 1" class="card card-img">
-                    <div v-if="ads.ad1.length > 0" v-html="ads.ad1[0].content"></div>
+                    <div v-if="media.ad1.length > 0" v-html="media.ad1[0].content"></div>
                   </div>
 
 
                 </div>
 
 
-                <div class="card card-img square" v-if="ads.ad2.length > 0" v-html="ads.ad2[0].content">
+                <div class="card card-img square" v-if="media.ad2.length > 0" v-html="media.ad2[0].content">
                  
                 </div>
               </div>
@@ -235,7 +235,7 @@
           </div>
 
           <div class="row pt-20">
-            <div class="col-md-12" v-if="ads.ad3.length > 0" v-html="ads.ad3[0].content">
+            <div class="col-md-12" v-if="media.ad3.length > 0" v-html="media.ad3[0].content">
              
             </div>
           </div>
@@ -265,13 +265,13 @@ const {
 } = await useAsyncData('news_details', () => $fetch(`${apiUrl}/news/${id}`))
 const {data: seo} = await useAsyncData('news_seo', () => $fetch(`${apiUrl}/seo-data/Nieuws`));
 const {data: totalComments} = await useAsyncData('comments_count', () => $fetch(`${apiUrl}/comments/total-comments/${id}`))
-const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/ads/news`));
+const {data : media} = await useAsyncData('media',()=>$fetch(`${apiUrl}/media/news`));
 
 onMounted(() => {
   refreshNuxtData('news_details');
   refreshNuxtData('news_seo');
   refreshNuxtData('comments_count');
-  refreshNuxtData('ads');
+  refreshNuxtData('media');
 
 })
 const title = route.params.slug.replaceAll("-", " ");
