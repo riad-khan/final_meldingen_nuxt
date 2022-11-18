@@ -265,7 +265,7 @@ const {
 } = await useAsyncData('news_details', () => $fetch(`${apiUrl}/news/${id}`))
 const {data: seo} = await useAsyncData('news_seo', () => $fetch(`${apiUrl}/seo-data/Nieuws`));
 const {data: totalComments} = await useAsyncData('comments_count', () => $fetch(`${apiUrl}/comments/total-comments/${id}`))
-const {data : media} = await useAsyncData('media',()=>$fetch(`${apiUrl}/media/news`));
+const {data : media} = await useAsyncData('media',()=>$fetch(`${apiUrl}/media/newsDetails`));
 
 onMounted(() => {
   refreshNuxtData('news_details');
