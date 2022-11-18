@@ -1,9 +1,11 @@
 <template>
-    <div>
+    <section>
         <Header />
         <main class="main-content bg-dark-white">
+          <div class="header_bellow_bg"></div>
+          
             <!-- / Step Section-->
-            <section class="page-content details-page sec-padding">
+            <section class="page-content news-details-page sec-padding">
               <div class="container">
                 <div class="row">
                   <div class="breadcrumbs desktop-only">
@@ -97,7 +99,7 @@
             <!-- / Step Section-->
           </main>
         <Footer />
-    </div>
+    </section>
 </template>
 
 <script setup>

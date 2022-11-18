@@ -33,14 +33,14 @@
                     <div class="col-md-4" v-for="blog in blogs" :key="blog.id" >
                       <div class="card other-news box-shadow border-radius-8">
                         <div class="card-thumb">
-                          <img :src="backend+'/' + blog.images" alt="nieuws foto">
+                          <img class="img-cover" :src="backend+'/' + blog.images" alt="nieuws foto">
         
                         </div>
                         <div class="card-content">
         
         
                           <h6 class="text-limit-2"><nuxt-link :to="'/blogs/' +blog.slug + '/'+ blog.id">{{blog.blog_title}}</nuxt-link></h6>
-                          <p>{{blog.description.substr(0,100)+"..."}}</p>
+                          <p>{{blog.description.substr(0,50)+"..."}}</p>
                           <div class="meta">
                             <ul class="inline-list">
                               <li><nuxt-link :to="'/blogs/' +blog.slug + '/'+ blog.id"><span class="link___fXYli">Lees meer
@@ -105,5 +105,9 @@ onMounted(() => {
 
 
 <style scoped>
+.img-cover{
+  height: 192px;
+  object-fit: cover;
+}
 
 </style>

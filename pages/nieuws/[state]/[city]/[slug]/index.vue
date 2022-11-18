@@ -4,6 +4,7 @@
     <Header/>
     <main class="main-content bg-dark-white">
       <div class="header_bellow_bg"></div>
+      
       <section class="page-content news-details-page  sec-padding">
         <div class="container">
           <div class="contact-form box-shadow border-radius-8">
