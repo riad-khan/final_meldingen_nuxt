@@ -106,8 +106,8 @@ backend = config.public.backend;
 const route = useRoute();
 
 const {data: blogDetails, pending} = await useAsyncData('get_partner_blogs_details', () => $fetch(`${apiUrl}/partner-blogs/${route.params.id}`));
-const {data: recentBlogs} = await useAsyncData('get_partner_blogs_recent', () => $fetch(`${apiUrl}/partner-blogs/recent-partner-blogs`));
-const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/ads/news`));
+const {data: recentBlogs} = await useAsyncData('get_partner_blogs_recent', () => $fetch(`${apiUrl}/partner-blogs/recent-partner-blogs/${route.params.id}`));
+const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/media/partnerBlogs`));
 onMounted(() => {
   refreshNuxtData('get_partner_blogs_details');
   refreshNuxtData('get_partner_blogs_recent');

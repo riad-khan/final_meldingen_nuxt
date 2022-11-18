@@ -7,9 +7,9 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2 desktop-only">
-            <!-- <div class="a_banner"  v-if="ads.ad1.length > 0" v-html="ads.ad1[0].content">
+            <div class="a_banner"  v-if="ads.ad1.length > 0" v-html="ads.ad1[0].content">
 
-            </div> -->
+            </div>
           </div>
           <div class="col-md-8">
             <div class="news_list">
@@ -79,9 +79,9 @@
             </div>
           </div>
           <div class="col-md-2 desktop-only">
-            <!-- <div class="a_banner" v-if="ads.ad2.length > 0" v-html="ads.ad2[0].content"  >
+            <div class="a_banner" v-if="ads.ad2.length > 0" v-html="ads.ad2[0].content"  >
              
-            </div> -->
+            </div>
           </div>
 
         </div>

@@ -102,7 +102,7 @@ apiUrl = config.public.api;
 backend = config.public.backend;
 
 const { data: melding, pending } = await useAsyncData('filter_meldingen', () => $fetch(`${apiUrl}/meldingen/filter-meldingen/${route.params.regio}/0`));
-const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/ads/home`));
+const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/media/home`));
 meldingenArray = melding;
 const regio = route.params.regio
 

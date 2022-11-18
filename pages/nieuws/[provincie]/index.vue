@@ -25,7 +25,7 @@
                 <div class="meldingen">
                   <div v-for="(item, i) in allNews" class="card other-news acard box-shadow border-radius-8 d-flex"
                     data-aos="fade-up" data-aos-delay="10" data-aos-once="true">
-                    <div class="news-thumb"><img :src="backend + item.image" alt="" class="img-thumb border-radius">
+                    <div class="news-thumb"><img :src="backend+'/' + item.image" alt="" class="img-thumb border-radius">
                     </div>
                     <div class="card-content">
                       <h3 class="card-heading">
@@ -69,7 +69,7 @@
                 <div class="meldingen">
                   <div v-for="(item, i) in moreNews" class="card other-news acard box-shadow border-radius-8 d-flex"
                     data-aos="fade-up" data-aos-delay="10" data-aos-once="true">
-                    <div class="news-thumb"><img :src="backend + item.image" alt="" class="img-thumb border-radius">
+                    <div class="news-thumb"><img :src="backend+'/' + item.image" alt="" class="img-thumb border-radius">
                     </div>
                     <div class="card-content">
                       <h3 class="card-heading">
@@ -177,7 +177,7 @@ const router = useRoute();
 apiUrl = config.public.api;
 backend = config.public.backend;
 const { data } = await useAsyncData('seo', () => $fetch(`${apiUrl}/seo-data/Nieuws`))
-const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/ads/news`));
+const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/media/news`));
 const provincie = router.params.provincie;
 
 useHead({
