@@ -17,7 +17,7 @@
 
 
               <div  class="meldingen"  v-for="(item,i) in meldingens"  :key="i">
-                <div class="news-item box-shadow border-radius acard">
+                <div :class="'news-item box-shadow border-radius acard '+item.dienst">
                   <img v-if="item.dienst == 'ambulance'" src="@/assets/img/ambulance.png" class="news-icon"/>
                   <img v-if="item.dienst == 'brandweer'" src="@/assets/img/brandweer.png" class="news-icon"/>
                   <img v-if="item.dienst == 'kustwacht'" src="@/assets/img/kustwacht.png" class="news-icon"/>
@@ -33,7 +33,7 @@
                       </h4>
                       <p class="place_name">
                         <span class="place-name"> {{ item.straat }}</span> in <span class="place-title"
-                                                                                    style="color: #669e97 !important;"><nuxt-link :to="'/'+item.provincie_url.toLowerCase()+'/'+item.stad_url.toLowerCase()">{{ item.stad }}</nuxt-link> </span>,
+                                                                                    style="color: #669e97 !important;"><nuxt-link style="color:#669E97" :to="'/'+item.provincie_url.toLowerCase()+'/'+item.stad_url.toLowerCase()">{{ item.stad }}</nuxt-link> </span>,
                         <span class="place-name">
                {{ item.provincie }}</span>
                       </p>
@@ -268,8 +268,17 @@ export default {
 .news-content .content_right {
   text-align: right;
 }
-.news_list .acard {
-  border-left: 2px solid #D8AF3B;
+.ambulance{
+  border-left: 1.5px solid #d8af3b ;
+}
+.politie{
+  border-left: 1.5px solid #0095FF;
+}
+.brandweer{
+  border-left: 1.5px solid #e05b59;
+}
+.traumaheli{
+  border-left: 1.5px solid #669e97
 }
 @media (min-width: 768px) and (max-width: 1024px) {
   .prio {

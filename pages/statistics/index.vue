@@ -162,18 +162,18 @@
                       </select>
                     </p>
 
-                    <div style=" margin-bottom: 2px;" id="slider" class="loaded">
+                    <div ref="slider" style=" margin-bottom: 2px;" id="slider" class="loaded">
                       <div class="wrapper">
 
 
-                        <div id="provincie_buttons_area" class="slides chart-btn">
+                        <div ref="provincie_buttons_area" id="provincie_buttons_area" class="slides chart-btn">
 
 
 
                           <button v-for="(item, i) in provincieBtn" :key="i" :id="item.provincie"
                             @click="provincieSelect(item.provincie, i)"
                             :class="index === i ? 'provienci button active' : 'provienci button'"
-                            :value="item.provincie" style="margin-left: 2px;margin-top: 3px;">
+                            :value="item.provincie" ref="provincie" style="margin-left: 2px;margin-top: 3px;">
 
                             <span style="vertical-align: inherit;" class="provincie_name">{{ item.provincie }}
                               <span style="margin-left: 2px;display:block;span-size: 18px;" :id="'provincie' + i">{{
@@ -188,9 +188,9 @@
 
                         </div>
                       </div>
-                      <a id="prev" @click="prev" class="control prev" :style="image"></a>
-                      <a id="next" class="control next" :style="image"></a>
-                      <div class="dots"></div>
+                      <a id="prev" ref="prev" class="control prev" :style="image"></a>
+                      <a id="next" ref="next" class="control next" :style="image"></a>
+                      <div ref="dots" class="dots"></div>
                     </div><br>
 
                     <div style="height: 300px" ref="provincie_canvas" id="provincie_canvas" class="">
@@ -321,7 +321,7 @@ export default {
       emergencyBtn: [],
       selectedRegio: '',
       isLoading: false,
-      defaultProvincie: 'Drenthe',
+      defaultProvincie: 'Noord-Brabant',
       defaultEmergency: 'ambulance',
       index: 0,
       toggle: false,
@@ -697,6 +697,7 @@ export default {
         }
       },
 
+
     }
   },
 
@@ -706,179 +707,184 @@ export default {
   mounted() {
 
     this.RegioChange('all');
-    
-    if (document.getElementById('provincie_buttons_area')) {
-      var slider = document.getElementById('slider'),
-        sliderItems = document.getElementById('provincie_buttons_area'),
-        prev = document.getElementById('prev'),
-        next = document.getElementById('next'),
-        dot = document.querySelector('.dots');
 
-      function provienci(wrapper, items, prev, next) {
 
-        var posX1 = 0,
-          posX2 = 0,
-          posInitial,
-          posFinal,
-          threshold = 100,
-          slides = items.getElementsByClassName('provienci'),
-          slidesLength = slides.length,
-          slideSize = items.getElementsByClassName('provienci')[0].offsetWidth,
-          index = 0,
-          allowShift = true;
+    var slider = this.$refs.slider,
+      sliderItems = this.$refs.provincie_buttons_area,
+      prev = this.$refs.prev,
+      next = this.$refs.next,
+      dot = this.$refs.dots;
 
 
 
-        wrapper.classList.add('loaded');
+    function provienci(wrapper, items, prev, next) {
 
-        for (var j = 0; j < slidesLength; j++) {
-          var dotItem = document.createElement('i');
-          dotItem.dataset.id = j;
-
-
-          dot.appendChild(dotItem);
-
-
-        }
-
-        document.querySelector('.dots i:first-child').classList.add('active');
-
-
-        function appendAfter(n, original, appendTo) {
-          for (var i = 0; i < n; i++) {
-            var clone = original[i].cloneNode(true);
-            appendTo.appendChild(clone);
-          }
-
-        }
-        appendAfter(5, slides, items);
+      var posX1 = 0,
+        posX2 = 0,
+        posInitial,
+        posFinal,
+        threshold = 100,
+        slides = items.getElementsByClassName('provienci'),
+        slidesLength = slides.length,
+        slideSize = 132,
+        index = 0,
+        allowShift = true;
 
 
 
-        // Click events
-        prev.addEventListener('click', function () { shiftSlide(-1) });
-        next.addEventListener('click', function () { shiftSlide(1) });
 
-        // Transition events
-        items.addEventListener('transitionend', checkIndex);
 
-        function dragStart(e) {
-          e = e || window.event;
-          e.preventDefault();
-          posInitial = items.offsetLeft;
+      wrapper.classList.add('loaded');
 
-          if (e.type == 'touchstart') {
-            posX1 = e.touches[0].clientX;
-          } else {
-            posX1 = e.clientX;
-            document.onmouseup = dragEnd;
-            document.onmousemove = dragAction;
-          }
-        }
+      for (var j = 0; j < slidesLength; j++) {
+        var dotItem = document.createElement('i');
+        dotItem.dataset.id = j;
 
-        function dragAction(e) {
-          e = e || window.event;
 
-          console.log('frim dragAction')
+        dot.appendChild(dotItem);
 
-          if (e.type == 'touchmove') {
-            posX2 = posX1 - e.touches[0].clientX;
-            posX1 = e.touches[0].clientX;
-          } else {
-            posX2 = posX1 - e.clientX;
-            posX1 = e.clientX;
-          }
-          items.style.left = (items.offsetLeft - posX2) + "px";
-        }
-
-        function dragEnd(e) {
-          posFinal = items.offsetLeft;
-          if (posFinal - posInitial < -threshold) {
-            shiftSlide(1, 'drag');
-          } else if (posFinal - posInitial > threshold) {
-            shiftSlide(-1, 'drag');
-          } else {
-            items.style.left = (posInitial) + "px";
-          }
-
-          document.onmouseup = null;
-          document.onmousemove = null;
-        }
-
-        function shiftSlide(dir, action) {
-          items.classList.add('shifting');
-
-          if (allowShift) {
-            if (!action) { posInitial = items.offsetLeft; }
-
-            if (dir == 1) {
-              items.style.left = (posInitial - slideSize) + "px";
-              index++;
-            } else if (dir == -1) {
-              items.style.left = (posInitial + slideSize) + "px";
-              index--;
-            }
-
-          };
-
-          allowShift = false;
-        }
-
-        function checkIndex() {
-          items.classList.remove('shifting');
-
-          if (index == -1) {
-            items.style.left = -(slidesLength * slideSize) + "px";
-            index = slidesLength - 1;
-          }
-
-          if (index == slidesLength) {
-            items.style.left = -(1 * slideSize) + "px";
-            index = 0;
-          }
-          deleteDots();
-          dot.children[index].classList.add('active');
-          allowShift = true;
-        }
-
-        dot.addEventListener('click', function (e) {
-          if (e.target.tagName.toLowerCase() !== 'i') return;
-          checkDots(e);
-        });
-        function checkDots(e) {
-          items.classList.add('shifting');
-          deleteDots();
-          e.target.classList.add('active');
-          items.style.left = -(1 * (slideSize * e.target.dataset.id)) + "px";
-          index = e.target.dataset.id;
-        }
-
-        function deleteDots(e) {
-          var dotElements = document.querySelectorAll('.dots i');
-          for (var i = 0; i < dotElements.length; i++) {
-            dotElements[i].classList.remove('active');
-          }
-        }
 
       }
 
+      function appendAfter(n, original, appendTo) {
+        for (var i = 0; i < n; i++) {
+          var clone = original[i].cloneNode(true);
+          appendTo.appendChild(clone);
+        }
+
+      }
+      appendAfter(5, slides, items);
 
 
-      provienci(slider, sliderItems, prev, next);
+
+      // Click events
+      prev.addEventListener('click', function () { shiftSlide(-1) });
+      next.addEventListener('click', function () { shiftSlide(1) });
+
+      // Transition events
+      items.addEventListener('transitionend', checkIndex);
+
+      function dragStart(e) {
+        e = e || window.event;
+        e.preventDefault();
+        posInitial = items.offsetLeft;
+
+        if (e.type == 'touchstart') {
+          posX1 = e.touches[0].clientX;
+        } else {
+          posX1 = e.clientX;
+          document.onmouseup = dragEnd;
+          document.onmousemove = dragAction;
+        }
+      }
+
+      function dragAction(e) {
+        e = e || window.event;
+
+        console.log('frim dragAction')
+
+        if (e.type == 'touchmove') {
+          posX2 = posX1 - e.touches[0].clientX;
+          posX1 = e.touches[0].clientX;
+        } else {
+          posX2 = posX1 - e.clientX;
+          posX1 = e.clientX;
+        }
+        items.style.left = (items.offsetLeft - posX2) + "px";
+      }
+
+      function dragEnd(e) {
+        posFinal = items.offsetLeft;
+        if (posFinal - posInitial < -threshold) {
+          shiftSlide(1, 'drag');
+        } else if (posFinal - posInitial > threshold) {
+          shiftSlide(-1, 'drag');
+        } else {
+          items.style.left = (posInitial) + "px";
+        }
+
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+
+      function shiftSlide(dir, action) {
+        console.log('clicked');
+        items.classList.add('shifting');
+
+        if (allowShift) {
+          if (!action) { posInitial = items.offsetLeft; }
+
+          if (dir == 1) {
+            items.style.left = (posInitial - slideSize) + "px";
+            index++;
+          } else if (dir == -1) {
+            items.style.left = (posInitial + slideSize) + "px";
+            index--;
+          }
+
+        };
+
+        allowShift = false;
+      }
+
+      function checkIndex() {
+        items.classList.remove('shifting');
+
+        if (index == -1) {
+          items.style.left = -(slidesLength * slideSize) + "px";
+          index = slidesLength - 1;
+        }
+
+        if (index == slidesLength) {
+          items.style.left = -(1 * slideSize) + "px";
+          index = 0;
+        }
+        deleteDots();
+        dot.children[index].classList.add('active');
+        allowShift = true;
+      }
+
+      dot.addEventListener('click', function (e) {
+        if (e.target.tagName.toLowerCase() !== 'i') return;
+        checkDots(e);
+      });
+      function checkDots(e) {
+        items.classList.add('shifting');
+        deleteDots();
+        e.target.classList.add('active');
+        items.style.left = -(1 * (slideSize * e.target.dataset.id)) + "px";
+        index = e.target.dataset.id;
+      }
+
+      function deleteDots(e) {
+        var dotElements = document.querySelectorAll('.dots i');
+        for (var i = 0; i < dotElements.length; i++) {
+          dotElements[i].classList.remove('active');
+        }
+      }
+
     }
+    provienci(slider, sliderItems, prev, next);
 
-    document.body.addEventListener('click',(e)=>{
+
+
+
+    document.body.addEventListener('click', (e) => {
       let customSelect = document.getElementsByClassName('custom-select sources')[0];
-      if(customSelect.classList.contains('opened')){
+      if (customSelect.classList.contains('opened')) {
         customSelect.classList.remove('opened');
         e.stopPropagation();
       }
-    
+
     })
 
 
   },
   methods: {
+
+
+
+
 
     RegioChange(e) {
       let regio;
@@ -897,6 +903,8 @@ export default {
       const defaultPolitie = this.$refs.select_politie.value;
       const provincieValue = this.$refs.select_provincie.value;
       const emergencyValue = this.$refs.select_emergency.value;
+
+      console.log();
 
       const btn = document.getElementsByClassName('provienci button active');
 

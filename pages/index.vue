@@ -16,7 +16,7 @@
               <RegioList region="Nederland" path="meldingen"/>
 
               <div  class="meldingen"  v-for="(item,i) in meldingens"  :key="i">
-                <div class="news-item box-shadow border-radius acard">
+                <div :class="'news-item box-shadow border-radius acard '+item.dienst">
                   <img v-if="item.dienst == 'ambulance'" src="@/assets/img/ambulance.png" class="news-icon"/>
                   <img v-if="item.dienst == 'brandweer'" src="@/assets/img/brandweer.png" class="news-icon"/>
                   <img v-if="item.dienst == 'kustwacht'" src="@/assets/img/kustwacht.png" class="news-icon"/>
@@ -26,13 +26,13 @@
                     <div class="content_left">
                       <h4>
                         <router-link
-                            :to="'/'+item.provincie.toLowerCase()+'/'+item.stad_url.toLowerCase()+'/'+item.regio_url.toLowerCase()+'/'+item.categorie_url.toLowerCase()+'-'+item.id">
+                            :to="'/'+item.provincie.toLowerCase()+'/'+item.stad_url.toLowerCase()+'/'+item.regio_url.toLowerCase()+'/'+item.categorie_url.toLowerCase()+'-'+item.id" class="meldingen_text">
                           {{ item.categorie }}
                         </router-link>
                       </h4>
                       <p class="place_name">
                         <span class="place-name"> {{ item.straat }}</span> in <span class="place-title"
-                                                                                    style="color: #669e97 !important;"><nuxt-link :to="item.provincie_url.toLowerCase()+'/'+item.stad_url.toLowerCase()">{{ item.stad }}</nuxt-link> </span>,
+                                                                                    style="color: #669e97 !important;"><nuxt-link style="color:#669E97" :to="item.provincie_url.toLowerCase()+'/'+item.stad_url.toLowerCase()">{{ item.stad }}</nuxt-link> </span>,
                         <span class="place-name">
                {{ item.provincie }}</span>
                       </p>
@@ -220,9 +220,10 @@ export default {
   color: white;
   bottom: 14px;
   font-size: 14px;
-  padding: 3px 5px;
+  padding: 3px 6px;
   border-radius:4px;
   text-align: center;
+  float: right;
 }
 .spoed{
   background-color: #e05b59 !important;
@@ -251,9 +252,20 @@ export default {
 .news-content .content_right {
   text-align: right;
 }
-.news_list .acard {
-  border-left: 2px solid #D8AF3B;
+
+.ambulance{
+  border-left: 1.5px solid #d8af3b ;
 }
+.politie{
+  border-left: 1.5px solid #0095FF;
+}
+.brandweer{
+  border-left: 1.5px solid #e05b59;
+}
+.traumaheli{
+  border-left: 1.5px solid #669e97
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .prio {
     display: inline-block;
@@ -283,6 +295,11 @@ export default {
   }
   .news_list .acard {
     border-left: 0px solid #D8AF3B;
+  }
+  .meldingen_text{
+    font-weight: 700;
+    font-size:20px;
+   
   }
 }
 

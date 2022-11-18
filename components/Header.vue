@@ -11,7 +11,7 @@
             <nuxt-link to="/nieuws">Nieuws <i class="icon-angle-down"></i></nuxt-link>
           </li>
           <li :class="currentRouteName === '/statistics' ? 'active' : ''">
-            <nuxt-link to="/statistics">statistieken</nuxt-link>
+            <nuxt-link to="/statistics">Statistieken</nuxt-link>
           </li>
           <li :class="currentRouteName === '/contact' ? 'active' : ''">
             <router-link to="/contact">Contact <i class="icon-angle-down"></i></router-link>
@@ -67,7 +67,7 @@
                   <nuxt-link to="/nieuws">Nieuws</nuxt-link>
                 </li>
                 <li :class="currentRouteName === '/statistics' ? 'active' : ''">
-                  <nuxt-link to="/statistics">statistieken</nuxt-link>
+                  <nuxt-link to="/statistics">Statistieken</nuxt-link>
                 </li>
                 <li :class="currentRouteName === '/contact' ? 'active' : ''">
                   <router-link to="/contact">Contact</router-link>
