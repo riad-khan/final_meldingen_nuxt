@@ -282,7 +282,7 @@
 const config = useRuntimeConfig();
 apiUrl = config.public.api;
 backend = config.public.backend;
-const {data: regios, pending} = await useAsyncData('fetch_Regios', () => $fetch(`${apiUrl}/news/fetch/regios`));
+const { data: regios, pending } = await useAsyncData('fetch_Regios', () => $fetch(`${apiUrl}/news/fetch/regios`));
 onMounted(() => {
   refreshNuxtData('fetch_Regios');
 })
