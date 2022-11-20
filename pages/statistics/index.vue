@@ -905,6 +905,7 @@ export default {
       } else {
         customSelect.classList.remove('opened')
       }
+      e.stopPropagation();
 
     },
 
