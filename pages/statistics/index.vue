@@ -290,11 +290,16 @@ onMounted(() => {
 </script>
 
 <script>
+import { provincieValue } from "../../provincieChart";
+
+
 let apiUrl;
 let backend;
 import Chart from 'chart.js/auto/auto.mjs';
 import axios from 'axios';
-
+import addImage from "../../assets/img/add-img.jpg";
+import rightIcon from 'assets/img/angel-icon-right.png';
+import $ from 'jquery';
 
 
 
@@ -303,6 +308,9 @@ export default {
   components: {},
   data() {
     return {
+      image: { backgroundImage: `url(${rightIcon})` },
+      provincieBtn: provincieValue,
+      slide: null,
       myChart1: null,
       myChart2: null,
       myChart3: null,
@@ -310,13 +318,14 @@ export default {
       myChart5: null,
       provincie: [],
       provincieCount: [],
-      emergencyBtn:[],
-      selectedRegio:'',
+      emergencyBtn: [],
+      selectedRegio: '',
       isLoading: false,
-      defaultProvincie: 'Drenthe',
+      defaultProvincie: 'Noord-Brabant',
       defaultEmergency: 'ambulance',
       index: 0,
-      toggle : false,
+      toggle: false,
+      isOpen: false,
       config1: {
         type: 'line',
         data: {
@@ -688,6 +697,7 @@ export default {
         }
       },
 
+
     }
   },
 
@@ -696,16 +706,191 @@ export default {
 
   mounted() {
 
-
     this.RegioChange('all');
+
+
+    var slider = this.$refs.slider,
+      sliderItems = this.$refs.provincie_buttons_area,
+      prev = this.$refs.prev,
+      next = this.$refs.next,
+      dot = this.$refs.dots;
+
+
+
+    function provienci(wrapper, items, prev, next) {
+
+      var posX1 = 0,
+        posX2 = 0,
+        posInitial,
+        posFinal,
+        threshold = 100,
+        slides = items.getElementsByClassName('provienci'),
+        slidesLength = slides.length,
+        slideSize = 132,
+        index = 0,
+        allowShift = true;
+
+
+
+
+
+      wrapper.classList.add('loaded');
+
+      for (var j = 0; j < slidesLength; j++) {
+        var dotItem = document.createElement('i');
+        dotItem.dataset.id = j;
+
+
+        dot.appendChild(dotItem);
+
+
+      }
+
+      function appendAfter(n, original, appendTo) {
+        for (var i = 0; i < n; i++) {
+          var clone = original[i].cloneNode(true);
+          appendTo.appendChild(clone);
+        }
+
+      }
+      appendAfter(5, slides, items);
+
+
+
+      // Click events
+      prev.addEventListener('click', function () { shiftSlide(-1) });
+      next.addEventListener('click', function () { shiftSlide(1) });
+
+      // Transition events
+      items.addEventListener('transitionend', checkIndex);
+
+      function dragStart(e) {
+        e = e || window.event;
+        e.preventDefault();
+        posInitial = items.offsetLeft;
+
+        if (e.type == 'touchstart') {
+          posX1 = e.touches[0].clientX;
+        } else {
+          posX1 = e.clientX;
+          document.onmouseup = dragEnd;
+          document.onmousemove = dragAction;
+        }
+      }
+
+      function dragAction(e) {
+        e = e || window.event;
+
+        console.log('frim dragAction')
+
+        if (e.type == 'touchmove') {
+          posX2 = posX1 - e.touches[0].clientX;
+          posX1 = e.touches[0].clientX;
+        } else {
+          posX2 = posX1 - e.clientX;
+          posX1 = e.clientX;
+        }
+        items.style.left = (items.offsetLeft - posX2) + "px";
+      }
+
+      function dragEnd(e) {
+        posFinal = items.offsetLeft;
+        if (posFinal - posInitial < -threshold) {
+          shiftSlide(1, 'drag');
+        } else if (posFinal - posInitial > threshold) {
+          shiftSlide(-1, 'drag');
+        } else {
+          items.style.left = (posInitial) + "px";
+        }
+
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+
+      function shiftSlide(dir, action) {
+        console.log('clicked');
+        items.classList.add('shifting');
+
+        if (allowShift) {
+          if (!action) { posInitial = items.offsetLeft; }
+
+          if (dir == 1) {
+            items.style.left = (posInitial - slideSize) + "px";
+            index++;
+          } else if (dir == -1) {
+            items.style.left = (posInitial + slideSize) + "px";
+            index--;
+          }
+
+        };
+
+        allowShift = false;
+      }
+
+      function checkIndex() {
+        items.classList.remove('shifting');
+
+        if (index == -1) {
+          items.style.left = -(slidesLength * slideSize) + "px";
+          index = slidesLength - 1;
+        }
+
+        if (index == slidesLength) {
+          items.style.left = -(1 * slideSize) + "px";
+          index = 0;
+        }
+        deleteDots();
+        dot.children[index].classList.add('active');
+        allowShift = true;
+      }
+
+      dot.addEventListener('click', function (e) {
+        if (e.target.tagName.toLowerCase() !== 'i') return;
+        checkDots(e);
+      });
+      function checkDots(e) {
+        items.classList.add('shifting');
+        deleteDots();
+        e.target.classList.add('active');
+        items.style.left = -(1 * (slideSize * e.target.dataset.id)) + "px";
+        index = e.target.dataset.id;
+      }
+
+      function deleteDots(e) {
+        var dotElements = document.querySelectorAll('.dots i');
+        for (var i = 0; i < dotElements.length; i++) {
+          dotElements[i].classList.remove('active');
+        }
+      }
+
+    }
+    provienci(slider, sliderItems, prev, next);
+
+
+
+
+    document.body.addEventListener('click', (e) => {
+      let customSelect = document.getElementsByClassName('custom-select sources')[0];
+      if (customSelect.classList.contains('opened')) {
+        customSelect.classList.remove('opened');
+        e.stopPropagation();
+      }
+
+    })
+
 
   },
   methods: {
+
+
+
+
+
     RegioChange(e) {
       let regio;
-      if(e == 'all'){
+      if (e == 'all') {
         regio = "all"
-      }else{
+      } else {
         document.getElementById('regio_name').innerText = e.target.getAttribute('data-value')
         regio = e.target.getAttribute('data-value')
         this.selectedRegio = e.target.getAttribute('data-value')
@@ -719,6 +904,8 @@ export default {
       const provincieValue = this.$refs.select_provincie.value;
       const emergencyValue = this.$refs.select_emergency.value;
 
+      console.log();
+
       const btn = document.getElementsByClassName('provienci button active');
 
       this.fetchMeldingenChartData(defaultMeldingenTime, regio);
@@ -727,20 +914,24 @@ export default {
       this.fetchPolitieMeldingen(defaultPolitie, regio);
 
       this.fetchProvincieMeldingen(provincieValue, this.defaultProvincie);
-      this.fetchEmergencyMeldingen(emergencyValue,this.defaultEmergency)
+      this.fetchEmergencyMeldingen(emergencyValue, this.defaultEmergency)
 
 
 
     },
 
-    openRegion(e){
+    openRegion(e) {
       let customSelect = document.getElementsByClassName('custom-select sources')[0];
       this.toggle = !this.toggle;
-      if(this.toggle === true){
+      if (this.toggle === true) {
+        this.isOpen = true;
         customSelect.classList.add('opened');
-      }else{
+      } else {
+        this.isOpen = false;
         customSelect.classList.remove('opened')
       }
+
+      e.stopPropagation();
 
     },
 
@@ -752,8 +943,8 @@ export default {
         this.myChart1.destroy();
       }
       this.myChart1 = new Chart(
-          document.getElementById('myChart1'),
-          this.config1
+        document.getElementById('myChart1'),
+        this.config1
       );
 
     },
@@ -761,36 +952,36 @@ export default {
 
       let regio;
 
-     if(!document.getElementById('regio').value){
-       regio = "all"
-     }else{
-       regio = document.getElementById('regio').value
-     }
+      if (!document.getElementById('regio').value) {
+        regio = "all"
+      } else {
+        regio = document.getElementById('regio').value
+      }
 
       console.log(regio)
       const hour = e.target.value;
       this.fetchMeldingenChartData(hour, regio);
     },
     fetchMeldingenChartData(hour, regio) {
-     this.$refs.all_meldingen.classList.value = "spin";
+      this.$refs.all_meldingen.classList.value = "spin";
       axios.get(`${apiUrl}/charts/meldingen/${hour}/${regio}`)
-          .then((response) => {
-            this.config1.data.labels = [];
-            this.config1.data.datasets[0].data = [];
-            for (let i = 0; i < response.data.charts.length; i++) {
-              this.config1.data.labels.push((response.data.charts[i].time.length == 1 ? '0' : '') + response.data.charts[i].time);
-              this.config1.data.datasets[0].data.push(response.data.charts[i].calculated);
-            }
+        .then((response) => {
+          this.config1.data.labels = [];
+          this.config1.data.datasets[0].data = [];
+          for (let i = 0; i < response.data.charts.length; i++) {
+            this.config1.data.labels.push((response.data.charts[i].time.length == 1 ? '0' : '') + response.data.charts[i].time);
+            this.config1.data.datasets[0].data.push(response.data.charts[i].calculated);
+          }
 
-            this.meldingenChartRender();
+          this.meldingenChartRender();
 
-            this.$refs.all_meldingen.classList.value = "";;
-            document.getElementById('mel_count').innerText = response.data.count;
-            document.getElementById('meldingen_parcentage').innerHTML = response.data.parcent + '%';
-          })
-          .catch(error => {
-            console.log(error.response);
-          })
+          this.$refs.all_meldingen.classList.value = "";;
+          document.getElementById('mel_count').innerText = response.data.count;
+          document.getElementById('meldingen_parcentage').innerHTML = response.data.parcent + '%';
+        })
+        .catch(error => {
+          console.log(error.response);
+        })
     },
 
     //Ambulance Charts
@@ -800,8 +991,8 @@ export default {
         this.myChart2.destroy();
       }
       this.myChart2 = new Chart(
-          document.getElementById('myChart2'),
-          this.config2
+        document.getElementById('myChart2'),
+        this.config2
       );
 
     },
@@ -810,9 +1001,9 @@ export default {
 
       let regio;
 
-      if(!document.getElementById('regio').value){
+      if (!document.getElementById('regio').value) {
         regio = "all"
-      }else{
+      } else {
         regio = document.getElementById('regio').value
       }
 
@@ -824,18 +1015,18 @@ export default {
 
       this.$refs.ambulance_meldingen.classList.value = "spin";
       axios.get(`${apiUrl}/charts/ambulance/${hour}/${regio}`)
-          .then((response) => {
-            this.config2.data.labels = [];
-            this.config2.data.datasets[0].data = [];
-            for (let i = 0; i < response.data.charts.length; i++) {
-              this.config2.data.labels.push((response.data.charts[i].time.length == 1 ? '0' : '') + response.data.charts[i].time);
-              this.config2.data.datasets[0].data.push(response.data.charts[i].calculated);
-            }
-            this.AmbulanceChartRender();
-            this.$refs.ambulance_meldingen.classList.value = "";
-            document.getElementById('ambulance_count').innerText = response.data.count;
-            document.getElementById('ambulance_parcentage').innerHTML = response.data.parcent + '%';
-          })
+        .then((response) => {
+          this.config2.data.labels = [];
+          this.config2.data.datasets[0].data = [];
+          for (let i = 0; i < response.data.charts.length; i++) {
+            this.config2.data.labels.push((response.data.charts[i].time.length == 1 ? '0' : '') + response.data.charts[i].time);
+            this.config2.data.datasets[0].data.push(response.data.charts[i].calculated);
+          }
+          this.AmbulanceChartRender();
+          this.$refs.ambulance_meldingen.classList.value = "";
+          document.getElementById('ambulance_count').innerText = response.data.count;
+          document.getElementById('ambulance_parcentage').innerHTML = response.data.parcent + '%';
+        })
     },
 
     //Brandweer Charts
@@ -845,17 +1036,17 @@ export default {
         this.myChart3.destroy();
       }
       this.myChart3 = new Chart(
-          document.getElementById('myChart3'),
-          this.config3
+        document.getElementById('myChart3'),
+        this.config3
       );
     },
 
     selectBrandweerTime(e) {
       let regio;
 
-      if(!document.getElementById('regio').value){
+      if (!document.getElementById('regio').value) {
         regio = "all"
-      }else{
+      } else {
         regio = document.getElementById('regio').value
       }
       const hour = e.target.value;
@@ -864,18 +1055,18 @@ export default {
     fetchBrandweerMeldingen(hour, regio) {
       this.$refs.brandweer_meldingen.classList.value = "spin"
       axios.get(`${apiUrl}/charts/brandweer/${hour}/${regio}`)
-          .then((response) => {
-            this.config3.data.labels = [];
-            this.config3.data.datasets[0].data = [];
-            for (let i = 0; i < response.data.charts.length; i++) {
-              this.config3.data.labels.push((response.data.charts[i].time.length == 1 ? '0' : '') + response.data.charts[i].time);
-              this.config3.data.datasets[0].data.push(response.data.charts[i].calculated);
-            }
-            this.BrandweerChartRender();
-            this.$refs.brandweer_meldingen.classList.value = ""
-            document.getElementById('brandweer_count').innerText = response.data.count;
-            document.getElementById('brandweer_parcentage').innerHTML = response.data.parcent + '%';
-          })
+        .then((response) => {
+          this.config3.data.labels = [];
+          this.config3.data.datasets[0].data = [];
+          for (let i = 0; i < response.data.charts.length; i++) {
+            this.config3.data.labels.push((response.data.charts[i].time.length == 1 ? '0' : '') + response.data.charts[i].time);
+            this.config3.data.datasets[0].data.push(response.data.charts[i].calculated);
+          }
+          this.BrandweerChartRender();
+          this.$refs.brandweer_meldingen.classList.value = ""
+          document.getElementById('brandweer_count').innerText = response.data.count;
+          document.getElementById('brandweer_parcentage').innerHTML = response.data.parcent + '%';
+        })
     },
 
     //politie charts
@@ -885,17 +1076,17 @@ export default {
         this.myChart4.destroy();
       }
       this.myChart4 = new Chart(
-          document.getElementById('myChart4'),
-          this.config4
+        document.getElementById('myChart4'),
+        this.config4
       );
     },
 
     selectPolitieTime(e) {
       let regio;
 
-      if(!document.getElementById('regio').value){
+      if (!document.getElementById('regio').value) {
         regio = "all"
-      }else{
+      } else {
         regio = document.getElementById('regio').value
       }
       const hour = e.target.value;
@@ -904,18 +1095,18 @@ export default {
     fetchPolitieMeldingen(hour, regio) {
       this.$refs.politie_meldingen.classList.value = "spin";
       axios.get(`${apiUrl}/charts/politie/${hour}/${regio}`)
-          .then((response) => {
-            this.config4.data.labels = [];
-            this.config4.data.datasets[0].data = [];
-            for (let i = 0; i < response.data.charts.length; i++) {
-              this.config4.data.labels.push((response.data.charts[i].time.length == 1 ? '0' : '') + response.data.charts[i].time);
-              this.config4.data.datasets[0].data.push(response.data.charts[i].calculated);
-            }
-            this.PolitieChartRender();
-            this.$refs.politie_meldingen.classList.value = "";
-            document.getElementById('politie_count').innerText = response.data.count;
-            document.getElementById('politie_parcentage').innerHTML = response.data.parcent + '%';
-          })
+        .then((response) => {
+          this.config4.data.labels = [];
+          this.config4.data.datasets[0].data = [];
+          for (let i = 0; i < response.data.charts.length; i++) {
+            this.config4.data.labels.push((response.data.charts[i].time.length == 1 ? '0' : '') + response.data.charts[i].time);
+            this.config4.data.datasets[0].data.push(response.data.charts[i].calculated);
+          }
+          this.PolitieChartRender();
+          this.$refs.politie_meldingen.classList.value = "";
+          document.getElementById('politie_count').innerText = response.data.count;
+          document.getElementById('politie_parcentage').innerHTML = response.data.parcent + '%';
+        })
     },
     //provincie charts
 
@@ -924,7 +1115,7 @@ export default {
       const selectedValue = this.$refs.select_provincie.value;
 
 
-    this.fetchProvincieMeldingen(selectedValue, provincie);
+      this.fetchProvincieMeldingen(selectedValue, provincie);
 
 
     },
@@ -932,7 +1123,7 @@ export default {
     selectProvincieTime(e) {
       const hour = e.target.value;
       const btn = document.getElementsByClassName('provienci button active');
-     this.fetchProvincieMeldingen(hour, btn[0].value)
+      this.fetchProvincieMeldingen(hour, btn[0].value)
 
 
     },
@@ -941,29 +1132,43 @@ export default {
         this.myChart5.destroy();
       }
       this.myChart5 = new Chart(
-          document.getElementById('myChart5'),
-          this.config5
+        document.getElementById('myChart5'),
+        this.config5
       );
     },
     fetchProvincieMeldingen(hour, provincie) {
+
       this.$refs.provincie_canvas.classList.value = "spin";
       axios.get(`${apiUrl}/charts/prov/${hour}/${provincie}`)
-          .then((response) => {
+        .then((response) => {
+          this.slide = true;
+          this.config5.data.labels = [];
+          this.config5.data.datasets[0].data = [];
+          for (let i = 0; i < response.data.chart.length; i++) {
+            this.config5.data.labels.push((response.data.chart[i].time.length == 1 ? '0' : '') + response.data.chart[i].time);
+            this.config5.data.datasets[0].data.push(response.data.chart[i].calculated);
+          }
 
-            this.config5.data.labels = [];
-            this.config5.data.datasets[0].data = [];
-            for (let i = 0; i < response.data.chart.length; i++) {
-              this.config5.data.labels.push((response.data.chart[i].time.length == 1 ? '0' : '') + response.data.chart[i].time);
-              this.config5.data.datasets[0].data.push(response.data.chart[i].calculated);
+          response.data.hoursData.map((item, i) => {
+            const data = this.provincieBtn.filter(el => el.provincie === item.provincie);
+
+            for (let i = 0; i < data.length; i++) {
+              if (data[i].provincie === item.provincie) {
+                data[i].total = item.total;
+                this.provincieBtn.push(data);
+                this.provincieBtn.pop(data);
+              }
             }
-
-
-            this.provincieChartRender();
-            this.$refs.provincie_canvas.classList.value = "";
-
-            this.provincieCount = response.data.hoursData;
-
           })
+
+
+          this.provincieChartRender();
+          this.$refs.provincie_canvas.classList.value = "";
+
+          this.provincieCount = response.data.hoursData;
+
+
+        })
 
     },
 
@@ -991,8 +1196,8 @@ export default {
         this.myChart6.destroy();
       }
       this.myChart6 = new Chart(
-          document.getElementById('myChart6'),
-          this.config6
+        document.getElementById('myChart6'),
+        this.config6
       );
     },
 
@@ -1001,22 +1206,22 @@ export default {
     fetchEmergencyMeldingen(hour, emergency) {
       this.$refs.emergency_canvas.classList.value = "spin";
       axios.get(`${apiUrl}/charts/emergency/${hour}/${emergency}`)
-          .then((response) => {
+        .then((response) => {
 
-            this.config6.data.labels = [];
-            this.config6.data.datasets[0].data = [];
-            for (let i = 0; i < response.data.chart.length; i++) {
-              this.config6.data.labels.push((response.data.chart[i].time.length == 1 ? '0' : '') + response.data.chart[i].time);
-              this.config6.data.datasets[0].data.push(response.data.chart[i].calculated);
-            }
+          this.config6.data.labels = [];
+          this.config6.data.datasets[0].data = [];
+          for (let i = 0; i < response.data.chart.length; i++) {
+            this.config6.data.labels.push((response.data.chart[i].time.length == 1 ? '0' : '') + response.data.chart[i].time);
+            this.config6.data.datasets[0].data.push(response.data.chart[i].calculated);
+          }
 
-            this.emergencyBtn = response.data.buttons
+          this.emergencyBtn = response.data.buttons
 
-            this.EmergencyChartRender();
-            this.$refs.emergency_canvas.classList.value = "";
+          this.EmergencyChartRender();
+          this.$refs.emergency_canvas.classList.value = "";
 
 
-          })
+        })
 
     }
 
