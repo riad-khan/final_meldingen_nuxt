@@ -749,16 +749,12 @@ export default {
       const provincieValue = this.$refs.select_provincie.value;
       const emergencyValue = this.$refs.select_emergency.value;
 
-      console.log();
-
-      const btn = document.getElementsByClassName('provienci button active');
-
       this.fetchMeldingenChartData(defaultMeldingenTime, regio);
       this.fetchAmbulanceMeldingen(defaultAmbulanceTime, regio);
       this.fetchBrandweerMeldingen(defaultBrandweer, regio);
       this.fetchPolitieMeldingen(defaultPolitie, regio);
 
-      this.fetchProvincieMeldingen(provincieValue, this.defaultProvincie);
+      //this.fetchProvincieMeldingen(provincieValue, this.defaultProvincie);
       this.fetchEmergencyMeldingen(emergencyValue, this.defaultEmergency)
 
 
