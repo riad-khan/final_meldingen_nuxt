@@ -24,7 +24,7 @@
                     </div>
                   </div>
                 </div>
-                <span class="arrow-down"><img src="http://localhost:3000/_nuxt/assets/img/angel-icon-down.svg"
+                <span class="arrow-down"><img src="https://final-meldingen-nuxt.vercel.app/_nuxt/assets/img/angel-icon-down.svg"
                     alt="" /></span>
               </div>
             </div>
@@ -873,7 +873,7 @@ export default {
       let customSelect = document.getElementsByClassName('custom-select sources')[0];
       if (customSelect.classList.contains('opened')) {
         customSelect.classList.remove('opened');
-        e.stopPropagation();
+        
       }
 
     })
