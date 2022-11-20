@@ -851,7 +851,13 @@ export default {
     }
     provienci(slider, sliderItems, prev, next);
 
-
+    document.body.addEventListener('click', (e) => {
+      let customSelect = document.getElementsByClassName('custom-select sources')[0];
+      if (customSelect.classList.contains('opened')) {
+        customSelect.classList.remove('opened');
+        e.stopPropagation();
+      }
+    })
 
   }
 
