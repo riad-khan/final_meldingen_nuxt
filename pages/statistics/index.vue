@@ -9,7 +9,7 @@
             <div class="chart_page_dropdown d-flex align-items-center">
               <h1>Statistieken in </h1>
               <div class="form-group input-select map">
-                
+
                 <div class="custom-select-wrapper">
                   <input type="hidden" v-model="selectedRegio" name="provincie" id="regio">
 
@@ -17,15 +17,17 @@
                     <span id="regio_name" class="custom-select-trigger"> Selecteer provincie </span>
                     <div class="custom-options" @click="(e) => RegioChange(e)">
                       <span class="custom-option undefined" data-value=""></span>
-                      <span class="custom-option undefined" :data-value="item.regio"
-                        v-for="(item, i) in regios">{{ item.regio }}</span>
+                      <span class="custom-option undefined" :data-value="item.regio" v-for="(item, i) in regios">{{
+                          item.regio
+                      }}</span>
 
                     </div>
                   </div>
                 </div>
-                <span class="arrow-down"><img src="http://localhost:3000/_nuxt/assets/img/angel-icon-down.svg" alt="" /></span>
+                <span class="arrow-down"><img src="http://localhost:3000/_nuxt/assets/img/angel-icon-down.svg"
+                    alt="" /></span>
               </div>
-              </div>
+            </div>
 
             <!--         <h1>Statistieken-->
             <!--           <select @change="(e)=>RegioChange(e)" name="datatablesSimple_length" placeholder="Nederland" id="regio"-->
@@ -38,75 +40,78 @@
             <!-- Chart 1 -->
             <div class="row">
               <div class="col-lg-4">
-              <div class="card other-news box-shadow border-radius-8">
-                <div class="card-content">
-                  <strong>
-                    <h4>Meldingen</h4>
-                  </strong>
-                  <p>Total of meldingen
-                    <select name="datatablesSimple_length" ref="meldingen" @change="(e) => changeMeldingenTime(e)">
-                      <option v-for="i in 24" selected :key="i" v-bind:value="i">{{ i }} uur</option>
-                    </select>
-                  </p>
-                  <div class="mel-row d-flex align-items-center">
-                    <span id="mel_count" class="mel_count">0</span> 
-                    <span id="meldingen_parcentage" class="mel_parc">0%</span>
-                  </div>
-                  <div ref="all_meldingen" class="">
-                    <canvas id="myChart1" width="400" height="400"></canvas>
-                  </div>
+                <div class="card other-news box-shadow border-radius-8">
+                  <div class="card-content">
+                    <strong>
+                      <h4>Meldingen</h4>
+                    </strong>
+                    <p>Total of meldingen
+                      <select name="datatablesSimple_length" ref="meldingen" @change="(e) => changeMeldingenTime(e)">
+                        <option v-for="i in 24" selected :key="i" v-bind:value="i">{{ i }} uur</option>
+                      </select>
+                    </p>
+                    <div class="mel-row d-flex align-items-center">
+                      <span id="mel_count" class="mel_count">0</span>
+                      <span id="meldingen_parcentage" class="mel_parc">0%</span>
+                    </div>
+                    <div ref="all_meldingen" class="">
+                      <canvas id="myChart1" width="400" height="400"></canvas>
+                    </div>
 
-                </div>
-
-              </div>
-            </div>
-            <!--  Chart 2-->
-            <div class="col-lg-4">
-              <div class="card other-news box-shadow border-radius-8">
-                <div class="card-content">
-                  <strong>
-                    <h4>Ambulance Meldingen</h4>
-                  </strong>
-                  <p>Total of meldingen
-                    <select name="datatablesSimple_length" ref="select_ambulance" @change="(e) => selectTime(e)">
-                      <option v-for="i in 24" selected :key="i" v-bind:value="i">{{ i }} uur</option>
-                    </select>
-                  </p>
-                  <div class="mel-row d-flex align-items-center">
-                  <span id="ambulance_count" class="mel_count">2689</span> <span id="ambulance_parcentage" class="mel_parc">-2%</span>
-                  </div>
-                  <div ref="ambulance_meldingen" class="">
-                    <canvas id="myChart2" width="400" height="400"></canvas>
                   </div>
 
                 </div>
-
               </div>
-            </div>
+              <!--  Chart 2-->
+              <div class="col-lg-4">
+                <div class="card other-news box-shadow border-radius-8">
+                  <div class="card-content">
+                    <strong>
+                      <h4>Ambulance Meldingen</h4>
+                    </strong>
+                    <p>Total of meldingen
+                      <select name="datatablesSimple_length" ref="select_ambulance" @change="(e) => selectTime(e)">
+                        <option v-for="i in 24" selected :key="i" v-bind:value="i">{{ i }} uur</option>
+                      </select>
+                    </p>
+                    <div class="mel-row d-flex align-items-center">
+                      <span id="ambulance_count" class="mel_count">2689</span> <span id="ambulance_parcentage"
+                        class="mel_parc">-2%</span>
+                    </div>
+                    <div ref="ambulance_meldingen" class="">
+                      <canvas id="myChart2" width="400" height="400"></canvas>
+                    </div>
 
-            <!--  Chart 3-->
-            <div class="col-lg-4">
-              <div class="card other-news box-shadow border-radius-8">
-                <div class="card-content">
-                  <strong>
-                    <h4>Brandweer Meldingen</h4>
-                  </strong>
-                  <p>Total of meldingen
-                    <select name="datatablesSimple_length" ref="select_brandweer" @change="(e) => selectBrandweerTime(e)">
-                      <option v-for="i in 24" selected :key="i" v-bind:value="i">{{ i }} uur</option>
-                    </select>
-                  </p>
-                  <div class="mel-row d-flex align-items-center">
-                  <span id="brandweer_count" class="mel_count">2689</span> <span id="brandweer_parcentage" class="mel_parc">-2%</span>
-                  </div>
-                  <div ref="brandweer_meldingen" class="">
-                    <canvas id="myChart3" width="400" height="400"></canvas>
                   </div>
 
                 </div>
-
               </div>
-            </div>
+
+              <!--  Chart 3-->
+              <div class="col-lg-4">
+                <div class="card other-news box-shadow border-radius-8">
+                  <div class="card-content">
+                    <strong>
+                      <h4>Brandweer Meldingen</h4>
+                    </strong>
+                    <p>Total of meldingen
+                      <select name="datatablesSimple_length" ref="select_brandweer"
+                        @change="(e) => selectBrandweerTime(e)">
+                        <option v-for="i in 24" selected :key="i" v-bind:value="i">{{ i }} uur</option>
+                      </select>
+                    </p>
+                    <div class="mel-row d-flex align-items-center">
+                      <span id="brandweer_count" class="mel_count">2689</span> <span id="brandweer_parcentage"
+                        class="mel_parc">-2%</span>
+                    </div>
+                    <div ref="brandweer_meldingen" class="">
+                      <canvas id="myChart3" width="400" height="400"></canvas>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
             </div>
 
             <!--  Chart 4-->
@@ -123,7 +128,8 @@
                       </select>
                     </p>
                     <div class="mel-row d-flex align-items-center">
-                    <span id="politie_count" class="mel_count">2689</span> <span id="politie_parcentage" class="mel_parc">-2%</span>
+                      <span id="politie_count" class="mel_count">2689</span> <span id="politie_parcentage"
+                        class="mel_parc">-2%</span>
                     </div>
                     <div ref="politie_meldingen" class="">
                       <canvas id="myChart4" width="400" height="400"></canvas>
@@ -166,12 +172,13 @@
 
                           <button v-for="(item, i) in provincieBtn" :key="i" :id="item.provincie"
                             @click="provincieSelect(item.provincie, i)"
-                            :class="index === i ? 'provienci button active' : 'provienci button'" :value="item.provincie"
-                            style="margin-left: 2px;margin-top: 3px;">
+                            :class="index === i ? 'provienci button active' : 'provienci button'"
+                            :value="item.provincie" style="margin-left: 2px;margin-top: 3px;">
 
                             <span style="vertical-align: inherit;" class="provincie_name">{{ item.provincie }}
-                              <span style="margin-left: 2px;display:block;span-size: 18px;"
-                                :id="'provincie' + i">{{ item.total }}</span>
+                              <span style="margin-left: 2px;display:block;span-size: 18px;" :id="'provincie' + i">{{
+                                  item.total
+                              }}</span>
                             </span>
 
 
@@ -200,65 +207,67 @@
             <!--         chart 6-->
             <div class="row">
               <div class="col-lg-12">
-              <div class="card other-news box-shadow border-radius-8">
-                <div class="card-content">
-                  <strong>
-                    <h4>
-                      <span style="vertical-align: inherit;">
-                        <span style="vertical-align: inherit;">Emergency meldingen</span>
-                      </span>
-                    </h4>
-                  </strong>
-                  <p>
-                    <span style="vertical-align: inherit;">
-                      <span style="vertical-align: inherit;">Total of the meldingen
-                      </span>
-                    </span>
-
-                    <select name="datatablesSimple_length" ref="select_emergency" @change="(e) => selectEmergencyTime(e)">
-                      <option v-for="i in 24" selected :key="i" v-bind:value="i">{{ i }} uur</option>
-                    </select>
-                  </p>
-
-                  <div style=" margin-bottom: 2px;">
-
-                    <div id="emergency_options_button" class="chart-btn">
-
-
-                      <button v-for="(item, i) in emergencyBtn" :key="i" :id="item.dienst"
-                        @click="emergencySelect(item.dienst, i)"
-                        :class="index === i ? 'emergency button active' : 'emergency button'" :value="item.dienst"
-                        style="margin-left: 2px;margin-top: 3px;">
-
-                        <span style="vertical-align: inherit;" class="provincie_name">{{ item.dienst }}
-                          <span style="margin-left: 2px;display:block;span-size: 18px;"
-                            :id="'provincie' + i">{{ item.total }}</span>
+                <div class="card other-news box-shadow border-radius-8">
+                  <div class="card-content">
+                    <strong>
+                      <h4>
+                        <span style="vertical-align: inherit;">
+                          <span style="vertical-align: inherit;">Emergency meldingen</span>
                         </span>
+                      </h4>
+                    </strong>
+                    <p>
+                      <span style="vertical-align: inherit;">
+                        <span style="vertical-align: inherit;">Total of the meldingen
+                        </span>
+                      </span>
+
+                      <select name="datatablesSimple_length" ref="select_emergency"
+                        @change="(e) => selectEmergencyTime(e)">
+                        <option v-for="i in 24" selected :key="i" v-bind:value="i">{{ i }} uur</option>
+                      </select>
+                    </p>
+
+                    <div style=" margin-bottom: 2px;">
+
+                      <div id="emergency_options_button" class="chart-btn">
+
+
+                        <button v-for="(item, i) in emergencyBtn" :key="i" :id="item.dienst"
+                          @click="emergencySelect(item.dienst, i)"
+                          :class="index === i ? 'emergency button active' : 'emergency button'" :value="item.dienst"
+                          style="margin-left: 2px;margin-top: 3px;">
+
+                          <span style="vertical-align: inherit;" class="provincie_name">{{ titleCase(item.dienst) }}
+                            <span style="margin-left: 2px;display:block;span-size: 18px;" :id="'provincie' + i">{{
+                                item.total
+                            }}</span>
+                          </span>
 
 
 
-                      </button>
+                        </button>
 
 
+                      </div>
+
+                      <a id="prev" class="control prev"></a>
+                      <a id="next" class="control next"></a>
+                      <div class="dots"><i data-id="0" class=""></i><i data-id="1" class=""></i><i data-id="2"
+                          class=""></i><i data-id="3" class=""></i><i data-id="4" class="active"></i><i data-id="5"
+                          class=""></i><i data-id="6" class=""></i><i data-id="7" class=""></i><i data-id="8"
+                          class=""></i><i data-id="9" class=""></i><i data-id="10" class=""></i><i data-id="11"
+                          class=""></i></div>
+                    </div><br>
+
+                    <div style="height: 300px" ref="emergency_canvas" class="">
+                      <canvas id="myChart6" style="display: block; box-sizing: border-box; height: 300px; width: 683px;"
+                        width="500" height="150"></canvas>
                     </div>
-
-                    <a id="prev" class="control prev"></a>
-                    <a id="next" class="control next"></a>
-                    <div class="dots"><i data-id="0" class=""></i><i data-id="1" class=""></i><i data-id="2"
-                        class=""></i><i data-id="3" class=""></i><i data-id="4" class="active"></i><i data-id="5"
-                        class=""></i><i data-id="6" class=""></i><i data-id="7" class=""></i><i data-id="8"
-                        class=""></i><i data-id="9" class=""></i><i data-id="10" class=""></i><i data-id="11"
-                        class=""></i></div>
-                  </div><br>
-
-                  <div style="height: 300px" ref="emergency_canvas" class="">
-                    <canvas id="myChart6" style="display: block; box-sizing: border-box; height: 300px; width: 683px;"
-                      width="500" height="150"></canvas>
                   </div>
-                </div>
 
+                </div>
               </div>
-            </div>
             </div>
 
           </div>
@@ -273,7 +282,7 @@
 const config = useRuntimeConfig();
 apiUrl = config.public.api;
 backend = config.public.backend;
-const { data: regios} = await useAsyncData('fetch_Regios', () => $fetch(`${apiUrl}/news/fetch/regios`));
+const { data: regios } = await useAsyncData('fetch_Regios', () => $fetch(`${apiUrl}/news/fetch/regios`));
 onMounted(() => {
   refreshNuxtData('fetch_Regios');
 })
@@ -697,10 +706,10 @@ export default {
     this.RegioChange('all');
 
     var slider = this.$refs.slider,
-        sliderItems = this.$refs.provincie_buttons,
-        prev = this.$refs.prevs,
-        next = this.$refs.nexts,
-        dot = this.$refs.slide_dot;
+      sliderItems = this.$refs.provincie_buttons,
+      prev = this.$refs.prevs,
+      next = this.$refs.nexts,
+      dot = this.$refs.slide_dot;
 
     function provienci(wrapper, items, prev, next) {
 
@@ -793,7 +802,7 @@ export default {
       }
 
       function shiftSlide(dir, action) {
-        
+
         items.classList.add('shifting');
 
         if (allowShift) {
@@ -864,6 +873,11 @@ export default {
 
   ,
   methods: {
+    titleCase(val) {
+      let value  = val.replace(/-/g, ' ');
+      let upperText = value.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+      return upperText
+    },
 
     RegioChange(e) {
       let regio;
