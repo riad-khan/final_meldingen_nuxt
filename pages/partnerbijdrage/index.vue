@@ -18,8 +18,6 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-12">
-
               <div class="col-md-4" v-for="item in partnerBlogs" :key="item.id">
                 <div class="card other-news box-shadow border-radius-8">
                   <div class="card-thumb">
@@ -49,10 +47,6 @@
 
                 </div>
               </div>
-
-
-
-            </div>
           </div>
         </div>
       </section>
@@ -99,5 +93,17 @@ export default {
 </script>
 
 <style scoped>
+.card-thumb img {
+    height: 200px;
+}
+@media (max-width: 767px) {
+  .col-md-6 .card-content, .col-md-12 .card-content {
+    padding: 0;
+    padding-top: 10px;
+}	
+.card-content {
+    padding-top: 10px;
+}
+}
 
 </style>

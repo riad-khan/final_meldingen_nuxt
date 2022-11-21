@@ -22,8 +22,8 @@
       </div>
 
 
-      <div class="row">
-        <div class="col-md-12">
+      <div class="row result_row">
+        <div class="col-md-12 result_list">
           <div v-for="(item, i) in meldingens" v-show="isOpen" id="search_by_place_result"
                class="searchbar-area box-shadow">
             <router-link :to="urlPath == 'meldingen' ? `/${findProvUrl(item.provincie)}/${item.stad_url}`:`/${urlPath}/${findProvUrl(item.provincie)}`" class="d-block">{{ item.stad }}
@@ -138,5 +138,11 @@ export default {
 </script>
 
 <style scoped>
-
+.result_row {
+  position: relative;
+}
+.result_list{
+  position: absolute;
+  z-index: 999;
+}
 </style>

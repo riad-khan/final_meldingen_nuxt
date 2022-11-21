@@ -91,7 +91,7 @@
 
 <script>
 import { isAuth } from "../middlewares/auth";
-
+import $ from 'jquery'
 
 
 export default {
@@ -99,7 +99,7 @@ export default {
   data() {
     return {
       isAuth: null,
-      isOpen : false,
+      isOpen: false,
     }
   },
 
@@ -109,18 +109,27 @@ export default {
     }
   },
 
-  mounted(){
+  mounted() {
     const menuBtn = document.querySelector('.menu-btn');
-      menuBtn.addEventListener('click', () => {
-        if (!this.isOpen) {
-          menuBtn.classList.add('open');
-          this.isOpen = true;
-        }
-        else {
-          menuBtn.classList.remove('open');
-          this.isOpen = false;
-        }
-      });
+    menuBtn.addEventListener('click', () => {
+      if (!this.isOpen) {
+        menuBtn.classList.add('open');
+        this.isOpen = true;
+      }
+      else {
+        menuBtn.classList.remove('open');
+        this.isOpen = false;
+      }
+    });
+    $(window).on('scroll', function () {
+      var scroll = $(window).scrollTop();
+      if (scroll < 1) {
+        $(".header-area").removeClass("sticky");
+      } else {
+        $(".header-area").addClass("sticky");
+      }
+    });
+
   },
 
   computed: {
@@ -158,17 +167,17 @@ export default {
 <style scoped>
 .menu-btn {
   width: 35px;
-    height: 35px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all .3s ease-in-out;
-    border: 1px solid #2b5882;
-    float: right;
-    background: #2b5882;
-    border-radius: 4px;
+  height: 35px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+  border: 1px solid #2b5882;
+  float: right;
+  background: #2b5882;
+  border-radius: 4px;
 }
 
 .menu-btn__burger {
@@ -217,10 +226,10 @@ export default {
 .menu-btn.open {
   border: 1px solid #2b5882;
 }
+
 @media (min-width: 769px) {
   .menu-btn {
     display: none;
-} 
+  }
 }
-
 </style>

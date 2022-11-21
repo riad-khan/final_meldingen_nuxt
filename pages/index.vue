@@ -272,35 +272,39 @@ export default {
   }
 }
 @media (max-width: 767px) {
-  .news-item .news-content.d-flex{
-    display: block !important;
-  }
   .news-content .content_right {
     text-align: left;
   }
   .news-item img.news-icon {
     right: auto;
     opacity: 1;
-    left: 20px;
+    left: 15px;
     width: 20px;
     object-fit: cover;
     margin-top: 1px;
+    top: 15px;
   }
   .news-content h4 {
-    padding-left: 30px;
-    font-size: 18px;
+    padding-left: 25px;
+    font-size: 16px;
+    margin-bottom: 5px;
   }
+  .content_right p.mb-5 span.place-name {
+    font-size: 12px;
+}
+.prio{
+    font-size: 12px;
+    padding: 3px 5px;
+}
   .content_right p.mb-5 {
     margin-bottom: 5px;
   }
   .news_list .acard {
     border-left: 0px solid #D8AF3B;
   }
-  .meldingen_text{
-    font-weight: 700;
-    font-size:20px;
-   
-  }
+  section.news-overview-sec {
+    padding-top: 15px;
+}
 }
 
 </style>

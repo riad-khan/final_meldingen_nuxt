@@ -349,8 +349,13 @@ export default {
 .card-content .meta {
   margin-bottom: 5px;
 }
-
 .btn-group .button {
   margin-bottom: 0;
+}
+.news-thumb img.img-thumb {
+    height: 130px;
+    object-fit: cover;
+    max-width: 100%;
+    min-width: 200px;
 }
 </style>

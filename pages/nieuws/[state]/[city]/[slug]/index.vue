@@ -596,4 +596,13 @@ export default {
 .btn-group .button {
     margin-bottom: 0;
 }
+@media (max-width: 767px){
+.sidebar {
+    margin-top: 30px;
+}
+.card-thumb img {
+    height: 200px;
+}
+}
+
 </style>

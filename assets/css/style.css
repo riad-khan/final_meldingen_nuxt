@@ -1475,6 +1475,10 @@ ul.social li a:hover span.icon-Instagram:before {
     background: #1b425e;
     border-radius: 50px;
 }
+.content_right p.mb-5 span.place-name {
+    color: #A6B9C9;
+    font-size: 14px;
+}
 
 /*Icon Black*/
 ul.social.dark-white li a span[class*="icon-"], ul.social.dark-white li a span[class*="icon-"] .path1:before, ul.social.dark-white li a span[class*="icon-"] .path2:before {
