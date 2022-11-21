@@ -224,7 +224,9 @@ export default {
   border-radius:4px;
   text-align: center;
   float: right;
+  line-height: 1.1;
 }
+
 .spoed{
   background-color: #e05b59 !important;
 }

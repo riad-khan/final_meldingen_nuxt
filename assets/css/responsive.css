@@ -278,7 +278,10 @@
     .mobile-only {
         display: block;
     }
-
+    .container-fluid, .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
     header.header-area {
         padding: 30px 0px;
         padding-bottom: 30px;
