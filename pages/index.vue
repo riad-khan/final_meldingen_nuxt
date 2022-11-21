@@ -38,7 +38,7 @@
                       </p>
                     </div>
                     <div class="content_right">
-                      <p class="mb-5"><span class="place-name">{{ DateTime(item.timestamp) }}</span></p>
+                      <p class="mb-5"><span  class="place-name">{{ DateTime(item.timestamp) }} <span id="time_text">geleden</span></span></p>
                       <p class="place_right">
                    <span  v-if="item.prio === 1"
                           class="place-name prio spoed"
@@ -174,7 +174,12 @@ export default {
   },
   methods: {
     DateTime(value) {
-      return moment.unix(value).locale('nl').fromNow()
+    let date =  moment.unix(value).locale('nl').fromNow();
+    let words = date.split(" ");
+
+   let finalTime = words[0]+ " "+words[1];
+   return finalTime;
+   
     },
     getMoreMeldingen(page) {
       this.loading = true;
@@ -275,7 +280,7 @@ export default {
 }
 @media (max-width: 767px) {
   .news-content .content_right {
-    text-align: left;
+    /* text-align: left; */
   }
   .news-item img.news-icon {
     right: auto;
@@ -307,6 +312,12 @@ export default {
   section.news-overview-sec {
     padding-top: 15px;
 }
+}
+
+@media (max-width: 480px) {
+    #time_text {
+       display: none;
+    }
 }
 
 </style>
