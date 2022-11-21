@@ -17,12 +17,15 @@ export default defineNuxtConfig({
     },
     app: {
         head: {
-          viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0', 
-          meta: [
-            { name: 'robots', content: 'noindex' }
-          ],
+            link: [
+                { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+             ],
+            viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0',
+            meta: [
+                { name: 'robots', content: 'noindex' }
+            ],
         }
-      },
+    },
 
     css: [
 
