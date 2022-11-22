@@ -37,9 +37,9 @@
                           <nuxt-link style="color:#669E97"
                             :to="'/' + item.provincie_url.toLowerCase() + '/' + item.stad_url.toLowerCase()">{{ item.stad }}
                           </nuxt-link>
-                        </span>,
-                        <span class="place-name ">
-                          {{ item.provincie }}</span>
+                        </span>
+                        <span class="place-name city">
+                          ,{{ item.provincie }}</span>
                       </p>
                     </div>
                     <div class="content_right">
@@ -230,9 +230,11 @@ export default {
   color: white;
   bottom: 14px;
   font-size: 14px;
-  padding: 3px 5px;
+  padding: 3px 6px;
   border-radius: 4px;
   text-align: center;
+  float: right;
+  line-height: 1.1;
 }
 
 .spoed {
@@ -287,10 +289,6 @@ export default {
   border-left: 1.5px solid #669e97
 }
 
-.time {
-  font-size: 14px !important;
-}
-
 @media (min-width: 768px) and (max-width: 1024px) {
   .prio {
     display: inline-block;
@@ -298,23 +296,33 @@ export default {
 }
 
 @media (max-width: 767px) {
-  .news-item .news-content.d-flex {
-    display: block !important;
+  .news-content .content_right {
+    /* text-align: left; */
   }
-
 
   .news-item img.news-icon {
     right: auto;
     opacity: 1;
-    left: 20px;
+    left: 15px;
     width: 20px;
     object-fit: cover;
     margin-top: 1px;
+    top: 15px;
   }
 
   .news-content h4 {
-    padding-left: 30px;
-    font-size: 18px;
+    padding-left: 25px;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .content_right p.mb-5 span.place-name {
+    font-size: 12px;
+  }
+
+  .prio {
+    font-size: 12px;
+    padding: 3px 5px;
   }
 
   .content_right p.mb-5 {
@@ -324,10 +332,17 @@ export default {
   .news_list .acard {
     border-left: 0px solid #D8AF3B;
   }
+
+  section.news-overview-sec {
+    padding-top: 15px;
+  }
 }
 
 @media (max-width: 480px) {
   #time_text {
+    display: none;
+  }
+  .city{
     display: none;
   }
 

@@ -38,7 +38,7 @@
                             :to="item.provincie_url.toLowerCase() + '/' + item.stad_url.toLowerCase()">{{ item.stad }}
                           </nuxt-link>
                         </span>
-                        <span class="place-name">
+                        <span class="place-name city">
                           ,{{ item.provincie }}</span>
                       </p>
                     </div>
@@ -333,6 +333,9 @@ export default {
 
 @media (max-width: 480px) {
   #time_text {
+    display: none;
+  }
+  .city{
     display: none;
   }
 

@@ -33,14 +33,7 @@ export default defineNuxtConfig({
         '@/assets/css/style.css',
         '@/assets/css/responsive.css'
     ],
-    modules :[
-        '@nuxtjs/sitemap'
-    ],
-    sitemap: {
-        hostname: 'http://localhost:3000',
-        path:'/sitemap.xml',
-        cacheTime: 1000 * 60 *15
-      },
+   
 
 
 

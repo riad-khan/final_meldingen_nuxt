@@ -231,35 +231,35 @@
 
 
                     <div style=" margin-bottom: 2px;" ref="emergency_slider" id="slider" class="loaded">
-                      
+
                       <div class="wrapper">
 
-                      <div ref="emergency_buttons" id="emergency_options_button" class="slides chart-btn">
+                        <div ref="emergency_buttons" id="emergency_options_button" class="slides chart-btn">
 
 
-                        <button v-for="(item, i) in emergencyBtn" :key="i" :id="item.dienst"
-                          @click="emergencySelect(item.dienst, i)"
-                          :class="index === i ? 'emergency button active' : 'emergency button'" :value="item.dienst"
-                          style="margin-left: 2px;margin-top: 3px;">
+                          <button v-for="(item, i) in dienstBtn" :key="i" :id="item.dienst"
+                            @click="emergencySelect(item.dienst, i)"
+                            :class="index === i ? 'emergency button active' : 'emergency button'" :value="item.dienst"
+                            style="margin-left: 2px;margin-top: 3px;">
 
-                          <span style="vertical-align: inherit;" class="provincie_name">{{ titleCase(item.dienst) }}
-                            <span style="margin-left: 2px;display:block;span-size: 18px;" :id="'provincie' + i">{{
-                                item.total
-                            }}</span>
-                          </span>
-
-
-
-                        </button>
+                            <span style="vertical-align: inherit;" class="provincie_name">{{ titleCase(item.dienst) }}
+                              <span style="margin-left: 2px;display:block;span-size: 18px;" :id="'emergency' + i">{{
+                                  item.total
+                              }}</span>
+                            </span>
 
 
-                      </div>
+
+                          </button>
+
+
+                        </div>
 
                       </div>
 
                       <a id="prev" ref="emergency_prevs" class="control prev emergency_next" :style="image"></a>
                       <a id="next" ref="emergency_nexts" class="control next emergency_next" :style="image"></a>
-                      <div ref="emergency_slide_dot" class="dots"></div>
+                      <div ref="emergency_slide_dot" class="emergency_dots"></div>
                     </div><br>
 
                     <div style="height: 300px" ref="emergency_canvas" class="">
@@ -293,6 +293,7 @@ onMounted(() => {
 
 <script>
 import { provincieValue } from "../../provincieChart";
+import { dienstValue } from '../../dienst';
 
 
 let apiUrl;
@@ -309,9 +310,10 @@ export default {
   components: {},
   data() {
     return {
-      checkLoading :false,
+      checkLoading: false,
       image: { backgroundImage: `url(${rightIcon})` },
       provincieBtn: provincieValue,
+      dienstBtn: dienstValue,
       slide: null,
       myChart1: null,
       myChart2: null,
@@ -707,6 +709,7 @@ export default {
   mounted() {
 
     this.RegioChange('all');
+    
 
     var slider = this.$refs.slider,
       sliderItems = this.$refs.provincie_buttons,
@@ -714,11 +717,11 @@ export default {
       next = this.$refs.nexts,
       dot = this.$refs.slide_dot;
 
-      var emergency_slider = this.$refs.emergency_slider,
-          emergencySliderItems = this.$refs.emergency_buttons,
-          emergencyPrev = this.$refs.emergency_prevs,
-          emergencyNext = this.$refs.emergency_nexts,
-          emergencyDots = this.$refs.emergency_slide_dot;
+    var emergency_slider = this.$refs.emergency_slider,
+      emergencySliderItems = this.$refs.emergency_buttons,
+      emergencyPrev = this.$refs.emergency_prevs,
+      emergencyNext = this.$refs.emergency_nexts,
+      emergencyDots = this.$refs.emergency_slide_dot;
 
 
     function provienci(wrapper, items, prev, next) {
@@ -870,44 +873,167 @@ export default {
     };
 
 
-    
-      console.log(emergencySliderItems);
-   
-   
-
-//     function emergencySlider(wrapper, items, prev, next) {
-
-// var posX1 = 0,
-//   posX2 = 0,
-//   posInitial,
-//   posFinal,
-//   threshold = 100,
-//   slides = items.getElementsByClassName('emergency'),
-//   slidesLength = slides.length,
-//   slideSize = 132,
-//   index = 0,
-//   allowShift = true;
 
 
 
-// console.log(items);
+
+
+    function emergencySlider(wrapper, items, prev, next) {
+
+      var posX1 = 0,
+        posX2 = 0,
+        posInitial,
+        posFinal,
+        threshold = 100,
+        slides = items.getElementsByClassName('emergency'),
+        slidesLength = slides.length,
+        slideSize = 132,
+        index = 0,
+        allowShift = true;
+
+      wrapper.classList.add('loaded');
+
+      for (var j = 0; j < slidesLength; j++) {
+        var dotItem = document.createElement('i');
+        dotItem.dataset.id = j;
+
+
+        dot.appendChild(dotItem);
+
+
+      }
+
+      function appendAfter(n, original, appendTo) {
+        for (var i = 0; i < n; i++) {
+          var clone = original[i].cloneNode(true);
+          appendTo.appendChild(clone);
+        }
+
+      }
+      appendAfter(5, slides, items);
 
 
 
-// };
-   
+      // Click events
+      prev.addEventListener('click', function () { shiftSlide(-1) });
+      next.addEventListener('click', function () { shiftSlide(1) });
 
-  
-     
+      // Transition events
+      items.addEventListener('transitionend', checkIndex);
 
-    
+      function dragStart(e) {
+        e = e || window.event;
+        e.preventDefault();
+        posInitial = items.offsetLeft;
+
+        if (e.type == 'touchstart') {
+          posX1 = e.touches[0].clientX;
+        } else {
+          posX1 = e.clientX;
+          document.onmouseup = dragEnd;
+          document.onmousemove = dragAction;
+        }
+      }
+
+      function dragAction(e) {
+        e = e || window.event;
+
+        console.log('frim dragAction')
+
+        if (e.type == 'touchmove') {
+          posX2 = posX1 - e.touches[0].clientX;
+          posX1 = e.touches[0].clientX;
+        } else {
+          posX2 = posX1 - e.clientX;
+          posX1 = e.clientX;
+        }
+        items.style.left = (items.offsetLeft - posX2) + "px";
+      }
+
+      function dragEnd(e) {
+        posFinal = items.offsetLeft;
+        if (posFinal - posInitial < -threshold) {
+          shiftSlide(1, 'drag');
+        } else if (posFinal - posInitial > threshold) {
+          shiftSlide(-1, 'drag');
+        } else {
+          items.style.left = (posInitial) + "px";
+        }
+
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+
+      function shiftSlide(dir, action) {
+
+        items.classList.add('shifting');
+
+        if (allowShift) {
+          if (!action) { posInitial = items.offsetLeft; }
+
+          if (dir == 1) {
+            items.style.left = (posInitial - slideSize) + "px";
+            index++;
+          } else if (dir == -1) {
+            items.style.left = (posInitial + slideSize) + "px";
+            index--;
+          }
+
+        };
+
+        allowShift = false;
+      }
+
+      function checkIndex() {
+        items.classList.remove('shifting');
+
+        if (index == -1) {
+          items.style.left = -(slidesLength * slideSize) + "px";
+          index = slidesLength - 1;
+        }
+
+        if (index == slidesLength) {
+          items.style.left = -(1 * slideSize) + "px";
+          index = 0;
+        }
+        deleteDots();
+        dot.children[index].classList.add('active');
+        allowShift = true;
+      }
+
+      dot.addEventListener('click', function (e) {
+        if (e.target.tagName.toLowerCase() !== 'i') return;
+        checkDots(e);
+      });
+      function checkDots(e) {
+        items.classList.add('shifting');
+        deleteDots();
+        e.target.classList.add('active');
+        items.style.left = -(1 * (slideSize * e.target.dataset.id)) + "px";
+        index = e.target.dataset.id;
+      }
+
+      function deleteDots(e) {
+        var dotElements = document.querySelectorAll('.emergency_dots i');
+        for (var i = 0; i < dotElements.length; i++) {
+          dotElements[i].classList.remove('active');
+        }
+      }
 
 
 
+
+
+
+    };
 
 
     provienci(slider, sliderItems, prev, next);
-   // emergencySlider(emergency_slider, emergencySliderItems, emergencyPrev, emergencyNext);
+
+    if (window.innerWidth < 430) {
+      emergencySlider(emergency_slider, emergencySliderItems, emergencyPrev, emergencyNext);
+}
+    
 
     document.body.addEventListener('click', (e) => {
       let customSelect = document.getElementsByClassName('custom-select sources')[0];
@@ -923,7 +1049,7 @@ export default {
   ,
   methods: {
     titleCase(val) {
-      let value  = val.replace(/-/g, ' ');
+      let value = val.replace(/-/g, ' ');
       let upperText = value.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
       return upperText
     },
@@ -1245,13 +1371,28 @@ export default {
       this.$refs.emergency_canvas.classList.value = "spin";
       axios.get(`${apiUrl}/charts/emergency/${hour}/${emergency}`)
         .then((response) => {
-           
+
           this.config6.data.labels = [];
           this.config6.data.datasets[0].data = [];
           for (let i = 0; i < response.data.chart.length; i++) {
             this.config6.data.labels.push((response.data.chart[i].time.length == 1 ? '0' : '') + response.data.chart[i].time);
             this.config6.data.datasets[0].data.push(response.data.chart[i].calculated);
           }
+
+
+          response.data.buttons.map((item, i) => {
+            const data = this.dienstBtn.filter(el => el.dienst === item.dienst);
+
+            for (let i = 0; i < data.length; i++) {
+              if (data[i].dienst === item.dienst) {
+                data[i].total = item.total;    
+                
+                
+              }
+            }
+          })
+
+          
 
           this.emergencyBtn = response.data.buttons
 
@@ -1275,6 +1416,9 @@ div#slider {
   position: relative;
 }
 
+.emergency_next{
+  display: none;
+}
 .wrapper {
   overflow: hidden;
   position: relative;
@@ -1282,9 +1426,10 @@ div#slider {
   z-index: 1;
 }
 
-#stats{
+#stats {
   overflow: hidden;
 }
+
 .slides {
   display: flex;
   position: relative;
@@ -1471,7 +1616,7 @@ div#slider {
     font-size: 20px;
     margin-bottom: 18px;
   }
- 
+
   .chart_page_dropdown .custom-select-trigger {
     font-size: 20px;
   }
@@ -1480,6 +1625,9 @@ div#slider {
     font-size: 20px;
   }
 }
-
-
+@media(max-width : 420px){
+  .emergency_next{
+    display:block
+  }
+}
 </style>
