@@ -335,6 +335,9 @@ export default {
   #time_text {
     display: none;
   }
+  span.place-name.city {
+    display: none;
+}
 
   .news-item .news-content.d-flex {
     display: block !important;

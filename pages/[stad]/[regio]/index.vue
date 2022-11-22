@@ -302,9 +302,6 @@ export default {
     display: block !important;
   }
 
-  .news-content .content_right {
-   
-  }
 
   .news-item img.news-icon {
     right: auto;
