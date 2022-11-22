@@ -57,9 +57,6 @@
 
                 <!--                News card end-->
 
-                <div class="load-more text-center offset-2 mobile-only">
-                  <button class="button btn-tranparent">Bekijk alle artikelen</button>
-                </div>
 
                 
 

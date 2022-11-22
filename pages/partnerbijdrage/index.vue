@@ -21,12 +21,10 @@
               <div class="col-md-4" v-for="item in partnerBlogs" :key="item.id">
                 <div class="card other-news box-shadow border-radius-8">
                   <div class="card-thumb">
-                    <img :src="backend+'/' + item.images" alt="nieuws foto">
+                    <img class="img-cover" :src="backend+'/' + item.images" alt="nieuws foto">
 
                   </div>
                   <div class="card-content">
-
-
                     <h6 class="text-limit-2"><nuxt-link :to="'/partnerbijdrage/' + item.slug + '/'+ item.id">{{item.blog_title}}</nuxt-link></h6>
                     <p>{{item.description.substr(0,100)+"..."}}</p>
                     <div class="meta">
@@ -93,17 +91,18 @@ export default {
 </script>
 
 <style scoped>
-.card-thumb img {
-    height: 200px;
+.img-cover{
+  height: 192px;
+  object-fit: cover;
 }
-@media (max-width: 767px) {
-  .col-md-6 .card-content, .col-md-12 .card-content {
+.other-news .card-content {
     padding: 0;
     padding-top: 10px;
-}	
-.card-content {
-    padding-top: 10px;
 }
+.other-news .card-content h6 {
+    font-size: 20px;
 }
-
+.meta ul.inline-list a svg path {
+    fill: #669E97;
+}
 </style>

@@ -28,8 +28,6 @@
         
                 </div>
                 <div class="row">
-                  <div class="col-md-12">
-        
                     <div class="col-md-4" v-for="blog in blogs" :key="blog.id" >
                       <div class="card other-news box-shadow border-radius-8">
                         <div class="card-thumb">
@@ -44,7 +42,7 @@
                           <div class="meta">
                             <ul class="inline-list">
                               <li><nuxt-link :to="'/blogs/' +blog.slug + '/'+ blog.id"><span class="link___fXYli">Lees meer
-                                                    <svg width="6" height="10" viewBox="0 0 6 10"><path d="M.348 1.152a.522.522 0 00-.012.71L3.25 5 .336 8.139a.52.52 0 00.012.709l.804.804a.467.467 0 00.686-.028l3.824-4.248a.572.572 0 000-.752L1.838.376a.472.472 0 00-.686-.028l-.804.804z" fill="#FB4A3F" fill-rule="evenodd"></path></svg></span></nuxt-link></li>
+                                                    <svg width="6" height="8" viewBox="0 0 6 10"><path d="M.348 1.152a.522.522 0 00-.012.71L3.25 5 .336 8.139a.52.52 0 00.012.709l.804.804a.467.467 0 00.686-.028l3.824-4.248a.572.572 0 000-.752L1.838.376a.472.472 0 00-.686-.028l-.804.804z" fill="#FB4A3F" fill-rule="evenodd"></path></svg></span></nuxt-link></li>
         
         
         
@@ -59,10 +57,6 @@
         
                       </div>
                     </div>
-        
-        
-        
-                  </div>
                 </div>
         
         
@@ -109,5 +103,14 @@ onMounted(() => {
   height: 192px;
   object-fit: cover;
 }
-
+.other-news .card-content {
+    padding: 0;
+    padding-top: 10px;
+}
+.other-news .card-content h6 {
+    font-size: 20px;
+}
+.meta ul.inline-list a svg path {
+    fill: #669E97;
+}
 </style>

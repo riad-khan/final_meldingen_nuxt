@@ -31,7 +31,7 @@
                   <div class="card-content card-img-overlay">
                     <div class="btn-group">
                     </div>
-                    <h1 class="text-limit-2 mt-10 m-mt-0 t-mt-0">{{ blogDetails.blog_title }}</h1>
+                    <h6 class="text-limit-2 mt-10 m-mt-0 t-mt-0">{{ blogDetails.blog_title }}</h6>
                   </div>
                 </div>
                 <div class="content">
@@ -214,6 +214,12 @@ export default {
   top: 0;
   opacity: .3;
   border-radius: 4px;
+}
+.news-details .card-content {
+    padding: 15px;
+}
+.news-details.card .card-content.card-img-overlay h6{
+    font-size: 24px;
 }
 
 @media (max-width: 767px) {

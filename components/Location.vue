@@ -145,4 +145,12 @@ export default {
   position: absolute;
   z-index: 999;
 }
+@media (max-width: 767px) {
+  .call-to-action .row.call-to-row {
+    margin-left: 0px;
+    margin-right: 0;
+} 
+}
+
+
 </style>
