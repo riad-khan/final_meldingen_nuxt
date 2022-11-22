@@ -358,4 +358,10 @@ export default {
     max-width: 100%;
     min-width: 200px;
 }
+@media (max-width: 767px){
+  .news-thumb img.img-thumb {
+    min-width: 100px !important;
+    height: 100px;
+}  
+}
 </style>
