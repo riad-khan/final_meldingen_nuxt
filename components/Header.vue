@@ -56,7 +56,7 @@
               <button class="openNav box-shadow" id="toggle" @click="openNav"><img
                   src="@/assets/img/icon-hamburger.svg"></button>
               -->
-              <div class="menu-btn" @click="openNav">
+              <div ref="menu_btns" class="menu-btn" @click="openNav">
                 <div class="menu-btn__burger"></div>
               </div>
               <ul>
@@ -110,7 +110,7 @@ export default {
   },
 
   mounted() {
-    const menuBtn = document.querySelector('.menu-btn');
+    const menuBtn = this.$refs.menu_btns;
     menuBtn.addEventListener('click', () => {
       if (!this.isOpen) {
         menuBtn.classList.add('open');
