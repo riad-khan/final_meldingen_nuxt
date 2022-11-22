@@ -1,7 +1,7 @@
 <template>
   <section>
     <Header />
-    <section class="page-content details-page chat_page sec-padding">
+    <section id="stats" class="page-content details-page chat_page sec-padding">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
@@ -228,9 +228,13 @@
                       </select>
                     </p>
 
-                    <div style=" margin-bottom: 2px;">
 
-                      <div id="emergency_options_button" class="chart-btn">
+
+                    <div style=" margin-bottom: 2px;" ref="emergency_slider" id="slider" class="loaded">
+                      
+                      <div class="wrapper">
+
+                      <div ref="emergency_buttons" id="emergency_options_button" class="slides chart-btn">
 
 
                         <button v-for="(item, i) in emergencyBtn" :key="i" :id="item.dienst"
@@ -251,13 +255,11 @@
 
                       </div>
 
-                      <a id="prev" class="control prev"></a>
-                      <a id="next" class="control next"></a>
-                      <div class="dots"><i data-id="0" class=""></i><i data-id="1" class=""></i><i data-id="2"
-                          class=""></i><i data-id="3" class=""></i><i data-id="4" class="active"></i><i data-id="5"
-                          class=""></i><i data-id="6" class=""></i><i data-id="7" class=""></i><i data-id="8"
-                          class=""></i><i data-id="9" class=""></i><i data-id="10" class=""></i><i data-id="11"
-                          class=""></i></div>
+                      </div>
+
+                      <a id="prev" ref="emergency_prevs" class="control prev emergency_next" :style="image"></a>
+                      <a id="next" ref="emergency_nexts" class="control next emergency_next" :style="image"></a>
+                      <div ref="emergency_slide_dot" class="dots"></div>
                     </div><br>
 
                     <div style="height: 300px" ref="emergency_canvas" class="">
@@ -307,6 +309,7 @@ export default {
   components: {},
   data() {
     return {
+      checkLoading :false,
       image: { backgroundImage: `url(${rightIcon})` },
       provincieBtn: provincieValue,
       slide: null,
@@ -711,6 +714,13 @@ export default {
       next = this.$refs.nexts,
       dot = this.$refs.slide_dot;
 
+      var emergency_slider = this.$refs.emergency_slider,
+          emergencySliderItems = this.$refs.emergency_buttons,
+          emergencyPrev = this.$refs.emergency_prevs,
+          emergencyNext = this.$refs.emergency_nexts,
+          emergencyDots = this.$refs.emergency_slide_dot;
+
+
     function provienci(wrapper, items, prev, next) {
 
       var posX1 = 0,
@@ -857,8 +867,47 @@ export default {
         }
       }
 
-    }
+    };
+
+
+    
+      console.log(emergencySliderItems);
+   
+   
+
+//     function emergencySlider(wrapper, items, prev, next) {
+
+// var posX1 = 0,
+//   posX2 = 0,
+//   posInitial,
+//   posFinal,
+//   threshold = 100,
+//   slides = items.getElementsByClassName('emergency'),
+//   slidesLength = slides.length,
+//   slideSize = 132,
+//   index = 0,
+//   allowShift = true;
+
+
+
+// console.log(items);
+
+
+
+// };
+   
+
+  
+     
+
+    
+
+
+
+
+
     provienci(slider, sliderItems, prev, next);
+   // emergencySlider(emergency_slider, emergencySliderItems, emergencyPrev, emergencyNext);
 
     document.body.addEventListener('click', (e) => {
       let customSelect = document.getElementsByClassName('custom-select sources')[0];
@@ -1192,10 +1241,11 @@ export default {
 
 
     fetchEmergencyMeldingen(hour, emergency) {
+      this.checkLoading = true;
       this.$refs.emergency_canvas.classList.value = "spin";
       axios.get(`${apiUrl}/charts/emergency/${hour}/${emergency}`)
         .then((response) => {
-
+           
           this.config6.data.labels = [];
           this.config6.data.datasets[0].data = [];
           for (let i = 0; i < response.data.chart.length; i++) {
@@ -1207,7 +1257,7 @@ export default {
 
           this.EmergencyChartRender();
           this.$refs.emergency_canvas.classList.value = "";
-
+          this.checkLoading = false;
 
         })
 
@@ -1232,6 +1282,9 @@ div#slider {
   z-index: 1;
 }
 
+#stats{
+  overflow: hidden;
+}
 .slides {
   display: flex;
   position: relative;
@@ -1412,12 +1465,13 @@ div#slider {
   border-radius: 50px;
 }
 
+
 @media (max-width: 767px) {
   .chart_page_dropdown h1 {
     font-size: 20px;
     margin-bottom: 18px;
   }
-
+ 
   .chart_page_dropdown .custom-select-trigger {
     font-size: 20px;
   }
@@ -1426,4 +1480,6 @@ div#slider {
     font-size: 20px;
   }
 }
+
+
 </style>

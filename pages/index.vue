@@ -37,9 +37,9 @@
                           <nuxt-link style="color:#669E97"
                             :to="item.provincie_url.toLowerCase() + '/' + item.stad_url.toLowerCase()">{{ item.stad }}
                           </nuxt-link>
-                        </span>,
-                        <span class="place-name city">
-                          {{ item.provincie }}</span>
+                        </span>
+                        <span class="place-name">
+                          ,{{ item.provincie }}</span>
                       </p>
                     </div>
                     <div class="content_right">
@@ -306,7 +306,7 @@ export default {
   .news-content h4 {
     padding-left: 25px;
     font-size: 16px;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
   }
 
   .content_right p.mb-5 span.place-name {
@@ -335,9 +335,6 @@ export default {
   #time_text {
     display: none;
   }
-  span.place-name.city {
-    display: none;
-}
 
   .news-item .news-content.d-flex {
     display: block !important;
