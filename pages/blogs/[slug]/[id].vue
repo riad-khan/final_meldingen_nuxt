@@ -185,9 +185,7 @@ export default {
 .news-details-page .breadcrumbs{
     margin-bottom: 20px;
 }
-.card-thumb img {
-    height: 400px;
-}
+
 .sidebar .card-thumb img {
     border-radius: 8px 8px 0px 0px;
     display: block;
