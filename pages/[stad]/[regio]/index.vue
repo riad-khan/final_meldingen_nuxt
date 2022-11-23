@@ -27,7 +27,7 @@
                     <div class="content_left">
                       <h4>
                         <router-link
-                          :to="'/' + item.provincie.toLowerCase() + '/' + item.stad_url.toLowerCase() + '/' + item.regio_url.toLowerCase() + '/' + item.categorie_url.toLowerCase() + '-' + item.id">
+                          :to="'/' + item.provincie.toLowerCase() + '/' + item.stad_url.toLowerCase() + '/' + item.straat_url.toLowerCase() + '/' + item.categorie_url.toLowerCase() + '-' + item.id">
                           {{ item.categorie }}
                         </router-link>
                       </h4>
@@ -35,7 +35,9 @@
                         <span class="place-name"> {{ item.straat }}</span> in <span class="place-title"
                           style="color: #669e97 !important;">
                           <nuxt-link style="color:#669E97"
-                            :to="'/' + item.provincie_url.toLowerCase() + '/' + item.stad_url.toLowerCase()">{{ item.stad }}
+                            :to="'/' + item.provincie_url.toLowerCase() + '/' + item.stad_url.toLowerCase()">{{
+                                item.stad
+                            }}
                           </nuxt-link>
                         </span>
                         <span class="place-name city">
@@ -100,59 +102,87 @@ backend = config.public.backend;
 
 const { data: melding, pending } = await useAsyncData('filter_meldingen', () => $fetch(`${apiUrl}/meldingen/filter-meldingen/${route.params.regio}/0`));
 const { data: media } = await useAsyncData('media', () => $fetch(`${apiUrl}/media/home`));
+const { data: seo } = await useAsyncData('home_seo', () => $fetch(`${apiUrl}/seo-data/home`));
 meldingenArray = melding;
 const regio = route.params.regio
-
+nextReq = true;
 onMounted(() => {
   refreshNuxtData('filter_meldingen');
   refreshNuxtData('home_seo');
   refreshNuxtData('media');
 
 })
+const title = (stad) => {
+  let regio = stad.replace(/-/g, ' ');
+  let upperText = regio.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+  let addHyphen = upperText.replace(' ', '-');
+
+  return addHyphen;
+}
+
+console.log(melding);
 
 useHead({
-  titleTemplate: `112 meldingen en p2000 uit ${route.params.regio.replace(/-/g, ' ')}, | 112 ${route.params.regio.replace(/-/g, ' ')},p2000 ${route.params.regio.replace(/-/g, ' ')}`,
+  titleTemplate: `112 meldingen en p2000 uit ${title(route.params.regio)}, ${title(route.params.stad)} | 112 ${route.params.regio.replace(/-/g, ' ')} & p2000 ${route.params.regio.replace(/-/g, ' ')}`,
   // script: [{children: `${seo.value.structured_data}`}],
   meta: [
     {
-      name: 'description', content: `Overzicht 112 Meldingen uit ${route.params.regio.replace(/-/g, ' ')} : Nu recente 112 en P2000 meldingen uit
-    ${route.params.regio.replace(/-/g, ' ')} afkomstig van de brandweer, ambulance, politie en andere 112
-    `},
+      name: 'description', content: `${seo.value.seo_meta}`
+    },
 
-    {
-      name: 'keywords', content: `112 meldingen ${route.params.regio.replace(/-/g, ' ')},112 ${route.params.regio.replace(/-/g, ' ')},p2000 ${route.params.regio.replace(/-/g, ' ')},
-    meldingen,p2000 meldingen, politie meldingen, brandweer meldingen, ambulance meldingen
-    `},
+    { name: 'keywords', content: `${seo.value.seo_keywords}` },
 
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     {
       property: "og:title",
-      content: `112 meldingen en p2000 uit ${route.params.regio.replace(/-/g, ' ')}, | 112 ${route.params.regio.replace(/-/g, ' ')},p2000 ${route.params.regio.replace(/-/g, ' ')}`,
+      content: `${seo.value.title}`,
     },
     {
       property: "og:description",
-      content: `Overzicht 112 Meldingen uit ${route.params.regio.replace(/-/g, ' ')} : Nu recente 112 en P2000 meldingen uit
-    ${route.params.regio.replace(/-/g, ' ')} afkomstig van de brandweer, ambulance, politie en andere 112
-    `
+      content: `${seo.value.seo_meta}`,
+    },
+    {
+      property: "og:image",
+      content: `https://i.imgur.com/P0xgWRX.jpg`,
+    },
+    {
+      property: "og:url",
+     
     },
     {
       property: "twitter:title",
-      content: `112 meldingen en p2000 uit ${route.params.regio.replace(/-/g, ' ')}, | 112 ${route.params.regio.replace(/-/g, ' ')},p2000 ${route.params.regio.replace(/-/g, ' ')}`,
+      content: `${seo.value.title}`,
     },
     {
       property: "twitter:description",
-      content: `Overzicht 112 Meldingen uit ${route.params.regio.replace(/-/g, ' ')} : Nu recente 112 en P2000 meldingen uit
-    ${route.params.regio.replace(/-/g, ' ')} afkomstig van de brandweer, ambulance, politie en andere 112
-    `
+      content: `${seo.value.seo_meta}`,
+    },
+    {
+      property: "twitter:image",
+      content: `https://i.imgur.com/P0xgWRX.jpg`,
+    },
+    {
+      property: "twitter:card",
+      content: `summary_large_image`,
+    },
+    {
+      property: "og:site_name",
+      content: `Meldingen.nl`,
+    },
+    {
+      property: "twitter:image:alt",
+      content: `${seo.value.title}`,
     },
 
 
   ],
-})
+});
+
+
 
 </script>
 
 <script>
+let nextReq;
 import moment from "moment/moment";
 import axios from "axios";
 import addImage from 'assets/img/add-img.jpg'
@@ -175,6 +205,7 @@ export default {
       increment: 1,
       region: '',
       isLoading: false,
+      nexReq: null,
 
 
     }
@@ -184,6 +215,8 @@ export default {
     const route = useRoute();
     this.region = route.params.regio
     this.meldingens = meldingenArray;
+    this.nexReq = nextReq
+
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll);
@@ -200,6 +233,9 @@ export default {
     },
     getMoreMeldingen(page) {
       const regio = this.$route.params.regio;
+      this.nexReq = false;
+
+
       this.isLoading = true;
       axios.get(`${apiUrl}/meldingen/filter-meldingen/` + regio + '/' + page)
         .then((response) => {
@@ -207,17 +243,31 @@ export default {
             this.meldingens.push(item)
             this.isLoading = false;
           })
+          this.nexReq = true;
+
         })
         .catch(error => {
           console.log(error)
           this.isLoading = false;
+          this.nexReq = true;
         })
 
     },
     handleScroll() {
+      const route = useRoute();
+
+
       if ((Math.round(window.scrollY) + window.innerHeight + 300) >= document.body.scrollHeight) {
 
-        this.getMoreMeldingen(this.increment++);
+        if (route.name == 'stad-regio') {
+
+          if (this.nexReq === true && this.meldingens.length < 500) {
+            this.getMoreMeldingen(this.increment++);
+          }
+
+
+
+        }
 
       }
 
@@ -342,44 +392,53 @@ export default {
   #time_text {
     display: none;
   }
-  .city{
+
+  .city {
     display: none;
   }
 
   .news-item .news-content.d-flex {
     display: block !important;
   }
+
   .news-content .content_right {
     position: absolute;
     right: 0;
     top: 0;
-}
-.news-content .content_left {
+  }
+
+  .news-content .content_left {
     max-width: 80%;
-}
+  }
 
 }
+
 @media (max-width: 320px) {
   .news-item {
     padding: 10px;
-}
-.news-item img.news-icon {
+  }
+
+  .news-item img.news-icon {
     left: 10px;
     top: 10px;
-}
-.news-content h4 {
+  }
+
+  .news-content h4 {
     font-size: 14px;
     margin-bottom: 0;
-}
-.news-content .content_left{
+  }
+
+  .news-content .content_left {
     max-width: 75%;
-}
-.prio {
+  }
+
+  .prio {
     font-size: 12px;
     padding: 2px 3px;
-}
-.news-content p{
+  }
+
+  .news-content p {
     font-size: 12px;
-}
+  }
 }
 </style>

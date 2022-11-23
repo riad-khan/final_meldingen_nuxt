@@ -34,6 +34,7 @@
                     <h6 class="text-limit-2 mt-10 m-mt-0 t-mt-0">{{ blogDetails.blog_title }}</h6>
                   </div>
                 </div>
+                <p>Foto: <a href="https://www.intervisualstudio.nl/" target="_blank" rel="nofollow">intervisualstudio.nl</a></p>
                 <div class="content">
                   <div class="meta">
                     <div class="row d-flex align-items-center meta-group">

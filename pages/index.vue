@@ -29,7 +29,7 @@
                     <div class="content_left">
                       <h4>
                         <router-link
-                          :to="'/' + item.provincie.toLowerCase() + '/' + item.stad_url.toLowerCase() + '/' + item.regio_url.toLowerCase() + '/' + item.categorie_url.toLowerCase() + '-' + item.id"
+                          :to="'/' + item.provincie.toLowerCase() + '/' + item.stad_url.toLowerCase() + '/' + item.straat_url.toLowerCase() + '/' + item.categorie_url.toLowerCase() + '-' + item.id"
                           class="meldingen_text">
                           {{ item.categorie }}
                         </router-link>
@@ -116,7 +116,47 @@ useHead({
   script: [{ children: `${seo.value.structured_data}` }],
   meta: [
     { name: 'description', content: `${seo.value.seo_meta}` },
-    { name: 'keywords', content: `${seo.value.seo_keywords}` }
+    { name: 'keywords', content: `${seo.value.seo_keywords}` },
+    {
+      property: "og:title",
+      content: `${seo.value.title}`,
+    },
+    {
+      property: "og:description",
+      content: `${seo.value.seo_meta}`,
+    },
+    {
+      property: "og:image",
+      content: `https://i.imgur.com/P0xgWRX.jpg`,
+    },
+    {
+      property: "og:url",
+     
+    },
+    {
+      property: "twitter:title",
+      content: `${seo.value.title}`,
+    },
+    {
+      property: "twitter:description",
+      content: `${seo.value.seo_meta}`,
+    },
+    {
+      property: "twitter:image",
+      content: `https://i.imgur.com/P0xgWRX.jpg`,
+    },
+    {
+      property: "twitter:card",
+      content: `summary_large_image`,
+    },
+    {
+      property: "og:site_name",
+      content: `Meldingen.nl`,
+    },
+    {
+      property: "twitter:image:alt",
+      content: `${seo.value.title}`,
+    },
   ],
 })
 meldingenArray = melding.value.data;
@@ -216,7 +256,7 @@ export default {
       const route = useRoute();
       if (route.name == 'index') {
         if ((Math.round(window.scrollY) + window.innerHeight + 300) >= document.body.scrollHeight) {
-          if (this.nexReq === true) {
+          if (this.nexReq === true && this.meldingens.length < 500) {
 
             this.getMoreMeldingen(this.increment++);
           }

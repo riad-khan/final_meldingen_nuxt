@@ -40,13 +40,17 @@
                 <div class="card-thumb">
                   <img :src="backend + newsDetails.details.image" alt="nieuws image" class="blog_thumb">
                 </div>
+                
                 <div class="card-content card-img-overlay">
                   <div class="btn-group">
                         <a  :class="'button btn-more bg-blue border-radius-8  '+ tag" v-for="(tag,i) in newsDetails.details.tags.split(',')" v-show="tag.length !==0 ">{{ tag }}</a>
                   </div>
                   <h6 class="text-limit-2 mt-10 m-mt-0 t-mt-0">{{ newsDetails.details.title }}</h6>
                 </div>
+                
               </div>
+              <p>Foto: <a href="https://www.intervisualstudio.nl/" target="_blank" rel="nofollow">intervisualstudio.nl</a></p>
+              
 
               <div class="content">
                 <div class="meta">
@@ -96,6 +100,8 @@
 
                         </div>
 
+                    
+
 
 
                       </div>
@@ -114,6 +120,7 @@
                 </div>
 
               </div>
+            
 
               <!--   comment Section-->
 
@@ -177,6 +184,14 @@
 
 
               </div>
+              <ul class="social dark-white white-dark desktop-only">
+                  <li class="label">Delen:</li>
+
+
+                  <li><ShareNetwork :title="newsDetails.details.title" network="facebook" :url="currentUrl"  ><span class="icon-facebook"><span class="path1"></span><span class="path2"></span></span></ShareNetwork></li>
+                  <li><ShareNetwork network="twitter" :title="newsDetails.details.title"  :url="currentUrl"  ><span class="icon-twitter"><span class="path1"></span><span class="path2"></span></span></ShareNetwork></li>
+                  
+                </ul>
 
             </div>
 
@@ -314,6 +329,7 @@ export default {
       loveEmpty,
       LoveFill,
       status: 0,
+      currentUrl:"",
 
 
     }
@@ -326,6 +342,7 @@ export default {
       let new_id = route.params.slug.replace(/[^0-9]/g, '');
       this.getComments(new_id, this.page);
 
+      this.currentUrl = window.location.href;
 
 
     }
@@ -488,6 +505,14 @@ export default {
 </script>
 
 <style scoped>
+
+ul.social.white-dark li a span[class*="icon-"], ul.social.white-dark li a span[class*="icon-"] .path1:before, ul.social.white-dark li a span[class*="icon-"] .path2:before {
+    font-size: 18px;
+}
+ul.social.white-dark li a {
+    padding: 0;
+    margin-right: 5px;
+}
 
 #comment-btn{
   background-color: white !important;

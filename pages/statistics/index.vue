@@ -14,7 +14,7 @@
                   <input type="hidden" v-model="selectedRegio" name="provincie" id="regio">
 
                   <div @click="(e) => openRegion(e)" id="open_regio" class="custom-select sources">
-                    <span id="regio_name" class="custom-select-trigger"> Selecteer provincie </span>
+                    <span id="regio_name" class="custom-select-trigger"> Nederland </span>
                     <div class="custom-options" @click="(e) => RegioChange(e)">
                       <span class="custom-option undefined" data-value=""></span>
                       <span class="custom-option undefined" :data-value="item.regio" v-for="(item, i) in regios">{{
@@ -24,7 +24,7 @@
                     </div>
                   </div>
                 </div>
-                <span class="arrow-down"><img src="http://localhost:3000/_nuxt/assets/img/angel-icon-down.svg"
+                <span class="arrow-down"><img src="@/assets/img/icon-angle-down.svg"
                     alt="" /></span>
               </div>
             </div>
@@ -1030,9 +1030,9 @@ export default {
 
     provienci(slider, sliderItems, prev, next);
 
-    if (window.innerWidth < 430) {
+  
       emergencySlider(emergency_slider, emergencySliderItems, emergencyPrev, emergencyNext);
-}
+
     
 
     document.body.addEventListener('click', (e) => {

@@ -10,7 +10,7 @@
             <ul class="inline-list">
               <li><nuxt-link to="/">Home</nuxt-link><span class="right-angel">></span></li>
               <li><nuxt-link :to="'/'+route.params.provincie.toLowerCase() ">{{meldingenDetails.details.provincie}}</nuxt-link><span class="right-angel">></span></li>
-              <li><nuxt-link :to="'/'+route.params.stad.toLowerCase()">{{meldingenDetails.details.stad}}</nuxt-link><span class="right-angel">></span></li>
+              <li><nuxt-link :to="'/'+route.params.provincie.toLowerCase()+'/'+route.params.stad.toLowerCase()">{{meldingenDetails.details.stad}}</nuxt-link><span class="right-angel">></span></li>
               <li >{{meldingenDetails.details.categorie}}</li>
             </ul>
           </div>
@@ -33,6 +33,14 @@
                 <p>Regio {{meldingenDetails.details.regio}} kreeg op  {{DateTime(meldingenDetails.details.timestamp, 'dddd DD MMMM')}} een melding via het p2000 netwerk. De {{meldingenDetails.details.dienst}} is met spoed uitgerukt naar de {{meldingenDetails.details.straat}} in {{meldingenDetails.details.stad}}</p>
 
 
+                <div class="google-map-sec">
+                  <iframe :src="'https://maps.google.com/maps?q='+meldingenDetails.details.straat+','+meldingenDetails.details.stad+'&t=&z=15&ie=UTF8&iwloc=&output=embed'" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <h2 class="content-heading" style="font-weight:700;font-size:22px;">Originele P2000 melding
+                </h2>
+                <p style="font-size:18px">{{meldingenDetails.details.p2000}}</p>
+
+                
                 <h3 class="weight-500 mt-30">Verzonden aan eenheden</h3>
 
                 <ul v-for="(item,i) in enheedens" class="inline-list list-gap-10 d-flex align-items-center" :key="i">
@@ -48,9 +56,7 @@
                   <li><a href="#" rel="nofollow">{{item.capcode}}</a>, </li>
                   <li>{{item.omschrijving}} </li>
                 </ul>
-                <div class="google-map-sec">
-                  <iframe :src="'https://maps.google.com/maps?q='+meldingenDetails.details.straat+','+meldingenDetails.details.stad+'&t=&z=15&ie=UTF8&iwloc=&output=embed'" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
+               
 
                 <ul class="social dark-white white-dark desktop-only">
                   <li class="label">Delen:</li>
@@ -58,7 +64,7 @@
 
                   <li><ShareNetwork network="facebook" :title="meldingenDetails.details.straat + 'in' + meldingenDetails.details.stad + '-' + meldingenDetails.details.categorie " :url="currentUrl" ><span class="icon-facebook"><span class="path1"></span><span class="path2"></span></span></ShareNetwork></li>
                   <li><ShareNetwork network="twitter" :title="meldingenDetails.details.straat + 'in' + meldingenDetails.details.stad + '-' + meldingenDetails.details.categorie "  :url="currentUrl" ><span class="icon-twitter"><span class="path1"></span><span class="path2"></span></span></ShareNetwork></li>
-                  <li><a href=""><span class="icon-Instagram"></span></a></li>
+                  
                 </ul>
 
               </div>
@@ -154,33 +160,80 @@ var id = route.params.category.replace(/[^0-9]/g,'');
 
 const {data: meldingenDetails, pending} = await useAsyncData('meldingen_details', () => $fetch(`${apiUrl}/meldingen/${id}`));
 const {data: enheedens} = await useLazyAsyncData('enheeden', () => $fetch(`${apiUrl}/meldingen/enheeden/${id}`));
-const {data: recentNews} = await useLazyAsyncData('recent_news', () => $fetch(`${apiUrl}/news/recent/news`))
+//const {data: recentNews} = await useLazyAsyncData('recent_news', () => $fetch(`${apiUrl}/news/recent/news`))
 const {data : ads} = await useAsyncData('ads',()=>$fetch(`${apiUrl}/media/meldingenDetails`));
+const { data: seo } = await useAsyncData('home_seo', () => $fetch(`${apiUrl}/seo-data/home`));
+const titleSlug =(slug)=>{
+  const text = slug.replace(/-/g," ");
+  var lastIndex = text.lastIndexOf(" ");
+  var lastRemoved =  text.substring(0, lastIndex);
+  let finalText = lastRemoved.charAt(0).toUpperCase() + lastRemoved.slice(1);
 
+  return finalText
+  
+}
+
+const title = (stad) => {
+  let regio = stad.replace(/-/g, ' ');
+  let upperText = regio.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+  let addHyphen = upperText.replace(' ', '-');
+
+  return addHyphen;
+}
+
+//route.params.category.replace(/-/g, ' ')
 
 useHead({
-  titleTemplate: `${route.params.category.replace(/-/g, ' ')} - ${route.params.stad.replace(/-/g, ' ')}, ${route.params.regio.replace(/-/g, ' ')} | 112 Meldingen op Meldingen.nl`,
+  titleTemplate: `${titleSlug(route.params.category)} - ${title(route.params.stad)}, ${title(route.params.regio)} | 112 Meldingen op Meldingen.nl`,
   meta: [
-    {name: 'description', content: `Regio ${meldingenDetails.value.regio} kreeg op  ${moment.unix(meldingenDetails.value.timestamp).locale('nl')} een melding via het p2000 netwerk. De ${meldingenDetails.value.dienst} is met spoed uitgerukt naar de ${meldingenDetails.value.straat} in ${meldingenDetails.value.stad}`},
-    {name: 'keywords', content: `112 meldingen ${meldingenDetails.value.regio},112 ${meldingenDetails.value.regio},p2000 ${meldingenDetails.value.regio},${meldingenDetails.value.straat},
-    meldingen,p2000 meldingen,politie meldingen,brandweer meldingen,ambulance meldingen`},
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    {
+      name: 'description', content: `${seo.value.seo_meta}`
+    },
+
+    { name: 'keywords', content: `${seo.value.seo_keywords}` },
+
     {
       property: "og:title",
-      content: `Regio ${meldingenDetails.value.regio} kreeg op  ${moment.unix(meldingenDetails.value.timestamp).locale('nl')} een melding via het p2000 netwerk. De ${meldingenDetails.value.dienst} is met spoed uitgerukt naar de ${meldingenDetails.value.straat} in ${meldingenDetails.value.stad}`,
+      content: `${seo.value.title}`,
     },
     {
       property: "og:description",
-      content: `Regio ${meldingenDetails.value.regio} kreeg op  ${moment.unix(meldingenDetails.value.timestamp).locale('nl')} een melding via het p2000 netwerk. De ${meldingenDetails.value.dienst} is met spoed uitgerukt naar de ${meldingenDetails.value.straat} in ${meldingenDetails.value.stad}`,
+      content: `${seo.value.seo_meta}`,
+    },
+    {
+      property: "og:image",
+      content: `https://i.imgur.com/P0xgWRX.jpg`,
+    },
+    {
+      property: "og:url",
+     
     },
     {
       property: "twitter:title",
-      content: `Regio ${meldingenDetails.value.regio} kreeg op  ${moment.unix(meldingenDetails.value.timestamp).locale('nl')} een melding via het p2000 netwerk. De ${meldingenDetails.value.dienst} is met spoed uitgerukt naar de ${meldingenDetails.value.straat} in ${meldingenDetails.value.stad}`,
+      content: `${seo.value.title}`,
     },
     {
       property: "twitter:description",
-      content: `Regio ${meldingenDetails.value.regio} kreeg op  ${moment.unix(meldingenDetails.value.timestamp).locale('nl')} een melding via het p2000 netwerk. De ${meldingenDetails.value.dienst} is met spoed uitgerukt naar de ${meldingenDetails.value.straat} in ${meldingenDetails.value.stad}`,
+      content: `${seo.value.seo_meta}`,
     },
+    {
+      property: "twitter:image",
+      content: `https://i.imgur.com/P0xgWRX.jpg`,
+    },
+    {
+      property: "twitter:card",
+      content: `summary_large_image`,
+    },
+    {
+      property: "og:site_name",
+      content: `Meldingen.nl`,
+    },
+    {
+      property: "twitter:image:alt",
+      content: `${seo.value.title}`,
+    },
+
+
   ],
 })
 
@@ -215,7 +268,7 @@ export default {
   },
   methods:{
     DateTime(value){
-      return moment.unix(value).format('MMMM Do YYYY');
+      return moment.unix(value).format('MMMM Do YYYY, hh:mm');
     },
     dateTime(value) {
 

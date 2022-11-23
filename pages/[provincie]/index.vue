@@ -27,7 +27,7 @@
                     <div class="content_left">
                       <h4>
                         <router-link
-                          :to="'/' + item.provincie.toLowerCase() + '/' + item.stad_url.toLowerCase() + '/' + item.regio_url.toLowerCase() + '/' + item.categorie_url.toLowerCase() + '-' + item.id">
+                          :to="'/' + item.provincie.toLowerCase() + '/' + item.stad_url.toLowerCase() + '/' + item.straat_url.toLowerCase() + '/' + item.categorie_url.toLowerCase() + '-' + item.id">
                           {{ item.categorie }}
                         </router-link>
                       </h4>
@@ -99,6 +99,7 @@ backend = config.public.backend;
 
 const { data: melding, pending } = await useAsyncData('filter_meldingen', () => $fetch(`${apiUrl}/meldingen/filter-meldingen/${route.params.provincie}/0`));
 const { data: media } = await useAsyncData('media', () => $fetch(`${apiUrl}/media/home`));
+const { data: seo } = await useAsyncData('home_seo', () => $fetch(`${apiUrl}/seo-data/home`));
 meldingenArray = melding;
 nextReq = true;
 
@@ -111,40 +112,63 @@ onMounted(() => {
 
 })
 
+const title = (stad) => {
+  let regio = stad.replace(/-/g, ' ');
+  let upperText = regio.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+  let addHyphen = upperText.replace(' ', '-');
+
+  return addHyphen;
+}
+
 useHead({
-  titleTemplate: `112 meldingen en p2000 uit ${route.params.provincie.replace(/-/g, ' ')}, | 112 ${route.params.provincie.replace(/-/g, ' ')},p2000 ${route.params.provincie.replace(/-/g, ' ')}`,
+  titleTemplate: `112 Meldingen uit ${title(route.params.provincie)}`,
   // script: [{children: `${seo.value.structured_data}`}],
   meta: [
     {
-      name: 'description', content: `Overzicht 112 Meldingen uit ${route.params.provincie.replace(/-/g, ' ')} : Nu recente 112 en P2000 meldingen uit
-    ${route.params.provincie.replace(/-/g, ' ')} afkomstig van de brandweer, ambulance, politie en andere 112
-    `},
+      name: 'description', content: `${seo.value.seo_meta}`
+    },
 
-    {
-      name: 'keywords', content: `112 meldingen ${route.params.provincie.replace(/-/g, ' ')},112 ${route.params.provincie.replace(/-/g, ' ')},p2000 ${route.params.provincie.replace(/-/g, ' ')},
-    meldingen,p2000 meldingen, politie meldingen, brandweer meldingen, ambulance meldingen
-    `},
+    { name: 'keywords', content: `${seo.value.seo_keywords}` },
 
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     {
       property: "og:title",
-      content: `112 meldingen en p2000 uit ${route.params.provincie.replace(/-/g, ' ')}, | 112 ${route.params.provincie.replace(/-/g, ' ')},p2000 ${route.params.provincie.replace(/-/g, ' ')}`,
+      content: `${seo.value.title}`,
     },
     {
       property: "og:description",
-      content: `Overzicht 112 Meldingen uit ${route.params.provincie.replace(/-/g, ' ')} : Nu recente 112 en P2000 meldingen uit
-    ${route.params.provincie.replace(/-/g, ' ')} afkomstig van de brandweer, ambulance, politie en andere 112
-    `
+      content: `${seo.value.seo_meta}`,
+    },
+    {
+      property: "og:image",
+      content: `https://i.imgur.com/P0xgWRX.jpg`,
+    },
+    {
+      property: "og:url",
+     
     },
     {
       property: "twitter:title",
-      content: `112 meldingen en p2000 uit ${route.params.provincie.replace(/-/g, ' ')}, | 112 ${route.params.provincie.replace(/-/g, ' ')},p2000 ${route.params.provincie.replace(/-/g, ' ')}`,
+      content: `${seo.value.title}`,
     },
     {
       property: "twitter:description",
-      content: `Overzicht 112 Meldingen uit ${route.params.provincie.replace(/-/g, ' ')} : Nu recente 112 en P2000 meldingen uit
-    ${route.params.provincie.replace(/-/g, ' ')} afkomstig van de brandweer, ambulance, politie en andere 112
-    `
+      content: `${seo.value.seo_meta}`,
+    },
+    {
+      property: "twitter:image",
+      content: `https://i.imgur.com/P0xgWRX.jpg`,
+    },
+    {
+      property: "twitter:card",
+      content: `summary_large_image`,
+    },
+    {
+      property: "og:site_name",
+      content: `Meldingen.nl`,
+    },
+    {
+      property: "twitter:image:alt",
+      content: `${seo.value.title}`,
     },
 
 
@@ -223,7 +247,7 @@ export default {
       const route = useRoute();
       if ((Math.round(window.scrollY) + window.innerHeight + 300) >= document.body.scrollHeight) {
         if (route.name == 'provincie') {
-          if (this.nexReq === true) {
+          if (this.nexReq === true && this.meldingens.length < 500) {
             this.getMoreMeldingen(this.$route.params.provincie, this.increment++)
           }
 
