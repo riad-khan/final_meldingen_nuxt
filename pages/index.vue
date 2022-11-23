@@ -7,7 +7,10 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2 desktop-only">
-            <div class="a_banner" v-if="media.ad1.length > 0" v-html="media.ad1[0].content">
+
+        
+            
+            <div class="a_banner" v-if=" media.ad1 && media.ad1.length > 0" v-html="media.ad1[0].content">
 
             </div>
           </div>
@@ -65,7 +68,7 @@
                 <div v-if="i % 7 === 5" class="card card-img">
 
 
-                  <div v-if="media.ad3.length > 0" v-html="media.ad3[0].content">
+                  <div v-if=" media.ad3 && media.ad3.length > 0" v-html="media.ad3[0].content">
 
                   </div>
                 </div>
@@ -78,7 +81,7 @@
           </div>
           <div class="col-md-2 desktop-only">
 
-            <div class="a_banner" v-if="media.ad2.length > 0" v-html="media.ad2[0].content">
+            <div class="a_banner" v-if=" media.ad2 && media.ad2.length > 0" v-html="media.ad2[0].content">
 
             </div>
           </div>
@@ -103,7 +106,7 @@ const { data: melding, pending } = await useFetch(`${apiUrl}/meldingen/scroll-mo
 
 const { data: seo } = await useAsyncData('home_seo', () => $fetch(`${apiUrl}/seo-data/home`));
 
-const { data: media } = await useAsyncData('media', () => $fetch(`${apiUrl}/media/home`));
+//const { data: media } = await useAsyncData('media', () => $fetch(`${apiUrl}/media/home`));
 
 nextReq = melding.value.nextReq;
 
@@ -150,7 +153,7 @@ export default {
         3: 'Geen spoed',
         4: 'Grote ingreep'
       },
-
+      media:[],
       nexReq: null,
       meldingens: [],
       loading: false,
@@ -159,18 +162,27 @@ export default {
       increment: 1,
     }
   },
+  beforeCreate(){
+    axios.get(`${apiUrl}/media/home`)
+        .then((response) => {
+        console.log(response.data);
+          this.media = response.data
+        })
+  },
   created() {
     this.meldingens = meldingenArray;
-    this.nexReq = nextReq
+    this.nexReq = nextReq;
+   
+      
+    
+    
 
   },
   mounted() {
-
-
-
     window.addEventListener('scroll', this.handleScroll)
   },
   methods: {
+    
     DateTime(value) {
       let date = moment.unix(value).locale('nl').fromNow();
       let words = date.split(" ");
