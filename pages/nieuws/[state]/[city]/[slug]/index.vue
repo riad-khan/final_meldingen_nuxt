@@ -52,7 +52,7 @@
                 <div class="meta">
 
                   <div class="row d-flex align-items-center meta-group">
-                    <div class="col-md-8 col-lg-6 col-xs-6">
+                    <div class="col-md-8 col-lg-6 col-xs-8">
 
                       <ul class="inline-list">
                         <li><span class="icon-clock"></span> {{ dateTime(newsDetails.details.timestamp) }} in <span
@@ -68,7 +68,7 @@
 
                     </div>
 
-                    <div class="col-md-4 col-lg-3 col-xs-6">
+                    <div class="col-md-4 col-lg-3 col-xs-4">
                       <div class="reacties d-flex align-items-center text-right">
                         <div class="heart-icon-area">
 
@@ -163,6 +163,7 @@
                     </h2>
                     <p>{{ item.comments }}</p>
                   </div>
+                  
                   <div class="load-more  text-center">
 
                     <button v-if="totalComments.total !== comments.length" class="button btn-sumit btn-full mt-10"

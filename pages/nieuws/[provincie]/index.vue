@@ -55,10 +55,6 @@
 
                 <!--                News card end-->
 
-                <div class="load-more text-center offset-2 mobile-only">
-                  <button class="button btn-tranparent">Bekijk alle artikelen</button>
-                </div>
-
                 <div class="card card-img" v-if="media.ad1.length > 0" v-html="media.ad1[0].content">
                  
                 </div>
@@ -318,7 +314,11 @@ export default {
   },
 }
 </script>
+
 <style scoped>
+.news_drop div#news-list {
+  padding: 10px;
+}
 .card-content .meta {
   margin-bottom: 5px;
 }
@@ -327,7 +327,5 @@ export default {
   margin-bottom: 0;
 }
 
-.news_drop div#news-list {
-  padding: 10px;
-}
+
 </style>

@@ -1541,7 +1541,9 @@ ul.social.dark-white li a:hover span.icon-Instagram:before {
     background: #fff;
 }
 */
-
+.news_drop div#news-list {
+    padding: 10px;
+  }
 
 .widget ul.partner-logo li {
     display: inline-block;

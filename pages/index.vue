@@ -322,10 +322,6 @@ export default {
     margin-bottom: 5px;
   }
 
-  .news_list .acard {
-    border-left: 0px solid #D8AF3B;
-  }
-
   section.news-overview-sec {
     padding-top: 15px;
   }
