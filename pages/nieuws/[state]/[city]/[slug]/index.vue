@@ -384,13 +384,13 @@ export default {
           this.status = response.data.status
         })
     };
-    let recaptchaScript = document.createElement('script')
-    recaptchaScript.setAttribute(
-      'src',
-      'https://www.google.com/recaptcha/api.js?render=' +
-      this.siteKey
-    )
-    document.head.appendChild(recaptchaScript)
+    // let recaptchaScript = document.createElement('script')
+    // recaptchaScript.setAttribute(
+    //   'src',
+    //   'https://www.google.com/recaptcha/api.js?render=' +
+    //   this.siteKey
+    // )
+    // document.head.appendChild(recaptchaScript)
   },
 
 
@@ -497,16 +497,16 @@ export default {
         })
     },
     async submitComments() {
-      const token = await window.grecaptcha.execute(
-        this.siteKey,
-        { action: 'submit' }
-      );
+      // const token = await window.grecaptcha.execute(
+      //   this.siteKey,
+      //   { action: 'submit' }
+      // );
       const route = useRoute();
       let new_id = route.params.slug.replace(/[^0-9]/g, '');
       const data = {
         news_id: new_id,
         comments: this.message,
-        recaptcha_token: token
+       // recaptcha_token: token
       }
       axios.post(`${apiUrl}/comments/insert-comments`, data, {
         headers: {
