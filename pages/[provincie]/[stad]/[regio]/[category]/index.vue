@@ -6,7 +6,7 @@
       <!-- / Step Section-->
       <section class="page-content details-page sec-padding">
         <div class="container">
-          <div class="breadcrumbs desktop-only">
+          <div class="breadcrumbs desktop-only mb-20">
             <ul class="inline-list">
               <li><nuxt-link to="/">Home</nuxt-link><span class="right-angel">></span></li>
               <li><nuxt-link :to="'/'+route.params.provincie.toLowerCase() ">{{meldingenDetails.details.provincie}}</nuxt-link><span class="right-angel">></span></li>
@@ -19,7 +19,7 @@
           <div class="row with-sidebar ">
             <div  :class="'col-md-8 col-lg-9 col-xs-12'">
               <div v-if="isLoading === true" style="height: 300px;" :class="isLoading ? 'spin':''"></div>
-              <div v-else class="content">
+              <div v-else class="content box-shadow border-radius-8">
                 <h2 class="content-heading">
                   {{meldingenDetails.details.straat}} in {{meldingenDetails.details.stad}} - <span class="text-trans-cap">{{meldingenDetails.details.categorie}}</span>
 
@@ -58,7 +58,7 @@
                 </ul>
                
 
-                <ul class="social dark-white white-dark desktop-only">
+                <ul class="social dark-white white-dark desktop-only mt-30">
                   <li class="label">Delen:</li>
 
 
@@ -302,7 +302,32 @@ ul.social.white-dark li a {
 .breadcrumbs ul.inline-list li a {
   color: #1F405E;
 }
+.sidebar h2.sec-heading {
+    margin-top: 0;
+}
+.content {
+    padding: 20px;
+    margin: 0px;
+}
+.content h2.content-heading {
+    margin-bottom: 10px;
+}
+img.news-icon {
+    width: 24px;
+}
+.content ul.inline-list.list-gap-10 {
+    padding: 5px 0px;
+    display: block;
+    border-bottom: 1px solid #dfe2e6;
+}
+.google-map-sec {
+    margin-bottom: 20px;
+}
 
+@media (max-width: 767px) {
+.sidebar h2.sec-heading{
+    margin-top: 20px;
+}
 
-
+}
 </style>

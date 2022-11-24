@@ -22,14 +22,18 @@
       </div>
 
 
-      <div class="row result_row">
-        <div class="col-md-12 result_list">
-          <div v-for="(item, i) in meldingens" v-show="isOpen" id="search_by_place_result"
-               class="searchbar-area box-shadow">
-            <router-link :to="urlPath == 'meldingen' ? `/${findProvUrl(item.provincie)}/${item.stad_url}`:`/${urlPath}/${findProvUrl(item.provincie)}`" class="d-block">{{ item.stad }}
-              <span>{{ findProvName(item.provincie) }}
-              </span></router-link>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="result_row">
+          <div class="result_list box-shadow">
+            <div v-for="(item, i) in meldingens" v-show="isOpen" id="search_by_place_result"
+                class="searchbar-area">
+              <router-link :to="urlPath == 'meldingen' ? `/${findProvUrl(item.provincie)}/${item.stad_url}`:`/${urlPath}/${findProvUrl(item.provincie)}`" class="d-block">{{ item.stad }}
+                <span>{{ findProvName(item.provincie) }}
+                </span></router-link>
+            </div>
           </div>
+        </div>
         </div>
       </div>
 
@@ -138,6 +142,17 @@ export default {
 </script>
 
 <style scoped>
+div#search_by_place_result {
+    background: transparent;
+}
+.call-to-action .d-block:first-child {
+    border-top: 0px solid #DFE2E6;
+}
+.call-to-action .d-block {
+    padding: 10px 15px;
+    color: #1F4160;
+    font-size: 16px;
+}
 .result_row {
   position: relative;
 }
@@ -145,6 +160,10 @@ export default {
   position: absolute;
   z-index: 999;
   width:100%;
+  background-color: #fff;
+}
+.location-search-form input {
+    font-size: 16px;
 }
 @media (max-width: 767px) {
   .call-to-action .row.call-to-row {

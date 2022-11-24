@@ -291,8 +291,8 @@
         padding-right: 10px;
     }
     header.header-area {
-        padding: 30px 0px;
-        padding-bottom: 30px;
+        padding: 10px 0px;
+        padding-bottom: 10px;
         z-index: 999;
     }
     header.header-area.sticky {
@@ -344,7 +344,7 @@
     width: 100%;
     position: fixed;
     z-index: 9999;
-    top: 95px;
+    top: 60px;
     right: 0;
     background-color: var(--theme-color);
     overflow-x: hidden;

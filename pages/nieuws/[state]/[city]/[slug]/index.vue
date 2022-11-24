@@ -49,7 +49,7 @@
                 </div>
                 
               </div>
-              <p>Foto: <a href="https://www.intervisualstudio.nl/" target="_blank" rel="nofollow">intervisualstudio.nl</a></p>
+              <p class="source-img">Foto: <a href="https://www.intervisualstudio.nl/" target="_blank" rel="nofollow">intervisualstudio.nl</a></p>
               
 
               <div class="content">
@@ -72,7 +72,7 @@
 
                     </div>
 
-                    <div class="col-md-4 col-lg-3 col-xs-4">
+                    <div class="col-md-4 col-lg-6 col-xs-4">
                       <div class="reacties d-flex align-items-center text-right">
                         <div class="heart-icon-area">
 
@@ -124,7 +124,7 @@
 
               <!--   comment Section-->
 
-              <div v-if="!auth" class="comment-sec t-mt-20">
+              <div v-if="!auth" class="comment-sec mb-20">
                 <h2 class="comment-head">Reageer op dit artikel</h2>
                 <nuxt-link id="comment-btn" class="button btn-tranparent" to="/login">Aanmelden om te reageren</nuxt-link>
               </div>
@@ -184,7 +184,7 @@
 
 
               </div>
-              <ul class="social dark-white white-dark desktop-only">
+              <ul class="social dark-white white-dark desktop-only mt-20">
                   <li class="label">Delen:</li>
 
 
@@ -563,7 +563,7 @@ ul.social.white-dark li a {
   color: #669E97 !important;
 }
 .news-details.card{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     position: relative;
     padding: 0;
     background: transparent;
@@ -621,6 +621,20 @@ ul.social.white-dark li a {
 }
 .btn-group .button {
     margin-bottom: 0;
+}
+.reacties {
+    justify-content: end;
+    padding-top: 0;
+}
+h2.comment-head {
+    margin-bottom: 0;
+}
+
+h2.reacties {
+    margin-bottom: 0px;
+}
+p.source-img{
+  margin-bottom: 10px;
 }
 @media (max-width: 767px){
 .sidebar {
