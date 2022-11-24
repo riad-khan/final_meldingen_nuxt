@@ -89,8 +89,9 @@ export default {
   },
   mounted() {
     const id = localStorage.getItem('id')
-    axios.get(`${apiUrl}/user/dashboard/count/`+34)
+    axios.get(`${apiUrl}/user/dashboard/count/`+id)
         .then((response)=>{
+          console.log(response.data);
          this.totalComments = response.data.comments.total;
          this.fav_news = response.data.fav_news.total;
         })

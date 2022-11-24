@@ -60,7 +60,7 @@
 
                 
 
-                <div class="card card-img" v-if="media.ad1.length > 0" v-html="media.ad1[0].content">
+                <div class="card card-img" v-if=" media.ad1 && media.ad1.length > 0" v-html="media.ad1[0].content">
                  
                 </div>
 
@@ -148,7 +148,7 @@
                   </div>
 
                   <div v-if="i % 2 === 1" class="card card-img">
-                    <div v-if="media.ad2.length > 0" v-html="media.ad2[0].content">
+                    <div v-if=" media.ad2 && media.ad2.length > 0" v-html="media.ad2[0].content">
 
                     </div>
                   </div>
@@ -156,7 +156,7 @@
 
                 </div>
 
-                <div class="card card-img square" v-if="media.ad3.length > 0" v-html="media.ad3[0].content">
+                <div class="card card-img square" v-if=" media.ad3 && media.ad3.length > 0" v-html="media.ad3[0].content">
                   
                 </div>
               </div>
@@ -180,7 +180,7 @@ apiUrl = config.public.api;
 backend = config.public.backend;
 
 const { data: news, pending, refresh } = await useAsyncData('get_news', () => $fetch(`${apiUrl}/news/`));
-const {data : media} = await useAsyncData('media',()=>$fetch(`${apiUrl}/media/news`));
+//const {data : media} = await useAsyncData('media',()=>$fetch(`${apiUrl}/media/news`));
 
 useHead({
   titleTemplate: ` ${news.value.seo.title}`,
@@ -249,11 +249,17 @@ export default {
       loadingMore: false,
       loadData: true,
       nextReq: true,
+      media:[],
 
     }
   },
-  created() {
-
+  
+  beforeCreate(){
+    axios.get(`${apiUrl}/media/news`)
+        .then((response) => {
+        console.log(response.data);
+          this.media = response.data
+        })
   },
 
 

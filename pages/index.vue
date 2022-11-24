@@ -65,7 +65,7 @@
 
 
 
-                <div v-if="i % 7 === 5" class="card card-img">
+                <div v-if="i % 5 === 2" class="card card-img">
 
 
                   <div v-if=" media.ad3 && media.ad3.length > 0" v-html="media.ad3[0].content">
@@ -197,7 +197,7 @@ export default {
       nexReq: null,
       meldingens: [],
       loading: false,
-      ads: {},
+   
 
       increment: 1,
     }
@@ -205,7 +205,6 @@ export default {
   beforeCreate(){
     axios.get(`${apiUrl}/media/home`)
         .then((response) => {
-        console.log(response.data);
           this.media = response.data
         })
   },

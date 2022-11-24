@@ -1031,9 +1031,10 @@ export default {
     provienci(slider, sliderItems, prev, next);
 
   
+    if (window.innerWidth < 550) {
       emergencySlider(emergency_slider, emergencySliderItems, emergencyPrev, emergencyNext);
 
-    
+    }
 
     document.body.addEventListener('click', (e) => {
       let customSelect = document.getElementsByClassName('custom-select sources')[0];
@@ -1625,7 +1626,7 @@ div#slider {
     font-size: 20px;
   }
 }
-@media(max-width : 420px){
+@media(max-width : 550px){
   .emergency_next{
     display:block
   }

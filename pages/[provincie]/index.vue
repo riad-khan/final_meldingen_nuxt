@@ -6,7 +6,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2 desktop-only">
-            <div class="a_banner" v-if="media.ad1.length > 0" v-html="media.ad1[0].content">
+            <div class="a_banner" v-if=" media.ad1 && media.ad1.length > 0" v-html="media.ad1[0].content">
 
             </div>
           </div>
@@ -60,8 +60,8 @@
                     </div>
                   </div>
                 </div>
-                <div v-if="i % 7 === 5" class="card card-img">
-                  <div v-if="media.ad3.length > 0" v-html="media.ad3[0].content">
+                <div v-if="i % 5 === 2" class="card card-img">
+                  <div v-if=" media.ad3 && media.ad3.length > 0" v-html="media.ad3[0].content">
 
                   </div>
                 </div>
@@ -73,7 +73,7 @@
             </div>
           </div>
           <div class="col-md-2 desktop-only">
-            <div class="a_banner" v-if="media.ad2.length > 0" v-html="media.ad2[0].content">
+            <div class="a_banner" v-if=" media.ad2 && media.ad2.length > 0" v-html="media.ad2[0].content">
 
             </div>
           </div>
@@ -98,7 +98,7 @@ apiUrl = config.public.api;
 backend = config.public.backend;
 
 const { data: melding, pending } = await useAsyncData('filter_meldingen', () => $fetch(`${apiUrl}/meldingen/filter-meldingen/${route.params.provincie}/0`));
-const { data: media } = await useAsyncData('media', () => $fetch(`${apiUrl}/media/home`));
+//const { data: media } = await useAsyncData('media', () => $fetch(`${apiUrl}/media/home`));
 const { data: seo } = await useAsyncData('home_seo', () => $fetch(`${apiUrl}/seo-data/home`));
 meldingenArray = melding;
 nextReq = true;
@@ -202,11 +202,19 @@ export default {
       region: '',
       isLoading: false,
       nexReq: null,
+      media:[],
 
 
     }
   },
 
+  beforeCreate(){
+    axios.get(`${apiUrl}/media/home`)
+        .then((response) => {
+        console.log(response.data);
+          this.media = response.data
+        })
+  },
   created() {
     const route = useRoute();
     this.region = route.params.regio
