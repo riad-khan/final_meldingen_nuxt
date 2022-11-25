@@ -302,9 +302,6 @@ ul.social.white-dark li a {
 .breadcrumbs ul.inline-list li a {
   color: #1F405E;
 }
-.sidebar h2.sec-heading {
-    margin-top: 0;
-}
 .content {
     padding: 20px;
     margin: 0px;
