@@ -240,5 +240,11 @@ export default {
   .sidebar .card-thumb img {
     height: 146px;
   }
+  .contact-form {
+    margin-top: -25px;
+}
+.sidebar .card-thumb img{
+    height: 100px;
+} 
 }
 </style>

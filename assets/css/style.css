@@ -261,6 +261,8 @@ img.news-icon {
     padding: 12px 0px;
     border-radius: 50px;
     margin-bottom: 4px;
+    display: flex;
+    justify-content: center;
 }
 
 button, .button, .button, input[type="button"], input[type="reset"], input[type="submit"] {

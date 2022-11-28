@@ -7,13 +7,16 @@
               <div class="container">
                 <div class="row">
                   <div class="col-md-8">
+                    <div class="blog_arichive_des">
                     <h1>Met ons blog haal je meer uit je internet</h1>
         
                     <p>Haal alles uit je internet met betrouwbare artikelen van onze experts. We helpen je met informatie over je internetverbinding en thuisnetwerk. Lees goede tips over het instellen van je apparaten, software en diensten die met het internet verbonden zijn.</p>
                   </div>
+                  </div>
                   <div class="col-md-4">
-                    <img src="https://p2000.net/img/blog-banner.png
-        ">
+                    <div class="blog_archive_img">
+                    <img src="https://p2000.net/img/blog-banner.png">
+                  </div>
                   </div>
                 </div>
                 <div style="margin-bottom: 35px;">
@@ -112,5 +115,10 @@ onMounted(() => {
 }
 .meta ul.inline-list a svg path {
     fill: #669E97;
+}
+@media (max-width: 767px) {
+  .blog_archive_img {
+    margin-bottom: 30px;
+}
 }
 </style>

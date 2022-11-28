@@ -136,7 +136,7 @@
 
     .contact-form {
         padding: 50px 100px;
-        margin-top: -40px;
+        margin-top: -30px;
     }
 
 
@@ -649,6 +649,7 @@
     /*Contact us page*/
     .contact-form {
         padding: 30px 20px;
+        margin-top: -25px;
     }
 
     .contact-box {
@@ -783,6 +784,10 @@
     }
     .contact-form[data-v-556e7b4e] {
         margin-top: -25px;
+    }
+    .sidebar-border {
+        border-left: 0px solid;
+        min-height: auto;
     }
     /*End Mobile*/
 }

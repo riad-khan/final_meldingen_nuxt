@@ -130,4 +130,12 @@ export default {
 .mac-content .card .card-content h6 {
     text-align: left;
 }
+#news_list .card:last-child {
+    margin-bottom: 0;
+}
+.col-md-6 .card-content, .col-md-12 .card-content {
+    padding: 0;
+}
+@media (max-width: 767px) {
+}
 </style>

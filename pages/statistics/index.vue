@@ -39,7 +39,7 @@
             <!--         </h1>-->
             <!-- Chart 1 -->
             <div class="row">
-              <div class="col-lg-4">
+              <div class="col-lg-4 col-md-4">
                 <div class="card other-news box-shadow border-radius-8">
                   <div class="card-content">
                     <strong>
@@ -63,7 +63,7 @@
                 </div>
               </div>
               <!--  Chart 2-->
-              <div class="col-lg-4">
+              <div class="col-lg-4 col-md-4">
                 <div class="card other-news box-shadow border-radius-8">
                   <div class="card-content">
                     <strong>
@@ -88,7 +88,7 @@
               </div>
 
               <!--  Chart 3-->
-              <div class="col-lg-4">
+              <div class="col-lg-4 col-md-4">
                 <div class="card other-news box-shadow border-radius-8">
                   <div class="card-content">
                     <strong>
@@ -116,7 +116,7 @@
 
             <!--  Chart 4-->
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-4 col-md-4">
                 <div class="card other-news box-shadow border-radius-8">
                   <div class="card-content">
                     <strong>
@@ -140,7 +140,7 @@
                 </div>
               </div>
 
-              <div class="col-lg-8">
+              <div class="col-lg-8 col-md-8">
                 <div class="card other-news box-shadow border-radius-8">
                   <div class="card-content">
                     <strong>
@@ -1625,6 +1625,9 @@ div#slider {
   .chat_page .card-content h4 {
     font-size: 20px;
   }
+  .col-md-6 .card-content, .col-md-12 .card-content {
+    padding: 0px;
+}
 }
 @media(max-width : 550px){
   .emergency_next{
