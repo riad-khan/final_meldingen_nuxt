@@ -361,6 +361,11 @@ export default {
     max-width: 100%;
     min-width: 200px;
 }
+@media (min-width: 768px) and (max-width: 1024px) {
+  .sidebar h2.sec-heading {
+    font-size: 20px;
+}
+}
 @media (max-width: 767px){
   .news-thumb img.img-thumb {
     min-width: 100px !important;

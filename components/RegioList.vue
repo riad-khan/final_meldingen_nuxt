@@ -170,5 +170,13 @@ export default {
 </script>
 
 <style scoped>
+.news_list .news_drop h2.sec-heading {
+    font-size: 22px;
+}
 
+@media (max-width: 767px) {
+  .news-overview-sec .row {
+    padding: 10px 5px;
+}	
+}
 </style>

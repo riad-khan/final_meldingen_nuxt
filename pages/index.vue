@@ -333,6 +333,7 @@ export default {
   border-left: 1.5px solid #669e97
 }
 
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .prio {
     display: inline-block;
@@ -340,9 +341,6 @@ export default {
 }
 
 @media (max-width: 767px) {
-  .news-content .content_right {
-    /* text-align: left; */
-  }
 
   .news-item img.news-icon {
     right: auto;

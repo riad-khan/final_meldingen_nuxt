@@ -169,7 +169,11 @@ div#search_by_place_result {
   .call-to-action .row.call-to-row {
     margin-left: 0px;
     margin-right: 0;
-} 
+}
+.call-to-row {
+    padding: 5px 0px;
+    margin-top: -25px;
+}
 }
 
 

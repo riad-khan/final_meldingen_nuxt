@@ -781,6 +781,9 @@
     .header_bellow_bg {
         margin-top: -1px;
     }
+    .contact-form[data-v-556e7b4e] {
+        margin-top: -25px;
+    }
     /*End Mobile*/
 }
 
