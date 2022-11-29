@@ -53,7 +53,7 @@
                     <img v-if="item.dienst == 'traumaheli'" src="@/assets/img/traumaheli.png" class="news-icon"/>
 
                   </li>
-                  <li><a href="#" rel="nofollow">{{item.capcode}}</a>, </li>
+                  <li><a href="#" rel="nofollow">{{item.capcode}}</a> </li>
                   <li>{{item.omschrijving}} </li>
                 </ul>
                
