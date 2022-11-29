@@ -38,7 +38,7 @@
                 </div>
                 <h2 class="content-heading">Originele P2000 melding
                 </h2>
-                <p style="font-size:18px">{{meldingenDetails.details.p2000}}</p>
+                <p>{{meldingenDetails.details.p2000}}</p>
 
                 
                 <h2 class="mt-30 content-heading">Verzonden aan eenheden</h2>
