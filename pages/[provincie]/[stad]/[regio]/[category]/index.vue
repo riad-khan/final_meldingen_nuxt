@@ -36,12 +36,12 @@
                 <div class="google-map-sec">
                   <iframe :src="'https://maps.google.com/maps?q='+meldingenDetails.details.straat+','+meldingenDetails.details.stad+'&t=&z=15&ie=UTF8&iwloc=&output=embed'" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                <h2 class="content-heading" style="font-weight:700;font-size:22px;">Originele P2000 melding
+                <h2 class="content-heading">Originele P2000 melding
                 </h2>
                 <p style="font-size:18px">{{meldingenDetails.details.p2000}}</p>
 
                 
-                <h3 class="weight-500 mt-30">Verzonden aan eenheden</h3>
+                <h2 class="mt-30 content-heading">Verzonden aan eenheden</h2>
 
                 <ul v-for="(item,i) in enheedens" class="inline-list list-gap-10 d-flex align-items-center" :key="i">
                   <li>
@@ -308,6 +308,7 @@ ul.social.white-dark li a {
 }
 .content h2.content-heading {
     margin-bottom: 10px;
+    font-size: 20px;
 }
 img.news-icon {
     width: 24px;
@@ -320,7 +321,12 @@ img.news-icon {
 .google-map-sec {
     margin-bottom: 20px;
 }
-
+.card .meta ul.inline-list li {
+    font-size: 14px;
+}
+.meta ul.inline-list li {
+    font-size: 14px;
+}
 @media (max-width: 767px) {
 .sidebar h2.sec-heading{
     margin-top: 20px;
