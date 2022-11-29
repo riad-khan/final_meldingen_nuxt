@@ -40,8 +40,7 @@
                             }}
                           </nuxt-link>
                         </span>
-                        <span class="place-name city">
-                          ,{{ item.provincie }}</span>
+                        <span class="place-name city">, {{ item.provincie }}</span>
                       </p>
                     </div>
                     <div class="content_right">
@@ -100,7 +99,7 @@ const config = useRuntimeConfig();
 apiUrl = config.public.api;
 backend = config.public.backend;
 
-const { data: melding, pending } = await useAsyncData('filter_meldingen', () => $fetch(`${apiUrl}/meldingen/filter-meldingen/${route.params.regio}/0`));
+const { data: melding, pending } = await useAsyncData('filter_meldingen', () => $fetch(`${apiUrl}/meldingen/filter-meldingen/${route.params.regio}/0`),{initialCache: false});
 //const { data: media } = await useAsyncData('media', () => $fetch(`${apiUrl}/media/home`));
 const { data: seo } = await useAsyncData('home_seo', () => $fetch(`${apiUrl}/seo-data/home`));
 meldingenArray = melding;

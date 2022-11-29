@@ -268,7 +268,7 @@ export default {
   },
   methods:{
     DateTime(value){
-      return moment.unix(value).format('MMMM Do YYYY, hh:mm');
+      return moment.unix(value).utcOffset("GMT+01:00").format('MMMM Do YYYY, hh:mm');
     },
     dateTime(value) {
 

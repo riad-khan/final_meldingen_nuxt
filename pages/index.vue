@@ -40,9 +40,7 @@
                           <nuxt-link style="color:#669E97"
                             :to="item.provincie_url.toLowerCase() + '/' + item.stad_url.toLowerCase()">{{ item.stad }}
                           </nuxt-link>
-                        </span>
-                        <span class="place-name city">
-                          ,{{ item.provincie }}</span>
+                        </span><span class="place-name city">, {{ item.provincie }}</span>
                       </p>
                     </div>
                     <div class="content_right">
@@ -102,14 +100,13 @@ backend = config.public.backend;
 
 //const {data: melding, pending} = await useAsyncData('get_meldingen', () => $fetch(`${apiUrl}/meldingen/scroll-more/0`));
 
-const { data: melding, pending } = await useFetch(`${apiUrl}/meldingen/scroll-more/0`)
+const { data: melding, pending } = await useAsyncData('get_meldingen',()=> $fetch(`${apiUrl}/meldingen/scroll-more/0`),{initialCache: false})
 
 const { data: seo } = await useAsyncData('home_seo', () => $fetch(`${apiUrl}/seo-data/home`));
 
 //const { data: media } = await useAsyncData('media', () => $fetch(`${apiUrl}/media/home`));
 
 nextReq = melding.value.nextReq;
-
 
 useHead({
   titleTemplate: ` ${seo.value.title}`,

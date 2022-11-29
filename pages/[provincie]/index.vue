@@ -38,8 +38,7 @@
                             :to="'/' + item.provincie_url.toLowerCase() + '/' + item.stad_url.toLowerCase()">{{ item.stad }}
                           </nuxt-link>
                         </span>
-                        <span class="place-name city">
-                          ,{{ item.provincie }}
+                        <span class="place-name city">, {{ item.provincie }}
                         </span>
                       </p>
                     </div>
@@ -97,7 +96,7 @@ const config = useRuntimeConfig();
 apiUrl = config.public.api;
 backend = config.public.backend;
 
-const { data: melding, pending } = await useAsyncData('filter_meldingen', () => $fetch(`${apiUrl}/meldingen/filter-meldingen/${route.params.provincie}/0`));
+const { data: melding, pending } = await useAsyncData('filter_meldingen', () => $fetch(`${apiUrl}/meldingen/filter-meldingen/${route.params.provincie}/0`),{initialCache: false});
 //const { data: media } = await useAsyncData('media', () => $fetch(`${apiUrl}/media/home`));
 const { data: seo } = await useAsyncData('home_seo', () => $fetch(`${apiUrl}/seo-data/home`));
 meldingenArray = melding;
