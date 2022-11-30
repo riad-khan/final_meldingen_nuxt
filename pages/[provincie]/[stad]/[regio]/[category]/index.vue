@@ -365,7 +365,9 @@ ul.inline-list li span.right-angel {
 img.news-icon {
   width: 24px;
 }
-
+.list_group img.news-icon {
+  width: 15px;
+}
 .content ul.inline-list.list-gap-10 {
   padding: 5px 0px;
   display: block;
