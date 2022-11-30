@@ -293,9 +293,15 @@ export default {
   },
   methods: {
     DateTime(value){
-      let date = moment.unix(value).utcOffset("GMT+01:00").format('LL');
-      let time = moment.unix(value).utcOffset("GMT+01:00").format('hh:mm');
-      return date + ' - ' + time
+    // return moment.unix(value).utcOffset("GMT+01:00").format('LL');
+    
+     const date = moment.unix(value).utcOffset("GMT+01:00").format('Do MMMM YYYY');
+     const time = moment.unix(value).utcOffset("GMT+01:00").format('hh:mm');
+    let newDate = date.split(' ');
+    const LastDate = newDate[0].slice(0,-2);
+    
+    return LastDate +' ' + newDate[1].toLowerCase() +' ' + newDate[2] + ' - ' + time
+     
     },
     dateTime(value) {
 
