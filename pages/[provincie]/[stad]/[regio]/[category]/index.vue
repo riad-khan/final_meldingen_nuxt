@@ -39,8 +39,7 @@
 
                   </ul>
                 </div>
-                <p class="mb-30">Regio {{ meldingenDetails.details.regio }} kreeg op {{ DateTime(meldingenDetails.details.timestamp,
-                    'dddd DD MMMM')
+                <p class="mb-30">Regio {{ meldingenDetails.details.regio }} kreeg op {{ DateTime(meldingenDetails.details.timestamp)
                 }} een melding via het p2000 netwerk. De {{ meldingenDetails.details.dienst }} is met
                   spoed uitgerukt naar de {{ meldingenDetails.details.straat }} in {{ meldingenDetails.details.stad }}</p>
 
@@ -293,8 +292,10 @@ export default {
     }
   },
   methods: {
-    DateTime(value) {
-      return moment.unix(value).utcOffset("GMT+01:00").format('MMMM Do YYYY, hh:mm');
+    DateTime(value){
+      let date = moment.unix(value).utcOffset("GMT+01:00").format('LL');
+      let time = moment.unix(value).utcOffset("GMT+01:00").format('hh:mm');
+      return date + ' - ' + time
     },
     dateTime(value) {
 
