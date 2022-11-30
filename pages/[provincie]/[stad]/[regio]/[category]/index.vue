@@ -6,7 +6,7 @@
       <!-- / Step Section-->
       <section class="page-content details-page sec-padding">
         <div class="container">
-          <div class="breadcrumbs desktop-only mb-20">
+          <div class="breadcrumbs desktop-only mb-30">
             <ul class="inline-list">
               <li>
                 <nuxt-link to="/">Home</nuxt-link><span class="right-angel">></span>
@@ -42,8 +42,10 @@
                 <p class="mb-30">Regio {{ meldingenDetails.details.regio }} kreeg op {{ DateTime(meldingenDetails.details.timestamp)
                 }} een melding via het p2000 netwerk. De {{ meldingenDetails.details.dienst }} is met
                   spoed uitgerukt naar de {{ meldingenDetails.details.straat }} in {{ meldingenDetails.details.stad }}</p>
-
-
+                
+                <div class="google_ad_sec mb-5">
+                  <img src="@/assets/img/add-img.jpg" class="a_dd_img" />
+                </div>
                 <div class="google-map-sec">
                   <iframe
                     :src="'https://maps.google.com/maps?q=' + meldingenDetails.details.straat + ',' + meldingenDetails.details.stad + '&t=&z=15&ie=UTF8&iwloc=&output=embed'"
@@ -331,17 +333,25 @@ ul.social.white-dark li a {
 }
 
 .breadcrumbs ul.inline-list li {
-  color: #669E97;
+  color: #A6B9C9;
 }
 
-.right-angel {
-  color: #669E97 !important;
+ul.inline-list li span.right-angel {
+    color: #A6B9C9;
+    font-size: 12px;
 }
 
 .breadcrumbs ul.inline-list li a {
-  color: #1F405E;
+  color: #1F4160;
 }
-
+.list_group ul.inline-list li a{
+  color: #A6B9C9;
+  cursor: text;
+  pointer-events: none;
+}
+.list_group ul.inline-list li a:hover{
+  color: #A6B9C9;
+}
 .content {
   padding: 20px;
   margin: 0px;
@@ -359,15 +369,17 @@ img.news-icon {
 .content ul.inline-list.list-gap-10 {
   padding: 5px 0px;
   display: block;
-  border-bottom: 1px solid #dfe2e6;
+  border-bottom: 1px solid rgba(166,185,201,0.25);
 }
 
 .google-map-sec {
   margin-bottom: 30px;
 }
-
 .card .meta ul.inline-list li {
   font-size: 14px;
+}
+.content .meta ul.inline-list li {
+  color:#A6B9C9;
 }
 
 .meta ul.inline-list li {
@@ -378,6 +390,11 @@ img.news-icon {
 }
 .google-map-sec iframe{
   margin:0px;
+}
+.google_ad_sec img{
+  max-height: 179px;
+  object-fit: cover;
+  width: 100%;
 }
 @media (max-width: 767px) {
   .sidebar h2.sec-heading {
