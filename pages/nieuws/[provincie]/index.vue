@@ -230,8 +230,10 @@ export default {
   beforeCreate(){
     axios.get(`${apiUrl}/media/news`)
         .then((response) => {
-        console.log(response.data);
           this.media = response.data
+        })
+        .catch((error)=>{
+          console.log(error);
         })
   },
 

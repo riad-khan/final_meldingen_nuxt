@@ -289,6 +289,11 @@ onMounted(() => {
   refreshNuxtData('fetch_Regios');
 })
 
+useHead({
+  titleTemplate: `Meldingen.nl - Statistiken`,
+
+})
+
 </script>
 
 <script>
@@ -325,7 +330,7 @@ export default {
       emergencyBtn: [],
       selectedRegio: '',
       isLoading: false,
-      defaultProvincie: 'Drenthe',
+      defaultProvincie: 'Noord-Brabant',
       defaultEmergency: 'ambulance',
       index: 0,
       toggle: false,

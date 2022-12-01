@@ -204,6 +204,9 @@ export default {
         .then((response) => {
           this.media = response.data
         })
+        .catch((error)=>{
+          console.log(error);
+        })
   },
   created() {
     this.meldingens = meldingenArray;

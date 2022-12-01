@@ -1,6 +1,7 @@
 <template>
   <div>
     <Header />
+    <location urlPath="meldingen" />
 
     <main class="main-content bg-dark-white">
       <!-- / Step Section-->
@@ -39,18 +40,23 @@
 
                   </ul>
                 </div>
-                <p class="mb-30">Regio {{ meldingenDetails.details.regio }} kreeg op {{ DateTime(meldingenDetails.details.timestamp)
+                <p class="mb-30">Regio {{ meldingenDetails.details.regio }} kreeg op donderdag {{
+                    DateTime(meldingenDetails.details.timestamp)
                 }} een melding via het p2000 netwerk. De {{ meldingenDetails.details.dienst }} is met
-                  spoed uitgerukt naar de {{ meldingenDetails.details.straat }} in {{ meldingenDetails.details.stad }}</p>
-                
+                  spoed uitgerukt naar de {{ meldingenDetails.details.straat }} in {{ meldingenDetails.details.stad }}
+                </p>
+
                 <div class="google_ad_sec mb-5">
                   <img src="@/assets/img/add-img.jpg" class="a_dd_img" />
                 </div>
                 <div class="google-map-sec">
                   <iframe
-                    :src="'https://maps.google.com/maps?q=' + meldingenDetails.details.straat + ',' + meldingenDetails.details.stad + '&t=&z=15&ie=UTF8&iwloc=&output=embed'"
+                    :src="'https://maps.google.com/maps?q=' + meldingenDetails.details.straat + ',' + meldingenDetails.details.stad + '&amp;t=k&amp;z=18&amp;ie=UTF8&amp;iwloc=&amp;output=embed'"
                     width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                 
+
                 </div>
                 <h2 class="content-heading">Originele P2000 melding
                 </h2>
@@ -209,27 +215,35 @@ const title = (stad) => {
 }
 
 //route.params.category.replace(/-/g, ' ')
+const seoTime = (value) => {
+  const date = moment.unix(value).utcOffset("GMT+01:00").format('Do MMMM YYYY');
+  const time = moment.unix(value).utcOffset("GMT+01:00").format('hh:mm');
+  let newDate = date.split(' ');
+  const LastDate = newDate[0].slice(0, -2);
+
+  return LastDate + ' ' + newDate[1].toLowerCase() + ' ' + newDate[2] + ' om ' + time
+}
 
 useHead({
-  titleTemplate: `${titleSlug(route.params.category)} - ${title(route.params.stad)}, ${title(route.params.regio)} | 112 Meldingen op Meldingen.nl`,
+  titleTemplate: `${meldingenDetails.value.details.categorie} - ${meldingenDetails.value.details.stad}, ${meldingenDetails.value.details.straat} | 112 Meldingen op Meldingen.nl`,
   meta: [
     {
-      name: 'description', content: `${seo.value.seo_meta}`
+      name: 'description', content: `Regio ${meldingenDetails.value.details.regio} kreeg op donderdag ${seoTime(meldingenDetails.value.details.timestamp)} een melding via het p2000 netwerk. De ${meldingenDetails.value.details.dienst} is met spoed uitgerukt naar de ${meldingenDetails.value.details.straat} in ${meldingenDetails.value.details.stad} `
     },
 
-    { name: 'keywords', content: `${seo.value.seo_keywords}` },
+    { name: 'keywords', content: `112 meldingen ${meldingenDetails.value.details.stad}, 112 ${meldingenDetails.value.details.stad}, p2000 ${meldingenDetails.value.details.stad}, ${meldingenDetails.value.details.straat}, meldingen, p2000 meldingen, politie meldingen, brandweer meldingen, ambulance meldingen` },
 
     {
       property: "og:title",
-      content: `${seo.value.title}`,
+      content: `${meldingenDetails.value.details.categorie} - ${meldingenDetails.value.details.stad}, ${meldingenDetails.value.details.straat} | 112 Meldingen op Meldingen.nl `,
     },
     {
       property: "og:description",
-      content: `${seo.value.seo_meta}`,
+      content: `Regio ${meldingenDetails.value.details.regio} kreeg op donderdag ${seoTime(meldingenDetails.value.details.timestamp)} een melding via het p2000 netwerk. De ${meldingenDetails.value.details.dienst} is met spoed uitgerukt naar de ${meldingenDetails.value.details.straat} in ${meldingenDetails.value.details.stad} `,
     },
     {
       property: "og:image",
-      content: `https://i.imgur.com/P0xgWRX.jpg`,
+      content: `https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${meldingenDetails.value.details.straat_url},${meldingenDetails.value.details.stad_url}&fov=90&heading=235&pitch=10&key=XXXXXXX`,
     },
     {
       property: "og:url",
@@ -237,15 +251,15 @@ useHead({
     },
     {
       property: "twitter:title",
-      content: `${seo.value.title}`,
+      content: `${meldingenDetails.value.details.categorie} - ${meldingenDetails.value.details.stad}, ${meldingenDetails.value.details.straat} | 112 Meldingen op Meldingen.nl `,
     },
     {
       property: "twitter:description",
-      content: `${seo.value.seo_meta}`,
+      content: `Regio ${meldingenDetails.value.details.regio} kreeg op donderdag ${seoTime(meldingenDetails.value.details.timestamp)} een melding via het p2000 netwerk. De ${meldingenDetails.value.details.dienst} is met spoed uitgerukt naar de ${meldingenDetails.value.details.straat} in ${meldingenDetails.value.details.stad}`,
     },
     {
       property: "twitter:image",
-      content: `https://i.imgur.com/P0xgWRX.jpg`,
+      content: `https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${meldingenDetails.value.details.straat_url},${meldingenDetails.value.details.stad_url}&fov=90&heading=235&pitch=10&key=XXXXXXX`,
     },
     {
       property: "twitter:card",
@@ -257,7 +271,7 @@ useHead({
     },
     {
       property: "twitter:image:alt",
-      content: `${seo.value.title}`,
+      content: `${meldingenDetails.value.details.categorie} - ${meldingenDetails.value.details.stad}, ${meldingenDetails.value.details.straat} | 112 Meldingen op Meldingen.nl`,
     },
 
 
@@ -294,16 +308,16 @@ export default {
     }
   },
   methods: {
-    DateTime(value){
-    // return moment.unix(value).utcOffset("GMT+01:00").format('LL');
-    
-     const date = moment.unix(value).utcOffset("GMT+01:00").format('Do MMMM YYYY');
-     const time = moment.unix(value).utcOffset("GMT+01:00").format('hh:mm');
-    let newDate = date.split(' ');
-    const LastDate = newDate[0].slice(0,-2);
-    
-    return LastDate +' ' + newDate[1].toLowerCase() +' ' + newDate[2] + ' - ' + time
-     
+    DateTime(value) {
+      // return moment.unix(value).utcOffset("GMT+01:00").format('LL');
+
+      const date = moment.unix(value).utcOffset("GMT+01:00").format('Do MMMM YYYY');
+      const time = moment.unix(value).utcOffset("GMT+01:00").format('hh:mm');
+      let newDate = date.split(' ');
+      const LastDate = newDate[0].slice(0, -2);
+
+      return LastDate + ' ' + newDate[1].toLowerCase() + ' ' + newDate[2] + ' - ' + time
+
     },
     dateTime(value) {
 
@@ -337,21 +351,24 @@ ul.social.white-dark li a {
 }
 
 ul.inline-list li span.right-angel {
-    color: #A6B9C9;
-    font-size: 12px;
+  color: #A6B9C9;
+  font-size: 12px;
 }
 
 .breadcrumbs ul.inline-list li a {
   color: #1F4160;
 }
-.list_group ul.inline-list li a{
+
+.list_group ul.inline-list li a {
   color: #A6B9C9;
   cursor: text;
   pointer-events: none;
 }
-.list_group ul.inline-list li a:hover{
+
+.list_group ul.inline-list li a:hover {
   color: #A6B9C9;
 }
+
 .content {
   padding: 20px;
   margin: 0px;
@@ -365,39 +382,47 @@ ul.inline-list li span.right-angel {
 img.news-icon {
   width: 24px;
 }
+
 .list_group img.news-icon {
   width: 15px;
 }
+
 .content ul.inline-list.list-gap-10 {
   padding: 5px 0px;
   display: block;
-  border-bottom: 1px solid rgba(166,185,201,0.25);
+  border-bottom: 1px solid rgba(166, 185, 201, 0.25);
 }
 
 .google-map-sec {
   margin-bottom: 30px;
 }
+
 .card .meta ul.inline-list li {
   font-size: 14px;
 }
+
 .content .meta ul.inline-list li {
-  color:#A6B9C9;
+  color: #A6B9C9;
 }
 
 .meta ul.inline-list li {
   font-size: 14px;
 }
+
 .list_group ul.inline-list.list-gap-10:last-child {
-    border: none;
+  border: none;
 }
-.google-map-sec iframe{
-  margin:0px;
+
+.google-map-sec iframe {
+  margin: 0px;
 }
-.google_ad_sec img{
+
+.google_ad_sec img {
   max-height: 179px;
   object-fit: cover;
   width: 100%;
 }
+
 @media (max-width: 767px) {
   .sidebar h2.sec-heading {
     margin-top: 20px;

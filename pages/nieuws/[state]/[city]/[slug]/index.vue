@@ -383,6 +383,9 @@ export default {
         .then(response => {
           this.status = response.data.status
         })
+        .catch(error=>{
+          console.log(error);
+        })
     };
     // let recaptchaScript = document.createElement('script')
     // recaptchaScript.setAttribute(

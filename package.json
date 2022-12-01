@@ -5,7 +5,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "deploy":"pm2 start npm -- name nuxt.js -- start"
   },
   "devDependencies": {
     "nuxt": "3.0.0-rc.12"
@@ -27,5 +28,11 @@
     "vue-social-sharing": "^4.0.0-alpha4",
     "vue-sweetalert2": "^5.0.5",
     "webpack": "^5.74.0"
+  },
+  "config":{
+    "nuxt":{
+      "host":"0.0.0.0",
+      "port":"3000"
+    }
   }
 }

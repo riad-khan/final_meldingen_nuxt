@@ -15,7 +15,7 @@
           <div class="call-to-link textright">
             <button class="button text-locator" @click.prevent="findMyLocation">
 
-              <span :class="isLoading ? 'rolling-spin':'icon-search'"></span>
+              <span class="location-name">Mijn locatie</span>
             </button>
           </div>
         </div>
@@ -90,9 +90,9 @@ export default {
         axios.get(geoApi)
             .then((response) => {
               if(this.urlPath == 'meldingen'){
-                this.$router.push(`/${response.data.city}`)
+                this.$router.push(`/${response.data.city.toLowerCase()}`)
               }else{
-                this.$router.push(`/${this.urlPath}/${response.data.city}`)
+                this.$router.push(`/${this.urlPath}/${response.data.city.toLowerCase()}`)
               }
             })
             .catch((error) => {
@@ -161,6 +161,9 @@ div#search_by_place_result {
   z-index: 999;
   width:100%;
   background-color: #fff;
+}
+.location-name{
+  color: #669e97
 }
 .location-search-form input {
     font-size: 16px;
