@@ -123,10 +123,12 @@ export default {
     });
     $(window).on('scroll', function () {
       var scroll = $(window).scrollTop();
-      if (scroll < 1) {
+      if (scroll < 10) {
         $(".header-area").removeClass("sticky");
+        $("body").removeClass("sticky");
       } else {
         $(".header-area").addClass("sticky");
+        $("body").addClass("sticky");
       }
     });
 

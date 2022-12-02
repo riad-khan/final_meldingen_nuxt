@@ -3,11 +3,11 @@
     <Header />
     <location urlPath="meldingen" />
 
-    <main class="main-content bg-dark-white">
+    <main class="main-content">
       <!-- / Step Section-->
       <section class="page-content details-page sec-padding">
         <div class="container">
-          <div class="breadcrumbs desktop-only mb-30">
+          <div class="breadcrumbs mb-30 m-mb-20">
             <ul class="inline-list">
               <li>
                 <nuxt-link to="/">Home</nuxt-link><span class="right-angel">></span>
@@ -28,19 +28,19 @@
           <div class="row with-sidebar ">
             <div :class="'col-md-8 col-lg-9 col-xs-12'">
               <div v-if="isLoading === true" style="height: 300px;" :class="isLoading ? 'spin' : ''"></div>
-              <div v-else class="content box-shadow border-radius-8">
+              <div v-else class="content box-shadow border-radius-8 bg-white">
                 <h2 class="content-heading">
                   {{ meldingenDetails.details.straat }} in {{ meldingenDetails.details.stad }} - <span
                     class="text-trans-cap">{{ meldingenDetails.details.categorie }}</span>
 
                 </h2>
-                <div class="meta">
+                <div class="meta m-mb-15">
                   <ul class="inline-list">
                     <li><span class="icon-clock"></span> {{ DateTime(meldingenDetails.details.timestamp) }}</li>
 
                   </ul>
                 </div>
-                <p class="mb-30">Regio {{ meldingenDetails.details.regio }} kreeg op donderdag {{
+                <p class="mb-30 m-mb-15">Regio {{ meldingenDetails.details.regio }} kreeg op donderdag {{
                     DateTime(meldingenDetails.details.timestamp)
                 }} een melding via het p2000 netwerk. De {{ meldingenDetails.details.dienst }} is met
                   spoed uitgerukt naar de {{ meldingenDetails.details.straat }} in {{ meldingenDetails.details.stad }}
@@ -49,7 +49,7 @@
                 <div class="google_ad_sec mb-5">
                   <img src="@/assets/img/add-img.jpg" class="a_dd_img" />
                 </div>
-                <div class="google-map-sec">
+                <div class="google-map-sec m-mb-15">
                   <iframe
                     :src="'https://maps.google.com/maps?q=' + meldingenDetails.details.straat + ',' + meldingenDetails.details.stad + '&amp;t=k&amp;z=18&amp;ie=UTF8&amp;iwloc=&amp;output=embed'"
                     width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
@@ -63,7 +63,7 @@
                 <p>{{ meldingenDetails.details.p2000 }}</p>
 
 
-                <h2 class="mt-30 content-heading">Verzonden aan eenheden</h2>
+                <h2 class="mt-30 m-mt-10 content-heading">Verzonden aan eenheden</h2>
                 <div class="list_group">
                   <ul v-for="(item, i) in enheedens" class="inline-list list-gap-10 d-flex align-items-center" :key="i">
                     <li>
@@ -370,7 +370,6 @@ ul.inline-list li span.right-angel {
 }
 
 .content {
-  padding: 20px;
   margin: 0px;
 }
 
@@ -427,6 +426,8 @@ img.news-icon {
   .sidebar h2.sec-heading {
     margin-top: 20px;
   }
-
+  section.page-content.details-page.sec-padding {
+    padding-top: 20px;
+}
 }
 </style>

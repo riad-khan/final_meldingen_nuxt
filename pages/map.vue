@@ -703,5 +703,8 @@ path.active {
 		min-height: auto;
 		background-size: contain;
 	}
+	.list-area {
+	padding: 15px;
+}
 }
 </style>

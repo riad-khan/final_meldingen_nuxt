@@ -35,7 +35,7 @@
                     <h6 class="text-limit-2 mt-10 m-mt-0 t-mt-0">{{ blogDetails.blog_title }}</h6>
                   </div>
                 </div>
-                <div class="content">
+                <div class="content-text">
                   <div class="meta">
                     <div class="row d-flex align-items-center meta-group">
                       <div class="col-md-8 col-lg-6 col-xs-6">
@@ -235,6 +235,9 @@ export default {
 }
 .sidebar .card-thumb img {
     height: 146px;
+}
+.contact-form{
+    padding: 15px;
 }
 }
 

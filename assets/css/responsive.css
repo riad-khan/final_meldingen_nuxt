@@ -35,67 +35,67 @@
     }
 
     .t-pt-0 {
-        padding-top: 0px;
+        padding-top: 0px !important;
     }
 
     .t-m-pb-0 {
-        padding-bottom: 0px;
+        padding-bottom: 0px !important;
     }
 
     .t-pt-10 {
-        padding-top: 10px;
+        padding-top: 10px !important;
     }
 
     .m-pb-10 {
-        padding-bottom: 10px;
+        padding-bottom: 10px !important;
     }
 
     .t-pt-20 {
-        padding-top: 20px;
+        padding-top: 20px !important;
     }
 
     .f-pb-20 {
-        padding-bottom: 20px;
+        padding-bottom: 20px !important;
     }
 
     .t-m-pt-30 {
-        padding-top: 30px;
+        padding-top: 30px !important;
     }
 
     .t-pb-30 {
-        padding-bottom: 30px;
+        padding-bottom: 30px !important;
     }
 
     .t-mt-0 {
-        margin-top: 0px;
+        margin-top: 0px !important;
     }
 
     .t-mb-0 {
-        margin-bottom: 0px;
+        margin-bottom: 0px !important;
     }
 
     .t-mt-10 {
-        margin-top: 10px;
+        margin-top: 10px !important;
     }
 
     .t-mb-10 {
-        margin-bottom: 10px;
+        margin-bottom: 10px !important;
     }
 
     .t-mt-20 {
-        margin-top: 20px;
+        margin-top: 20px !important;
     }
 
     .t-mb-20 {
-        margin-bottom: 20px;
+        margin-bottom: 20px !important;
     }
 
     .t-mt-30 {
-        margin-top: 30px;
+        margin-top: 30px !important;
     }
 
     .t-mb-30 {
-        margin-bottom: 30px;
+        margin-bottom: 30px !important;
     }
 
     .hide-tab {
@@ -172,9 +172,6 @@
 }
 
 @media (max-width: 767px) {
-    body {
-        font-size: 14px;
-    }
 
     h1,
     .entry-content h1 {
@@ -208,67 +205,72 @@
 
 
     .m-pt-0 {
-        padding-top: 0px;
+        padding-top: 0px !important;
     }
 
     .m-m-pb-0 {
-        padding-bottom: 0px;
+        padding-bottom: 0px !important;
     }
 
     .m-pt-10 {
-        padding-top: 10px;
+        padding-top: 10px !important;
     }
 
     .m-pb-10 {
-        padding-bottom: 10px;
+        padding-bottom: 10px !important;
     }
 
     .m-pt-20 {
-        padding-top: 20px;
+        padding-top: 20px !important;
     }
 
     .m-pb-20 {
-        padding-bottom: 20px;
+        padding-bottom: 20px !important;
     }
 
     .m-m-pt-30 {
-        padding-top: 30px;
+        padding-top: 30px !important;
     }
 
     .m-pb-30 {
-        padding-bottom: 30px;
+        padding-bottom: 30px !important;
     }
 
     .m-mt-0 {
-        margin-top: 0px;
+        margin-top: 0px !important;
     }
 
     .m-mb-0 {
-        margin-bottom: 0px;
+        margin-bottom: 0px !important;
     }
 
     .m-mt-10 {
-        margin-top: 10px;
+        margin-top: 10px !important;
     }
-
+    .m-mt-15 {
+        margin-top: 15px !important;
+    }    
+    .m-mb-15 {
+        margin-bottom: 15px !important;
+    }
     .m-mb-10 {
-        margin-bottom: 10px;
+        margin-bottom: 10px !important;
     }
 
     .m-mt-20 {
-        margin-top: 20px;
+        margin-top: 20px !important;
     }
 
     .m-mb-20 {
-        margin-bottom: 20px;
+        margin-bottom: 20px !important;
     }
 
     .m-mt-30 {
-        margin-top: 30px;
+        margin-top: 30px !important;
     }
 
     .m-mb-30 {
-        margin-bottom: 30px;
+        margin-bottom: 30px !important;
     }
 
     .desktop-only {
@@ -291,8 +293,7 @@
         padding-right: 10px;
     }
     header.header-area {
-        padding: 10px 0px;
-        padding-bottom: 10px;
+        padding: 20px 0px;
         z-index: 999;
     }
     header.header-area.sticky {
@@ -344,7 +345,7 @@
     width: 100%;
     position: fixed;
     z-index: 9999;
-    top: 60px;
+    top: 82px;
     right: 0;
     background-color: var(--theme-color);
     overflow-x: hidden;
@@ -788,6 +789,32 @@
     .sidebar-border {
         border-left: 0px solid;
         min-height: auto;
+    }
+
+    .sticky header.header-area {
+        padding: 10px 0px;
+        transition: .3s;
+    }
+    .sticky .sidenav {
+        top: 62px;
+    }
+    .breadcrumbs ul.inline-list li a {
+        margin-right: 5px;
+    }
+    ul.inline-list li span.right-angel {
+        margin-right: 5px;
+    }
+    .content {
+        padding: 15px;
+    }
+    .card {
+        padding: 15px;
+    }
+    .contact-form {
+        padding: 15px;
+    }
+    .my-account-page .content-box {
+        padding: 15px;
     }
     /*End Mobile*/
 }

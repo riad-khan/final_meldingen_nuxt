@@ -85,7 +85,7 @@ div#search_by_place_result {
 }
 
 .my-account-page .content-box {
-    padding: 30px;
+    padding: 20px;
     background-image: none;
 }
 
@@ -322,7 +322,7 @@ button, .button, .button, input[type="button"], input[type="reset"], input[type=
 
 /* End Toggle Switch*/
 header.header-area {
-    padding: 30px 0px;
+    padding: 25px 0px;
 }
 
 #mobileSidenav {
@@ -541,7 +541,7 @@ div#news-list, section#search-from {
 
 .call-to-row {
     margin: 0;
-    padding: 10px 0px;
+    padding: 8px 0px;
     margin-top: -30px;
     border-radius: 4px;
 }
@@ -563,14 +563,14 @@ div#news-list, section#search-from {
 }
 
 .location-search-form input::placeholder {
-    color: #1F4160;
-    opacity: 1;
+    color: #000;
+    opacity: .7;
   }
   .location-search-form input:-ms-input-placeholder {
-    color: #1F4160;
+    color: #000;
   }
   .location-search-form input::-ms-input-placeholder {
-    color: #1F4160;
+    color: #000;
   }
 
 .call-to-heading p {
@@ -762,16 +762,16 @@ td.ui-datepicker-unselectable.ui-state-disabled {
 }
 
 .search-form .input-date input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: var(--text-color);
-    opacity: 1; /* Firefox */
+    opacity: .7;
+    color: #000;
 }
 
 .search-form .input-date input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: var(--text-color);
+    color: #000;
 }
 
 .search-form .input-date input::-ms-input-placeholder { /* Microsoft Edge */
-    color: var(--text-color);
+    color: #000;
 }
 
 /* /input Date*/
@@ -1094,6 +1094,7 @@ time {
 /*Details Page*/
 .content {
     margin: 20px 0px;
+    padding: 20px
 }
 
 ul.inline-list {

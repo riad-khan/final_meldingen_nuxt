@@ -3,7 +3,7 @@
   <div class="header_bellow_bg"></div>
   <section class="call-to-action">
     <div class="container">
-      <div class="row d-flex align-items-center call-to-row box-shadow bg-white-gray">
+      <div class="row d-flex align-items-center call-to-row box-shadow bg-white-gray max-width">
         <div class="col-md-8 col-xs-7">
           <div class="location-search-form">
             <input v-model="search" name="placename" autocomplete="off" placeholder="Zoek op plaatsnaam" type="text"
@@ -24,7 +24,7 @@
 
       <div class="row">
         <div class="col-md-12">
-          <div class="result_row">
+          <div class="result_row max-width">
           <div class="result_list box-shadow">
             <div v-for="(item, i) in meldingens" v-show="isOpen" id="search_by_place_result"
                 class="searchbar-area">
@@ -167,6 +167,17 @@ div#search_by_place_result {
 }
 .location-search-form input {
     font-size: 16px;
+}
+.max-width {
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.max-width.box-shadow {
+    box-shadow: 0 3px 6px rgb(31 65 96 / 10%);
+}
+span.location-name {
+    margin-right: 0;
 }
 @media (max-width: 767px) {
   .call-to-action .row.call-to-row {

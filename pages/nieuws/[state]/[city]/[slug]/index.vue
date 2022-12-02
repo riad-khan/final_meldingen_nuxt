@@ -54,7 +54,7 @@
                     rel="nofollow">intervisualstudio.nl</a></p>
 
 
-                <div class="content">
+                <div class="content-text">
                   <div class="meta">
 
                     <div class="row d-flex align-items-center meta-group">

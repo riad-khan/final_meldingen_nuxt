@@ -373,5 +373,8 @@ export default {
     min-width: 100px !important;
     height: 100px;
 }  
+.news_page .news_drop div#news-list {
+    padding: 5px;
+}
 }
 </style>

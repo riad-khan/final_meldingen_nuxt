@@ -21,7 +21,7 @@
                 </div>
                 <div style="margin-bottom: 35px;">
         
-                  <div style="margin-left: 20px;">
+                  <div class="pagination">
                     Categories :
                     <router-link class="button mb-5 " :to="'/blogs'">All Blogs</router-link>
                     <router-link class="button" style="margin-left: 5px;" v-for="(item,i) in categories" :key="i" :to="'/blogs/category/'+item.slug + '/' + item.id">{{item.category_name}}</router-link>
@@ -119,6 +119,10 @@ onMounted(() => {
 @media (max-width: 767px) {
   .blog_archive_img {
     margin-bottom: 30px;
+}
+.pagination a.button {
+    font-size: 14px;
+    padding: 5px 10px;
 }
 }
 </style>

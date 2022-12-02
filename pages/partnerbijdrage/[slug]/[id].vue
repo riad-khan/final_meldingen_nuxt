@@ -35,7 +35,7 @@
                   </div>
                 </div>
                 <p>Foto: <a href="https://www.intervisualstudio.nl/" target="_blank" rel="nofollow">intervisualstudio.nl</a></p>
-                <div class="content">
+                <div class="content-text">
                   <div class="meta">
                     <div class="row d-flex align-items-center meta-group">
                       <div class="col-md-8 col-lg-6 col-xs-6">
