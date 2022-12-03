@@ -541,9 +541,9 @@ div#news-list, section#search-from {
 
 .call-to-row {
     margin: 0;
-    padding: 8px 0px;
-    margin-top: -30px;
+    margin-top: -25px;
     border-radius: 4px;
+    height: 50px;
 }
 
 .call-to-link button.text-locator {
@@ -563,14 +563,14 @@ div#news-list, section#search-from {
 }
 
 .location-search-form input::placeholder {
-    color: #000;
-    opacity: .7;
+    color: #999dbd !important;
+    opacity: 1; /* Firefox */
   }
   .location-search-form input:-ms-input-placeholder {
-    color: #000;
+    color: #999dbd !important;
   }
   .location-search-form input::-ms-input-placeholder {
-    color: #000;
+    color: #999dbd !important;
   }
 
 .call-to-heading p {
