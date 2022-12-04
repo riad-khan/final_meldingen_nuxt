@@ -563,14 +563,14 @@ div#news-list, section#search-from {
 }
 
 .location-search-form input::placeholder {
-    color: #999dbd !important;
+    color: #757575 !important;
     opacity: 1; /* Firefox */
   }
   .location-search-form input:-ms-input-placeholder {
-    color: #999dbd !important;
+    color: #757575 !important;
   }
   .location-search-form input::-ms-input-placeholder {
-    color: #999dbd !important;
+    color: #757575 !important;
   }
 
 .call-to-heading p {
