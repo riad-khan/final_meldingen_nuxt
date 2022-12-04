@@ -111,7 +111,7 @@ const route = useRoute();
 
 const { data: blogDetails, pending } = await useAsyncData('get_partner_blogs_details', () => $fetch(`${apiUrl}/partner-blogs/${route.params.id}`));
 const { data: recentBlogs } = await useAsyncData('get_partner_blogs_recent', () => $fetch(`${apiUrl}/partner-blogs/recent-partner-blogs/${route.params.id}`));
-const { data: media } = await useAsyncData('media', () => $fetch(`${apiUrl}/media/news`));
+const { data: media } = await useAsyncData('media', () => $fetch(`${apiUrl}/media/partnerBlogs`));
 onMounted(() => {
   refreshNuxtData('get_partner_blogs_details');
   refreshNuxtData('get_partner_blogs_recent');

@@ -46,8 +46,8 @@
                   spoed uitgerukt naar de {{ meldingenDetails.details.straat }} in {{ meldingenDetails.details.stad }}
                 </p>
 
-                <div class="google_ad_sec mb-5">
-                  <img src="@/assets/img/add-img.jpg" class="a_dd_img" />
+                <div class="google_ad_sec mb-5" v-if="ads.ad3.length > 0" v-html="ads.ad3[0].content">
+                  
                 </div>
                 <div class="google-map-sec m-mb-15">
                   <iframe

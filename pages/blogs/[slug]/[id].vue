@@ -89,12 +89,8 @@
             </div>
           </div>
           <div class="row pt-20">
-            <div class="col-md-12">
-              <div class="news-item box-shadow border-radius news-ad-sec" :style="image">
-                <div class="news-content">
-                  <h2 class="new-ad-heading">Dit is een placeholder voor reclame</h2>
-                </div>
-              </div>
+            <div class="col-md-12" v-if="media.ad1.length > 0" v-html="media.ad1[0].content">
+              
             </div>
           </div>
         </div>
@@ -113,6 +109,7 @@ backend = config.public.backend;
 const { data: blogDetails, pending } = await useAsyncData('get_blog_details', () => $fetch(`${apiUrl}/blogs/${route.params.id}`));
 const { data: recents } = await useAsyncData('get_recent_blogs', () => $fetch(`${apiUrl}/blogs/recent-blogs/${route.params.id}`));
 const { data: seo } = await useAsyncData('blogs_seo', () => $fetch(`${apiUrl}/seo-data/Blog`));
+const { data: media } = await useAsyncData('media', () => $fetch(`${apiUrl}/media/partnerBlogs`));
 useHead({
   titleTemplate: `Blog - Meldingen.nl - ${blogDetails.value.blog_title}`,
   script: [{ children: `${seo.value.structured_data}` }],
@@ -126,6 +123,7 @@ onMounted(() => {
   refreshNuxtData('get_blog_details');
   refreshNuxtData('get_recent_blogs');
   refreshNuxtData('blog_details_seo');
+  refreshNuxtData('media');
 
 })
 </script>
