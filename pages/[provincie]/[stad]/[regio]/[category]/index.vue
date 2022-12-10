@@ -46,7 +46,7 @@
                   spoed uitgerukt naar de {{ meldingenDetails.details.straat }} in {{ meldingenDetails.details.stad }}
                 </p>
 
-                <div class="google_ad_sec mb-5" v-if="ads.ad3.length > 0" v-html="ads.ad3[0].content">
+                <div class="google_ad_sec mb-5" v-if="ads.ad3 && ads.ad3.length > 0" v-html="ads.ad3[0].content">
                   
                 </div>
                 <div class="google-map-sec m-mb-15">
@@ -142,7 +142,7 @@
                   </div>
 
                   <div v-if="i % 2 === 1" class="card card-img">
-                    <div v-if="ads.ad1.length > 0" v-html="ads.ad1[0].content">
+                    <div v-if="ads.ad1 && ads.ad1.length > 0" v-html="ads.ad1[0].content">
 
                     </div>
 
@@ -153,7 +153,7 @@
                 </div>
 
 
-                <div class="card card-img square" v-if="ads.ad2.length > 0" v-html="ads.ad2[0].content">
+                <div class="card card-img square" v-if="ads.ad2 && ads.ad2.length > 0" v-html="ads.ad2[0].content">
 
                 </div>
               </div>
