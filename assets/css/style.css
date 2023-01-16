@@ -1629,3 +1629,14 @@ ul.social.white-dark li a span.icon-Instagram {
 
 
 /*/Footer*/
+/*Coder Start*/
+.news-content .content_right p {
+    font-size: 14px;
+}
+.content-text p {
+    line-height: 1.4;
+}
+.comment-sec.top-m {
+    margin-bottom: 15px;
+}
+/*Coder End*/

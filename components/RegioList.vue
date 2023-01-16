@@ -171,7 +171,7 @@ export default {
 
 <style scoped>
 .news_list .news_drop h2.sec-heading {
-    font-size: 22px;
+    font-size: 18px;
 }
 
 @media (max-width: 767px) {

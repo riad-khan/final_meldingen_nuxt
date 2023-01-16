@@ -129,7 +129,7 @@
 
                 <!--   comment Section-->
 
-                <div v-if="!auth" class="comment-sec mb-20">
+                <div v-if="!auth" class="comment-sec mb-16 top-m">
                   <h2 class="comment-head">Reageer op dit artikel</h2>
                   <nuxt-link id="comment-btn" class="button btn-tranparent" to="/login">Aanmelden om te reageren
                   </nuxt-link>
