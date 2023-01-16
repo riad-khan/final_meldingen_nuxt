@@ -383,7 +383,7 @@ img.news-icon {
 }
 
 .list_group img.news-icon {
-  width: 15px;
+  width: 16px;
 }
 
 .content ul.inline-list.list-gap-10 {

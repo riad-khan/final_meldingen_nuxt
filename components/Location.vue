@@ -181,12 +181,11 @@ span.location-name {
 }
 @media (max-width: 767px) {
   .call-to-action .row.call-to-row {
-    margin-left: 0px;
-    margin-right: 0;
+    margin: auto;
+    margin-top: -25px;
 }
 .call-to-row {
     padding: 5px 0px;
-    margin-top: -25px;
 }
 }
 

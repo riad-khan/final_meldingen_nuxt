@@ -44,7 +44,7 @@
                       </p>
                     </div>
                     <div class="content_right">
-                      <p class="mb-5"><span class="place-name">{{ DateTime(item.timestamp) }} <span
+                      <p class=""><span class="place-name">{{ DateTime(item.timestamp) }} <span
                             id="time_text">geleden</span></span></p>
                       <p class="place_right">
                         <span v-if="item.prio === 1" class="place-name prio spoed" style="">{{ prio["1"] }}
@@ -311,6 +311,7 @@ export default {
 
 .news-content p {
   margin-bottom: 0px;
+  margin-top: 8px;
 }
 
 .news-content .content_right {
@@ -342,6 +343,35 @@ export default {
 
 @media (max-width: 767px) {
 
+  section.news-overview-sec {
+    padding-top: 15px;
+  }
+}
+
+@media (max-width: 550.99px) {
+  #time_text {
+    display: none;
+  }
+  .city{
+    display: none;
+  }
+
+  .news-item .news-content.d-flex {
+    display: block !important;
+  }
+  .news-content .content_right {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.news-content .content_left {
+    max-width: 80%;
+}
+
+
+.news-content p{
+    font-size: 14px;
+}
   .news-item img.news-icon {
     right: auto;
     opacity: 1;
@@ -370,32 +400,6 @@ export default {
   .content_right p.mb-5 {
     margin-bottom: 5px;
   }
-
-  section.news-overview-sec {
-    padding-top: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  #time_text {
-    display: none;
-  }
-  .city{
-    display: none;
-  }
-
-  .news-item .news-content.d-flex {
-    display: block !important;
-  }
-  .news-content .content_right {
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-.news-content .content_left {
-    max-width: 80%;
-}
-
 }
 @media (max-width: 320px) {
   .news-item {
@@ -415,9 +419,6 @@ export default {
 .prio {
     font-size: 12px;
     padding: 2px 3px;
-}
-.news-content p{
-    font-size: 12px;
 }
 }
 </style>

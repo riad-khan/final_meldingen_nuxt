@@ -173,37 +173,6 @@
 
 @media (max-width: 767px) {
 
-    h1,
-    .entry-content h1 {
-        font-size: 24px;
-    }
-
-    h2,
-    .entry-content h2 {
-        font-size: 20px;
-    }
-
-    h3,
-    .entry-content h3 {
-        font-size: 14px;
-    }
-
-    h4,
-    .entry-content h4 {
-        font-size: 13px;
-    }
-
-    h5,
-    .entry-content h5 {
-        font-size: 12px;
-    }
-
-    h6,
-    .entry-content h6 {
-        font-size: 16px;
-    }
-
-
     .m-pt-0 {
         padding-top: 0px !important;
     }
@@ -486,47 +455,7 @@
         left: 20px;
     }
 
-    .news-item img.news-icon {
-        right: 0;
-        opacity: .5;
-        top:21px
-    }
-
-    .news-item .news-content {
-        padding-left: 0;
-    }
-    .news-item {
-        padding: 15px;
-    }
-    .news-content h4 {
-        margin-bottom: 5px;
-        padding-left:25px
-    }
-
-    .news-content p.place {
-        float: none;
-        font-size: 12px;
-        text-align: left;
-        margin-bottom: 10px;
-    }
-
-    .news-content p.place span.place-title {
-        margin-top: 0;
-        margin-bottom: 0px;
-    }
-
-    .news-content p.place span {
-        display: inline-block;
-    }
-
-    .timeline-content {
-        padding-left: 20px;
-    }
-
-    .news-item.news-ad-sec h2.new-ad-heading {
-        font-size: 16px;
-    }
-
+   
     .btn-full {
         height: auto;
     }
@@ -817,6 +746,80 @@
         padding: 15px;
     }
     /*End Mobile*/
+}
+
+@media only screen  and (max-width: 550.99px) {
+    h1,
+    .entry-content h1 {
+        font-size: 24px;
+    }
+
+    h2,
+    .entry-content h2 {
+        font-size: 20px;
+    }
+
+    h3,
+    .entry-content h3 {
+        font-size: 14px;
+    }
+
+    h4,
+    .entry-content h4 {
+        font-size: 13px;
+    }
+
+    h5,
+    .entry-content h5 {
+        font-size: 12px;
+    }
+
+    h6,
+    .entry-content h6 {
+        font-size: 16px;
+    }
+.news-item img.news-icon {
+    right: 0;
+    opacity: .5;
+    top:21px
+}
+
+.news-item .news-content {
+    padding-left: 0;
+}
+.news-item {
+    padding: 15px;
+}
+.news-content h4 {
+    margin-bottom: 5px;
+    padding-left:25px
+}
+
+.news-content p.place {
+    float: none;
+    font-size: 12px;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.news-content p.place span.place-title {
+    margin-top: 0;
+    margin-bottom: 0px;
+}
+
+.news-content p.place span {
+    display: inline-block;
+}
+.place_right {
+    margin-top: 8px;
+}
+.timeline-content {
+    padding-left: 20px;
+}
+
+.news-item.news-ad-sec h2.new-ad-heading {
+    font-size: 16px;
+}
 }
 
 @media only screen and (min-width: 480px) and (max-width: 767px) {

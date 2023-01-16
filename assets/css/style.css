@@ -514,7 +514,7 @@ button.news-list-btn {
     color: var(--text-color);
     border: none;
     font-weight: 500;
-    font-size: 28px;
+    font-size: 19px;
     padding: 0;
     margin-bottom: 10px;
 }
@@ -1105,7 +1105,7 @@ ul.inline-list {
 }
 
 ul.inline-list li {
-    display: inline-block;
+    display: inline;
 }
 
 .list-gap-10 li {

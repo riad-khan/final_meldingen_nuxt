@@ -340,7 +340,7 @@ export default {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 550.99px) {
   .news-content .content_right {
     /* text-align: left; */
   }
