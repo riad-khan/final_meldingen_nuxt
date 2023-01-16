@@ -1592,7 +1592,7 @@ div#slider {
 }
 
 .chart_page_dropdown h1 {
-  font-size: 28px;
+  font-size: 19px;
   margin-bottom: 10px;
 }
 
@@ -1619,7 +1619,7 @@ div#slider {
 
 @media (max-width: 767px) {
   .chart_page_dropdown h1 {
-    font-size: 20px;
+    font-size: 19px;
     margin-bottom: 18px;
   }
 

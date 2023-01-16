@@ -994,6 +994,7 @@ time {
     align-items: center;
     background: var(--bg-white);
     margin-bottom: 15px;
+    border: 1px solid #DFE2E6;
 }
 
 .spin {
@@ -1163,7 +1164,7 @@ ul.inline-list li a:hover {
     position: relative;
     padding: 20px;
     background: var(--bg-white);
-    border-radius: 8px;
+    border-radius: 8px;border: 1px solid #DFE2E6;
 }
 
 .news-thumb {
@@ -1644,4 +1645,5 @@ ul.social.white-dark li a span.icon-Instagram {
 .comment-sec.top-m {
     margin: 20px auto;
 }
+
 /*Coder End*/
