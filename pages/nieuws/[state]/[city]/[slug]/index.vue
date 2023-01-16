@@ -118,7 +118,7 @@
                   <p><strong>{{ newsDetails.details.description }}</strong></p>
                   <div v-html="newsDetails.details.content"></div>
 
-                  <div class="btn-group mt-10">
+                  <div class="btn-group mt-20">
                     <a id="tag" :class="'button btn-more bg-tag border-radius-8  ' + tag"
                       v-for="(tag, i) in newsDetails.details.tags.split(',')" v-show="tag.length !== 0">{{ tag }}</a>
 

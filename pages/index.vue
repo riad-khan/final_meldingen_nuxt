@@ -306,12 +306,11 @@ export default {
 }
 
 .content_left h4 {
-  margin-bottom: 0;
+  margin-bottom: 3px;
 }
 
 .news-content p {
   margin-bottom: 0px;
-  margin-top: 8px;
 }
 
 .news-content .content_right {

@@ -1632,11 +1632,16 @@ ul.social.white-dark li a span.icon-Instagram {
 /*Coder Start*/
 .news-content .content_right p {
     font-size: 14px;
+    margin-top: 8px;
 }
+.news-content .content_right p:first-child {
+    margin-top: 0px;
+}
+
 .content-text p {
     line-height: 1.4;
 }
 .comment-sec.top-m {
-    margin-bottom: 15px;
+    margin: 20px auto;
 }
 /*Coder End*/
