@@ -40,8 +40,8 @@
 
                   </ul>
                 </div>
-                <p class="mb-30 m-mb-15">Regio {{ meldingenDetails.details.regio }} kreeg op donderdag {{
-                    DateTime(meldingenDetails.details.timestamp)
+                <p class="mb-30 m-mb-15">Regio {{ meldingenDetails.details.regio }} kreeg op dinsdag {{
+                   addLetterOnTime(DateTime(meldingenDetails.details.timestamp))
                 }} een melding via het p2000 netwerk. De {{ meldingenDetails.details.dienst }} is met
                   spoed uitgerukt naar de {{ meldingenDetails.details.straat }} in {{ meldingenDetails.details.stad }}
                 </p>
@@ -318,6 +318,14 @@ export default {
 
       return LastDate + ' ' + newDate[1].toLowerCase() + ' ' + newDate[2] + ' - ' + time
 
+    },
+    addLetterOnTime(value){
+        let splitDate = value.split('-');
+        let removeYear = splitDate[0].split(' ')
+        
+     return removeYear[0] +' '+ removeYear[1] + ' om ' + splitDate[1];
+
+      
     },
     dateTime(value) {
 
