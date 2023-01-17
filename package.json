@@ -6,7 +6,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "deploy":"pm2 start npm -- name nuxt.js -- start"
+    "deploy": "pm2 start npm -- name nuxt.js -- start"
   },
   "devDependencies": {
     "nuxt": "3.0.0-rc.12"
@@ -22,6 +22,7 @@
     "jquery": "^3.6.1",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.40",
     "nuxt-svg-loader": "^1.2.0",
     "sweetalert2": "^11.6.1",
     "vite-svg-loader": "^3.6.0",
@@ -29,5 +30,4 @@
     "vue-sweetalert2": "^5.0.5",
     "webpack": "^5.74.0"
   }
- 
 }

@@ -4,6 +4,7 @@
     <location urlPath="meldingen" />
 
     <main class="main-content">
+   
       <!-- / Step Section-->
       <section class="page-content details-page sec-padding">
         <div class="container">
@@ -27,7 +28,7 @@
 
           <div class="row with-sidebar ">
             <div :class="'col-md-8 col-lg-9 col-xs-12'">
-              <div v-if="isLoading === true" style="height: 300px;" :class="isLoading ? 'spin' : ''"></div>
+              <div v-if="pending === true" style="height: 300px;" :class="pending ? 'spin' : ''"></div>
               <div v-else class="content box-shadow border-radius-8 bg-white">
                 <h2 class="content-heading">
                   {{ meldingenDetails.details.straat }} in {{ meldingenDetails.details.stad }} - <span
@@ -40,7 +41,7 @@
 
                   </ul>
                 </div>
-                <p class="mb-30 m-mb-15">Regio {{ meldingenDetails.details.regio }} kreeg op dinsdag {{
+                <p class="mb-30 m-mb-15">Regio {{ meldingenDetails.details.regio }} kreeg op dinsdag  {{
                    addLetterOnTime(DateTime(meldingenDetails.details.timestamp))
                 }} een melding via het p2000 netwerk. De {{ meldingenDetails.details.dienst }} is met
                   spoed uitgerukt naar de {{ meldingenDetails.details.straat }} in {{ meldingenDetails.details.stad }}
@@ -305,18 +306,25 @@ export default {
   created() {
     if (typeof window !== "undefined") {
       this.currentUrl = window.location.href;
+      this.DateTime();
     }
   },
   methods: {
     DateTime(value) {
       // return moment.unix(value).utcOffset("GMT+01:00").format('LL');
 
-      const date = moment.unix(value).utcOffset("GMT+01:00").format('Do MMMM YYYY');
-      const time = moment.unix(value).utcOffset("GMT+01:00").format('hh:mm');
-      let newDate = date.split(' ');
-      const LastDate = newDate[0].slice(0, -2);
+      // const date = moment.unix(value).utcOffset("GMT+01:00").format('Do MMMM YYYY');
+      // const time = moment.unix(value).utcOffset("GMT+01:00").format('hh:mm');
+      // let newDate = date.split(' ');
+      // const LastDate = newDate[0].slice(0, -2);
 
-      return LastDate + ' ' + newDate[1].toLowerCase() + ' ' + newDate[2] + ' - ' + time
+      // return LastDate + ' ' + newDate[1].toLowerCase() + ' ' + newDate[2] + ' - ' + time
+
+      let m = moment();
+
+
+
+      console.log(m);
 
     },
     addLetterOnTime(value){
