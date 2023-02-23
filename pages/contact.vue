@@ -13,7 +13,7 @@
 
               <div class="col-md-6 ">
                 <div class="text-left">
-                  <h2>Contact From</h2>
+                  <h2>Contactformulier</h2>
                   <p>Meldingen.nl helpt u graag. Via onderstaand formulier kunt u contact met ons opnemen. Indien nodig
                     zullen wij uw mail zo snel mogelijk beantwoorden.</p>
 
@@ -34,19 +34,19 @@
                 <form @submit.prevent="sendMessage" style="padding-top: 20px;">
 
                   <div class="form-group">
-                    <input type="text" placeholder="name" name="name" v-model="formData.name" class="form-control"
+                    <input type="text" placeholder="Naam" name="name" v-model="formData.name" class="form-control"
                       required>
                   </div>
 
 
 
                   <div class="form-group">
-                    <input type="email" name="email" placeholder="email" v-model="formData.email" class="form-control"
+                    <input type="email" name="email" placeholder="E-mail" v-model="formData.email" class="form-control"
                       required>
                   </div>
 
                   <div class="form-group">
-                    <textarea v-model="formData.message" placeholder="Message"></textarea>
+                    <textarea v-model="formData.message" placeholder="Bericht"></textarea>
 
                   </div>
                   <button type="submit" class="button " style="margin-top: 5px;width:100%;margin-bottom: 8px;"> <span

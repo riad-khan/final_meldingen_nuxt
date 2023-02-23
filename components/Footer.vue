@@ -35,18 +35,7 @@
             </ul>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="widget footer-widget-3">
-            <h4>CONTACT</h4>
-            <ul class="widget-menu contact">
-              <li>info@meldingen.nl</li>
-              <li>(+31)1234567890</li>
-              <li>KvK Nummer: 1234567890</li>
-              <li>BTW nummer: 1234567890</li>
-              <li>IBAN: 1234567890</li>
-            </ul>
-          </div>
-        </div>
+        
       </div>
     </div>
   </section>

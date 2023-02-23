@@ -45,7 +45,7 @@
                     <strong>
                       <h4>Meldingen</h4>
                     </strong>
-                    <p>Total of meldingen
+                    <p>Totaal aantal meldingen
                       <select name="datatablesSimple_length" ref="meldingen" @change="(e) => changeMeldingenTime(e)">
                         <option v-for="i in 24" selected :key="i" v-bind:value="i">{{ i }} uur</option>
                       </select>
@@ -69,7 +69,7 @@
                     <strong>
                       <h4>Ambulance Meldingen</h4>
                     </strong>
-                    <p>Total of meldingen
+                    <p>Totaal aantal meldingen
                       <select name="datatablesSimple_length" ref="select_ambulance" @change="(e) => selectTime(e)">
                         <option v-for="i in 24" selected :key="i" v-bind:value="i">{{ i }} uur</option>
                       </select>
@@ -94,7 +94,7 @@
                     <strong>
                       <h4>Brandweer Meldingen</h4>
                     </strong>
-                    <p>Total of meldingen
+                    <p>Totaal aantal meldingen
                       <select name="datatablesSimple_length" ref="select_brandweer"
                         @change="(e) => selectBrandweerTime(e)">
                         <option v-for="i in 24" selected :key="i" v-bind:value="i">{{ i }} uur</option>
@@ -122,7 +122,7 @@
                     <strong>
                       <h4>Politie Meldingen</h4>
                     </strong>
-                    <p>Total of meldingen
+                    <p>Totaal aantal meldingen
                       <select name="datatablesSimple_length" ref="select_politie" @change="(e) => selectPolitieTime(e)">
                         <option v-for="i in 24" selected :key="i" v-bind:value="i">{{ i }} uur</option>
                       </select>
@@ -212,13 +212,13 @@
                     <strong>
                       <h4>
                         <span style="vertical-align: inherit;">
-                          <span style="vertical-align: inherit;">Emergency meldingen</span>
+                          <span style="vertical-align: inherit;">Ambulance meldingen</span>
                         </span>
                       </h4>
                     </strong>
                     <p>
                       <span style="vertical-align: inherit;">
-                        <span style="vertical-align: inherit;">Total of the meldingen
+                        <span style="vertical-align: inherit;">Totaal aantal meldingen
                         </span>
                       </span>
 
