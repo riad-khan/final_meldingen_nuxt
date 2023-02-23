@@ -854,6 +854,7 @@ span.input-icon.map-icon img {
     pointer-events: none;
     transform: translateY(-15px);
     z-index: 999;
+    width: 200px;
 }
 
 .custom-select.opened .custom-options {

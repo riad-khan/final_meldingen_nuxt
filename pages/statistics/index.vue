@@ -1553,7 +1553,7 @@ div#slider {
 
 /* dropdown list*/
 .chart_page_dropdown .map span.custom-select-trigger {
-  padding-left: 10px;
+  padding-left: 5px;
 }
 
 .chart_page_dropdown .input-select .input-icon {
@@ -1576,7 +1576,7 @@ div#slider {
 
 .chart_page_dropdown .custom-select-trigger {
   width: 100%;
-  font-weight: 700;
+  font-weight: 500;
   background: transparent;
   border-radius: 0;
   cursor: pointer;
@@ -1587,13 +1587,14 @@ div#slider {
   padding-left: 10px;
   padding-right: 20px;
   color: #669E97;
-  font-size: 28px;
+  font-size: 19px;
   line-height: 1.2;
 }
 
 .chart_page_dropdown h1 {
   font-size: 19px;
   margin-bottom: 10px;
+  font-weight: 500;
 }
 
 .chat_page .card-content h4 {
@@ -1615,16 +1616,14 @@ div#slider {
   padding: 2px 10px;
   border-radius: 50px;
 }
-
+.content_right .place-name {
+    color: #A6B9C9;
+}
 
 @media (max-width: 767px) {
   .chart_page_dropdown h1 {
     font-size: 19px;
     margin-bottom: 18px;
-  }
-
-  .chart_page_dropdown .custom-select-trigger {
-    font-size: 20px;
   }
 
   .chat_page .card-content h4 {

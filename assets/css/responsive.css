@@ -746,6 +746,16 @@
         padding: 15px;
     }
     /*End Mobile*/
+    .header.header-area{
+        position: relative;
+    }
+    .mb-view {
+        position: absolute;
+        right: 0;
+    }
+    .logo {
+        text-align: center;
+    }
 }
 
 @media only screen  and (max-width: 550.99px) {

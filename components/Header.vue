@@ -43,14 +43,14 @@
     <header class="header-area sec-padding bg-theme">
       <div class="container">
         <div class="row d-flex align-items-center">
-          <div class="col-md-4 col-xs-8">
+          <div class="col-md-4 col-xs-12">
             <div class="logo">
               <h1>
                 <router-link to="/"><img alt="" src="@/assets/img/logo.svg" /></router-link>
               </h1>
             </div>
           </div>
-          <div class="col-md-8 col-xs-4">
+          <div class="col-md-8 mb-view">
             <div class="menu">
               <!--
               <button class="openNav box-shadow" id="toggle" @click="openNav"><img
